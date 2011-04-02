@@ -1,0 +1,6 @@
+Model generator for Java.
+
+Models are defined by blueprints to set default values using annotations.
+
+Inspired by "FactoryGirl":https://github.com/thoughtbot/factory_girl .
+
