@@ -3,7 +3,22 @@
     <groupId>com.slackworks</groupId>
     <artifactId>modelcitizen</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    
+    <packaging>jar</packaging>
+    <name>model-citizen</name>
+    <url>https://github.com/mguymon/model-citizen</url>
+    <licenses>
+        <license>
+          <name>The Apache Software License, Version 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+          <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>>scm:git:git@github.com/mguymon/model-citizen.git</url>
+        <developerConnection>scm:git:git@github.com/mguymon/model-citizen.git</developerConnection>
+        <connection>git@github.com/mguymon/model-citizen.git</connection>
+    </scm>
+	
     <dependencies>
         <!-- Compile scope -->
         <dependency>
