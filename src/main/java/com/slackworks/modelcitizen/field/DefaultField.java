@@ -1,5 +1,8 @@
 package com.slackworks.modelcitizen.field;
 
+/**
+ * A {@link Default} annotated Field in the {@link Blueprint} with a default value;
+ */
 public class DefaultField implements ModelField {
 
 	private String name;

@@ -1,14 +1,11 @@
 package com.slackworks.modelcitizen;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +15,13 @@ import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.field.DefaultField;
 import com.slackworks.modelcitizen.field.MappedField;
 import com.slackworks.modelcitizen.field.ModelField;
-import com.slackworks.modelcitizen.template.TemplateException;
+import com.slackworks.modelcitizen.template.BlueprintTemplateException;
 
+/**
+ * ModelFactory for generating Models. A Model's {@link Blueprint} is registered
+ * with the ModelFactory. Then a Model can be generated with {@link #createModel(Class)}
+ * or {@link #createModel(Object)}
+ */
 public class ModelFactory {
 
 	private Logger logger = LoggerFactory.getLogger( this.getClass() );
@@ -32,21 +34,21 @@ public class ModelFactory {
 		erectors = new HashMap<Class,Erector>();
 	}
 	
-	public void registerBlueprint( Class<Blueprint> clazz ) throws RegisterException {
+	public void registerBlueprint( Class<Blueprint> clazz ) throws RegisterBlueprintException {
 		Blueprint blueprint = null;
 		
 		try {
 			blueprint = clazz.newInstance();
 		} catch (InstantiationException e) {
-			throw new RegisterException(e);
+			throw new RegisterBlueprintException(e);
 		} catch (IllegalAccessException e) {
-			throw new RegisterException(e);
+			throw new RegisterBlueprintException(e);
 		}
 		
 		registerBlueprint( blueprint );
 	}
 	
-	public void registerBlueprint( Blueprint blueprint ) throws RegisterException {
+	public void registerBlueprint( Blueprint blueprint ) throws RegisterBlueprintException {
 		
 		List<ModelField> modelFields = new ArrayList<ModelField>();
 		
@@ -63,9 +65,9 @@ public class ModelFactory {
 				try {
 					defaultField.setValue( field.get( blueprint ) );
 				} catch (IllegalArgumentException e) {
-					throw new RegisterException( e );
+					throw new RegisterBlueprintException( e );
 				} catch (IllegalAccessException e) {
-					throw new RegisterException( e );
+					throw new RegisterBlueprintException( e );
 				}
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
@@ -95,24 +97,39 @@ public class ModelFactory {
 		erectors.put( blueprint.getTarget(), erector );
 	}
 	
-	public <T> T createModel( Class<T> clazz ) throws CreateException {
+	/**
+	 * Create a Model from a registered {@link Blueprint}
+	 * 
+	 * @param clazz Model class
+	 * @return Model
+	 * @throws CreateModelException
+	 */
+	public <T> T createModel( Class<T> clazz ) throws CreateModelException {
 		try {
 			return createModel( clazz.newInstance() );
 		} catch (InstantiationException e) {
-			throw new CreateException( e );
+			throw new CreateModelException( e );
 		} catch (IllegalAccessException e) {
-			throw new CreateException( e );
+			throw new CreateModelException( e );
 		}
 	}
 	
-	public <T> T createModel( T model ) throws CreateException {
+	/**
+	 * Create a Model from a registered {@link Blueprint}. Values set in the
+	 * model will not be overridden by defaults set in the {@link Blueprint}.
+	 * 
+	 * @param model Object
+	 * @return Model
+	 * @throws CreateModelException
+	 */
+	public <T> T createModel( T model ) throws CreateModelException {
 		
 		logger.info( "Creating for {}", model.getClass() );
 		
 		Erector erector = erectors.get( model.getClass() );
 		
 		if ( erector == null ) {
-			throw new CreateException( "Unregistered class: " + model.getClass() );
+			throw new CreateModelException( "Unregistered class: " + model.getClass() );
 		}
 		
 		for( ModelField modelField : erector.getModelFields() ) {
@@ -127,8 +144,8 @@ public class ModelFactory {
 				Object value = null;
 				try {
 					value = erector.getBlueprint().getTemplate().get( model, defaultField );
-				} catch (TemplateException e) {
-					throw new CreateException( e );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
 				} 
 				
 				// Use value set in the model, otherwise use value set in blueprint
@@ -138,8 +155,8 @@ public class ModelFactory {
 				
 				try {
 					model = erector.getBlueprint().getTemplate().set( model, defaultField );
-				} catch (TemplateException e) {
-					throw new CreateException( e );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
 				}
 				
 			} else if ( modelField instanceof MappedField ) {
@@ -149,8 +166,8 @@ public class ModelFactory {
 				Object value = null;
 				try {
 					value = erector.getBlueprint().getTemplate().get( model, mappedField );
-				} catch (TemplateException e) {
-					throw new CreateException( e );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
 				}
 				
 				if ( value == null ) {
@@ -163,8 +180,8 @@ public class ModelFactory {
 				
 				try {
 					model = erector.getBlueprint().getTemplate().set( model, mappedField );
-				} catch (TemplateException e) {
-					throw new CreateException( e );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
 				}
 			}
 		}
@@ -172,11 +189,20 @@ public class ModelFactory {
 		return model;
 	}
 	
-	
+	/**
+	 * Registered Blueprints
+	 * 
+	 * @return {@link List<Blueprint>}
+	 */
 	public List<Blueprint> getBlueprints() {
 		return blueprints;
 	}
 	
+	/**
+	 * Map of Class to their {@link Erector}.
+	 * 
+	 * @return {@link Map<Class, Erector>}
+	 */
 	public Map<Class,Erector> getErectors() {
 		return erectors;
 	}

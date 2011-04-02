@@ -2,6 +2,10 @@ package com.slackworks.modelcitizen.field;
 
 import java.lang.reflect.Field;
 
+/**
+ * A {@link Mapped} annotated Field in the {@link Blueprint} that is mapped 
+ * to a registered {@Blueprint}
+ */
 public class MappedField implements ModelField {
 
 	private String name;

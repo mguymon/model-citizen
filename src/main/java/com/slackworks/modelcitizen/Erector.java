@@ -2,9 +2,11 @@ package com.slackworks.modelcitizen;
 
 import java.util.List;
 
-import com.slackworks.modelcitizen.field.DefaultField;
 import com.slackworks.modelcitizen.field.ModelField;
 
+/**
+ * Erector for a Class to create an instance from a {@link Blueprint}
+ */
 public class Erector {
 
 	private Blueprint blueprint;

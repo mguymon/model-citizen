@@ -14,20 +14,20 @@ public class ModelFactoryTest {
 	private Blueprint wheelBlueprint = new WheelBlueprint();
 	
 	@Before
-	public void setUp() throws RegisterException {
+	public void setUp() throws RegisterBlueprintException {
 		modelFactory = new ModelFactory();
 		modelFactory.registerBlueprint( carBlueprint );
 		modelFactory.registerBlueprint( wheelBlueprint );
 	}
 	
 	@Test
-	public void testRegisterBlueprint() throws RegisterException {
+	public void testRegisterBlueprint() throws RegisterBlueprintException {
 		assertEquals( carBlueprint, modelFactory.getBlueprints().get(0) );
 		assertEquals( wheelBlueprint, modelFactory.getBlueprints().get(1) );
 	}
 	
 	@Test
-	public void testCreateModelWithModel() throws RegisterException, CreateException {
+	public void testCreateModelWithModel() throws RegisterBlueprintException, CreateModelException {
 		
 		Car testModel = modelFactory.createModel( new Car() );
 		assertEquals( "car make", testModel.getMake() );
@@ -49,7 +49,7 @@ public class ModelFactoryTest {
 	}
 	
 	@Test
-	public void testCreateModelWithClass() throws RegisterException, CreateException {
+	public void testCreateModelWithClass() throws RegisterBlueprintException, CreateModelException {
 		
 		Car testModel = modelFactory.createModel( Car.class );
 		assertEquals( "car make", testModel.getMake() );
@@ -60,7 +60,7 @@ public class ModelFactoryTest {
 	}
 	
 	@Test
-	public void testCreateModelWithMappedField() throws RegisterException, CreateException {
+	public void testCreateModelWithMappedField() throws RegisterBlueprintException, CreateModelException {
 		Car car = new Car();
 		Wheel wheel = new Wheel();
 		wheel.setName( "wheel!" );
