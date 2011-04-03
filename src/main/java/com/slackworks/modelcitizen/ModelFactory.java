@@ -129,7 +129,7 @@ public class ModelFactory {
 				
 				modelFields.add( listField );
 				
-				logger.info( "Setting mapped collection for {} to {} as {}", new Object[] { listField.getName(), listField.getTarget(), listField.getTarget() });
+				logger.info( "Setting mapped collection for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
 				
 			}
 		}
@@ -171,7 +171,7 @@ public class ModelFactory {
 	 */
 	public <T> T createModel( T model ) throws CreateModelException {
 		
-		logger.debug( "Creating for {}", ReflectionToStringBuilder.toString(model) );
+		logger.debug( "Creating for {}", model );
 		
 		Erector erector = erectors.get( model.getClass() );
 		
