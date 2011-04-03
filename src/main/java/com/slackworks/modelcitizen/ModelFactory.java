@@ -43,7 +43,11 @@ public class ModelFactory {
 		erectors = new HashMap<Class,Erector>();
 	}
 	
-	public void addPolicy( Policy policy ) {
+	public void addPolicy( Policy policy ) throws PolicyException {
+		if ( erectors.get( policy.getTarget() ) == null ) {
+			throw new PolicyException( "Blueprint does not exist for Policy target: " + policy.getTarget() );
+		}
+		
 		List<Policy> classPolicies = policies.get( policy.getTarget() );
 		if ( classPolicies == null ) {
 			classPolicies = new ArrayList<Policy>();

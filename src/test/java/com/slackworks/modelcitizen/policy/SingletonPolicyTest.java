@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.slackworks.modelcitizen.CreateModelException;
 import com.slackworks.modelcitizen.ModelFactory;
+import com.slackworks.modelcitizen.ModelFactoryException;
 import com.slackworks.modelcitizen.RegisterBlueprintException;
 import com.slackworks.modelcitizen.blueprint.CarBlueprint;
 import com.slackworks.modelcitizen.blueprint.DriverBlueprint;
@@ -33,7 +34,7 @@ public class SingletonPolicyTest {
 	}
 	
 	@Test
-	public void SingletonPolicyWithClass() throws CreateModelException {
+	public void SingletonPolicyWithClass() throws ModelFactoryException {
 		modelFactory.addPolicy( new SingletonPolicy( Driver.class ) );
 		
 		Car car1 = modelFactory.createModel( Car.class );
@@ -47,7 +48,7 @@ public class SingletonPolicyTest {
 	}
 	
 	@Test
-	public void SingletonPolicyWithModel() throws CreateModelException {
+	public void SingletonPolicyWithModel() throws ModelFactoryException {
 		Driver driver = modelFactory.createModel( Driver.class );
 		modelFactory.addPolicy( new SingletonPolicy( driver ) );
 		

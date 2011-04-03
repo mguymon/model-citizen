@@ -1,6 +1,11 @@
 package com.slackworks.modelcitizen.policy;
 
-public class PolicyException extends Exception {
+import com.slackworks.modelcitizen.ModelFactoryException;
+
+public class PolicyException extends ModelFactoryException {
+
+	private static final long serialVersionUID = -215518503802560084L;
+
 	public PolicyException( Throwable throwable ) {
 		super( throwable );
 	}
