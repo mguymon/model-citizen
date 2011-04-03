@@ -32,7 +32,7 @@ public abstract class FieldCallBack<T> {
 	 * FieldCallBack Field Class, <T>
 	 * @return Class<T>
 	 */
-	public Class<T> target() {
+	public Class<T> getTarget() {
 		return fieldClass;
 	}
 }

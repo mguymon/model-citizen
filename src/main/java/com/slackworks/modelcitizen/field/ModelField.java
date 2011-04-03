@@ -12,6 +12,12 @@ public interface ModelField {
 	public String getName();
 	
 	/**
+	 * Set value of {@link Blueprint} field
+	 * @return
+	 */
+	public void setValue( Object val );
+	
+	/**
 	 * Value of {@link Blueprint} field
 	 * @return
 	 */

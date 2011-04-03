@@ -17,6 +17,9 @@ import com.slackworks.modelcitizen.field.DefaultField;
 import com.slackworks.modelcitizen.field.MappedListField;
 import com.slackworks.modelcitizen.field.MappedField;
 import com.slackworks.modelcitizen.field.ModelField;
+import com.slackworks.modelcitizen.policy.Policy;
+import com.slackworks.modelcitizen.policy.PolicyException;
+import com.slackworks.modelcitizen.policy.PolicyStatus;
 import com.slackworks.modelcitizen.template.BlueprintTemplateException;
 
 /**
@@ -30,6 +33,7 @@ public class ModelFactory {
 	
 	private List<Blueprint> blueprints;
 	private Map<Class,Erector> erectors = new HashMap<Class,Erector>();
+	private Map<Class, List<Policy>> policies = new HashMap<Class, List<Policy>>();
 	
 	/**
 	 * Create new instance
@@ -37,6 +41,19 @@ public class ModelFactory {
 	public ModelFactory() {
 		blueprints = new ArrayList<Blueprint>();
 		erectors = new HashMap<Class,Erector>();
+	}
+	
+	public void addPolicy( Policy policy ) {
+		List<Policy> classPolicies = policies.get( policy.getTarget() );
+		if ( classPolicies == null ) {
+			classPolicies = new ArrayList<Policy>();
+		}
+		
+		classPolicies.add( policy );
+		
+		logger.debug( "Setting Policy {} for {}", policy, policy.getTarget() );
+		
+		policies.put( policy.getTarget(), classPolicies );
 	}
 	
 	/**
@@ -114,11 +131,35 @@ public class ModelFactory {
 					throw new RegisterBlueprintException( e );
 				}
 				
-				defaultField.setTarget( field.getType() );
+				// if class target not set  in annotation, use Field to determine class target
+				if ( NotSet.class.equals( defaultField.getTarget() ) ) {
+					
+					 // If Field is a FieldCallBack, set the target to the FieldCallBack target
+					 if ( FieldCallBack.class.equals( field.getType() ) ) {
+						FieldCallBack callBack;
+						try {
+							callBack = ( FieldCallBack )field.get( blueprint );
+						} catch (IllegalArgumentException e) {
+							throw new RegisterBlueprintException(e);
+						} catch (IllegalAccessException e) {
+							throw new RegisterBlueprintException(e);
+						}
+						 defaultField.setTarget( callBack.getTarget() );
+						 
+					 // Set target to Field class
+					 } else {
+						 defaultField.setTarget( field.getType() );
+					 }
+				
+				// Set target to annotation defined target
+				} else {
+					defaultField.setTarget( defaultField.getTarget() );
+				}
+				
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
 				
-				logger.info( "Setting default for {} to {}", defaultField.getName(), defaultField.getValue() );
+				logger.info( "  Setting default for {} to {}", defaultField.getName(), defaultField.getValue() );
 				
 			}
 			
@@ -137,7 +178,7 @@ public class ModelFactory {
 				mappedField.setFieldClass( field.getType() );
 				modelFields.add( mappedField );
 				
-				logger.info( "Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
+				logger.info( "  Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
 			}
 			
 			// Process @MappedList
@@ -156,7 +197,7 @@ public class ModelFactory {
 				
 				modelFields.add( listField );
 				
-				logger.info( "Setting mapped collection for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
+				logger.info( "  Setting mapped collection for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
 				
 			}
 		}
@@ -197,6 +238,18 @@ public class ModelFactory {
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( T model ) throws CreateModelException {
+		return createModel( model, true );
+	}
+	
+	/**
+	 * Create a Model for a registered {@link Blueprint}. Values set in the
+	 * model will not be overridden by defaults in the {@link Blueprint}.
+	 * 
+	 * @param model Object
+	 * @return Model
+	 * @throws CreateModelException
+	 */
+	public <T> T createModel( T model, boolean withPolicies ) throws CreateModelException {
 		
 		logger.debug( "Creating for {}", model );
 		
@@ -208,95 +261,121 @@ public class ModelFactory {
 		
 		for( ModelField modelField : erector.getModelFields() ) {
 			
-			logger.debug( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
+			logger.debug( "  ModelField {}", ReflectionToStringBuilder.toString(modelField) );
 			
-			// Process DefaultField
-			if ( modelField instanceof DefaultField ) {
-				
-				DefaultField defaultField = (DefaultField)modelField;
-				
-				Object value = null;
-				try {
-					value = erector.getBlueprint().getTemplate().get( model, defaultField );
-				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
-				} 
-				
-				// Use value set in the model, otherwise use value set in blueprint
-				if ( value == null ) {
-					value = defaultField.getValue();
-				}
-				
-				// If value is an instance of FieldCallBack, eval the callback and use the value
-				if ( value != null & value instanceof FieldCallBack ) {
-					FieldCallBack callBack = (FieldCallBack)value;
-					value = callBack.get( model );
-				}
-				
-				defaultField.setValue( value );
-				
-				try {
-					model = erector.getBlueprint().getTemplate().set( model, defaultField );
-				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
-				}
-				
-			// Process MappedField
-		    } else if ( modelField instanceof MappedField ) {
-				
-				MappedField mappedField = (MappedField)modelField;
-				
-				Object value = null;
-				try {
-					value = erector.getBlueprint().getTemplate().get( model, mappedField );
-				} catch (BlueprintTemplateException e) {
-					// Get does not exist
-				}
-				
-				if ( value == null ) {
-					value = this.createModel( mappedField.getTarget() );
-				} else {
-					value = this.createModel( value );
-				}
-				
-				mappedField.setValue( value );
-				
-				try {
-					model = erector.getBlueprint().getTemplate().set( model, mappedField );
-				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
-				}
-				
-			// Process MappedListField
-			} else if ( modelField instanceof MappedListField ) {
-				
-				MappedListField listField = (MappedListField)modelField;
-				
-				List modelList = null;
-				List createdList = new ArrayList();
-				
-				try {
-					modelList = (List)erector.getBlueprint().getTemplate().get( model, listField );
-				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
-				}
-				
-				if ( modelList == null ) {
-					for ( int x = 0; x < listField.getSize(); x ++ ) {
-						createdList.add( this.createModel( listField.getTarget() ) );
-					}
-				} else {
-					for ( Object object : modelList ) {
-						createdList.add( this.createModel( object ) );
+			
+			boolean processModelField =  true;
+			
+			if  ( withPolicies ) {
+				List<Policy> classPolicies = this.getPolicies().get( modelField.getTarget() );
+				if ( classPolicies != null ) {
+					
+					logger.debug( "  Running policies" );
+					
+					for ( Policy policy : classPolicies ) {
+						try {
+							logger.info( "    processing {} for {}", policy, modelField.getTarget() );
+							model = ( T )policy.process( this, erector.getBlueprint(), modelField, model );
+						} catch (PolicyException e) {
+							new CreateModelException(e);
+						}
+						
+						if ( PolicyStatus.RETURN.equals( policy.getStatus() ) ) {
+							processModelField = false;
+						}
 					}
 				}
-				
-				listField.setValue( createdList );
-				
-				try {
-					model = erector.getBlueprint().getTemplate().set( model, listField );
-				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
+			}
+			
+			if ( processModelField ) {
+				// Process DefaultField
+				if ( modelField instanceof DefaultField ) {
+					
+					DefaultField defaultField = (DefaultField)modelField;
+					
+					Object value = null;
+					try {
+						value = erector.getBlueprint().getTemplate().get( model, defaultField );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					} 
+					
+					// Use value set in the model, otherwise use value set in blueprint
+					if ( value == null ) {
+						value = defaultField.getValue();
+					}
+					
+					// If value is an instance of FieldCallBack, eval the callback and use the value
+					if ( value != null & value instanceof FieldCallBack ) {
+						FieldCallBack callBack = (FieldCallBack)value;
+						value = callBack.get( model );
+					}
+					
+					defaultField.setValue( value );
+					
+					try {
+						model = erector.getBlueprint().getTemplate().set( model, defaultField );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
+					
+				// Process MappedField
+			    } else if ( modelField instanceof MappedField ) {
+					
+					MappedField mappedField = (MappedField)modelField;
+					
+					Object value = null;
+					try {
+						value = erector.getBlueprint().getTemplate().get( model, mappedField );
+					} catch (BlueprintTemplateException e) {
+						// Get does not exist
+					}
+					
+					if ( value == null ) {
+						value = this.createModel( mappedField.getTarget() );
+					} else {
+						value = this.createModel( value );
+					}
+					
+					mappedField.setValue( value );
+					
+					try {
+						model = erector.getBlueprint().getTemplate().set( model, mappedField );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
+					
+				// Process MappedListField
+				} else if ( modelField instanceof MappedListField ) {
+					
+					MappedListField listField = (MappedListField)modelField;
+					
+					List modelList = null;
+					List createdList = new ArrayList();
+					
+					try {
+						modelList = (List)erector.getBlueprint().getTemplate().get( model, listField );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
+					
+					if ( modelList == null ) {
+						for ( int x = 0; x < listField.getSize(); x ++ ) {
+							createdList.add( this.createModel( listField.getTarget() ) );
+						}
+					} else {
+						for ( Object object : modelList ) {
+							createdList.add( this.createModel( object ) );
+						}
+					}
+					
+					listField.setValue( createdList );
+					
+					try {
+						model = erector.getBlueprint().getTemplate().set( model, listField );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
 				}
 			}
 		}
@@ -320,5 +399,9 @@ public class ModelFactory {
 	 */
 	public Map<Class,Erector> getErectors() {
 		return erectors;
+	}
+	
+	public Map<Class,List<Policy>> getPolicies() {
+		return policies;
 	}
 }

@@ -13,8 +13,10 @@ import com.slackworks.modelcitizen.blueprint.DriverBlueprint;
 import com.slackworks.modelcitizen.blueprint.UserBlueprint;
 import com.slackworks.modelcitizen.blueprint.WheelBlueprint;
 import com.slackworks.modelcitizen.model.Car;
+import com.slackworks.modelcitizen.model.Driver;
 import com.slackworks.modelcitizen.model.User;
 import com.slackworks.modelcitizen.model.Wheel;
+import com.slackworks.modelcitizen.policy.SingletonPolicy;
 
 public class ModelFactoryTest {
 
@@ -106,7 +108,5 @@ public class ModelFactoryTest {
 			assertTrue( email.contains( "email" ) );
 			assertTrue( email.contains( "@test.net" ) );
 		}
-	
-		
 	}
 }

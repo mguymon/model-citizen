@@ -7,6 +7,7 @@ import com.slackworks.modelcitizen.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.model.Driver;
+import com.slackworks.modelcitizen.model.User;
 import com.slackworks.modelcitizen.template.BlueprintTemplate;
 import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
