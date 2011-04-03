@@ -1,20 +1,22 @@
-package com.slackworks.modelcitizen;
+package com.slackworks.modelcitizen.blueprint;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+
+import com.slackworks.modelcitizen.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
+import com.slackworks.modelcitizen.annotation.MappedList;
+import com.slackworks.modelcitizen.model.Car;
+import com.slackworks.modelcitizen.model.Driver;
+import com.slackworks.modelcitizen.model.Wheel;
 import com.slackworks.modelcitizen.template.BlueprintTemplate;
 import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
 public class CarBlueprint implements Blueprint {
 
-		public CarBlueprint() { 
-			
-		}
-		
 		@Default
 		public String make = "car make";
 		
@@ -27,8 +29,11 @@ public class CarBlueprint implements Blueprint {
 		@Default
 		public Map status = new HashMap();
 		
+		@MappedList(target = Wheel.class, size = 4)
+		public List<Wheel> wheels;
+
 		@Mapped
-		public Wheel wheel;
+		public Driver driver;
 		
 		public Class getTarget() {
 			return Car.class;

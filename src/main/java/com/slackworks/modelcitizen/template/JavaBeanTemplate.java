@@ -1,9 +1,10 @@
 package com.slackworks.modelcitizen.template;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.reflect.MethodUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,18 +19,13 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 	
 	public <T> T set( T model, ModelField modelField ) throws BlueprintTemplateException {
 		try {
-			Method method = model.getClass().getMethod( "set" + WordUtils.capitalize( modelField.getName() ), new Class[] { modelField.getFieldClass() } );
-			method.invoke( model, modelField.getValue() );
-		} catch (SecurityException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (NoSuchMethodException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (IllegalArgumentException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (IllegalAccessException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (InvocationTargetException e) {
-			throw new BlueprintTemplateException( e );
+			PropertyUtils.setProperty( model, modelField.getName(), modelField.getValue() );
+		} catch (IllegalAccessException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
+		} catch (InvocationTargetException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
+		} catch (NoSuchMethodException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
 		}
 		
 		return model;
@@ -37,20 +33,14 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 
 	public Object get(Object model, ModelField modelField) throws BlueprintTemplateException {
 		try {
-			String methodSig = "get" + WordUtils.capitalize( modelField.getName() );
-			Method method = model.getClass().getMethod( methodSig, null );
-			return method.invoke( model );
-		} catch (SecurityException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (NoSuchMethodException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (IllegalArgumentException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (IllegalAccessException e) {
-			throw new BlueprintTemplateException( e );
-		} catch (InvocationTargetException e) {
-			throw new BlueprintTemplateException( e );
-		}
+			return PropertyUtils.getProperty( model, modelField.getName() );
+		} catch (IllegalAccessException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
+		} catch (InvocationTargetException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
+		} catch (NoSuchMethodException propertyException) {
+			throw new BlueprintTemplateException( propertyException );
+		} 
 	}
 
 }

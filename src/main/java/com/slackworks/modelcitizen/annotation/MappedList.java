@@ -9,6 +9,7 @@ import com.slackworks.modelcitizen.NotSet;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Mapped {
-	Class target() default NotSet.class;
+public @interface MappedList {
+	int size() default 1;
+    Class target();
 }

@@ -1,4 +1,4 @@
-package com.slackworks.modelcitizen;
+package com.slackworks.modelcitizen.model;
 
 public class Wheel {
 	public String name;

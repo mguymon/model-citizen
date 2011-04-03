@@ -1,29 +1,26 @@
-package com.slackworks.modelcitizen;
+package com.slackworks.modelcitizen.blueprint;
 
 import java.util.ArrayList;
 
+
+import com.slackworks.modelcitizen.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
+import com.slackworks.modelcitizen.model.Driver;
 import com.slackworks.modelcitizen.template.BlueprintTemplate;
 import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
-public class WheelBlueprint implements Blueprint {
+public class DriverBlueprint implements Blueprint {
 
-		public WheelBlueprint() { 
-			
-		}
 		
 		@Default
-		public String name = "tire name";
+		public String name = "driver's name";
 		
 		@Default
-		public Integer size = 10;
-		
-		@Default
-		public Object option = new ArrayList();
+		public Integer age= 16;
 		
 		public Class getTarget() {
-			return Wheel.class;
+			return Driver.class;
 		}
 
 		public BlueprintTemplate getTemplate() {

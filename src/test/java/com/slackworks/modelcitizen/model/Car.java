@@ -1,13 +1,16 @@
-package com.slackworks.modelcitizen;
+package com.slackworks.modelcitizen.model;
 
+import java.util.List;
 import java.util.Map;
+
 
 public class Car {
 	private String make;
 	private String manufacturer;
 	private Integer milage;
 	private Map status;
-	private Wheel wheel;
+	private List<Wheel> wheels;
+	private Driver driver;
 	
 	public Car() {
 		
@@ -45,12 +48,20 @@ public class Car {
 		this.status = status;
 	}
 
-	public Wheel getWheel() {
-		return wheel;
+	public List<Wheel> getWheels() {
+		return wheels;
 	}
 
-	public void setWheel(Wheel wheel) {
-		this.wheel = wheel;
+	public void setWheels(List<Wheel> wheels) {
+		this.wheels = wheels;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
 	}
 	
 	

@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
+import com.slackworks.modelcitizen.annotation.MappedList;
 import com.slackworks.modelcitizen.field.DefaultField;
+import com.slackworks.modelcitizen.field.MappedListField;
 import com.slackworks.modelcitizen.field.MappedField;
 import com.slackworks.modelcitizen.field.ModelField;
 import com.slackworks.modelcitizen.template.BlueprintTemplateException;
@@ -34,6 +36,22 @@ public class ModelFactory {
 		erectors = new HashMap<Class,Erector>();
 	}
 	
+	public void setRegisterBlueprints( List blueprints ) throws RegisterBlueprintException {
+		for( Object blueprint : blueprints ) {
+			if ( blueprint instanceof Class ) {
+				registerBlueprint( (Class)blueprint );
+			} else if ( blueprint instanceof String ) {
+				try {
+					registerBlueprint( (Class<Blueprint>)Class.forName( (String)blueprint) );
+				} catch (ClassNotFoundException e) {
+					throw new RegisterBlueprintException(e);
+				}
+			} else {
+				registerBlueprint( (Blueprint)blueprint );
+			}
+		}
+	}
+	
 	public void registerBlueprint( Class<Blueprint> clazz ) throws RegisterBlueprintException {
 		Blueprint blueprint = null;
 		
@@ -52,7 +70,7 @@ public class ModelFactory {
 		
 		List<ModelField> modelFields = new ArrayList<ModelField>();
 		
-		logger.info( "Building blueprint for {} {}", blueprint.getTarget(), blueprint.getTarget().getAnnotations() );
+		logger.info( "Registering blueprint for {} {}", blueprint.getTarget(), blueprint.getTarget().getAnnotations() );
 		
 		Field[] fields = blueprint.getClass().getFields();
 		
@@ -62,6 +80,7 @@ public class ModelFactory {
 				
 				DefaultField defaultField = new DefaultField();
 				defaultField.setName( field.getName() );
+				
 				try {
 					defaultField.setValue( field.get( blueprint ) );
 				} catch (IllegalArgumentException e) {
@@ -69,6 +88,8 @@ public class ModelFactory {
 				} catch (IllegalAccessException e) {
 					throw new RegisterBlueprintException( e );
 				}
+				
+				defaultField.setTarget( field.getType() );
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
 				
@@ -76,14 +97,40 @@ public class ModelFactory {
 				
 			}
 			
-			if ( field.getAnnotation( Mapped.class )  != null ) {
+			Mapped mapped = field.getAnnotation( Mapped.class ); 
+			if ( mapped != null ) {
 				MappedField mappedField = new MappedField();
 				mappedField.setName( field.getName() );
 				
+				if ( NotSet.class.equals( mapped.target() ) ) {
+					mappedField.setTarget( field.getType() );
+				} else {
+					mappedField.setTarget( mapped.target() );
+				}
+					
 				mappedField.setFieldClass( field.getType() );
 				modelFields.add( mappedField );
 				
-				logger.info( "Setting mapped for {} to {}", mappedField.getName(), mappedField.getFieldClass());
+				logger.info( "Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
+			}
+			
+			MappedList mappedCollection = field.getAnnotation( MappedList.class );
+			if ( mappedCollection != null ) {
+				MappedListField listField = new MappedListField();
+				listField.setName( field.getName() );
+				listField.setFieldClass( field.getType() );
+				listField.setSize( mappedCollection.size() );
+				
+				if ( NotSet.class.equals( mappedCollection.target() ) ) {
+					listField.setTarget( field.getType() );
+				} else {
+					listField.setTarget( mappedCollection.target() );
+				}
+				
+				modelFields.add( listField );
+				
+				logger.info( "Setting mapped collection for {} to {} as {}", new Object[] { listField.getName(), listField.getTarget(), listField.getTarget() });
+				
 			}
 		}
 		
@@ -124,7 +171,7 @@ public class ModelFactory {
 	 */
 	public <T> T createModel( T model ) throws CreateModelException {
 		
-		logger.info( "Creating for {}", model.getClass() );
+		logger.debug( "Creating for {}", ReflectionToStringBuilder.toString(model) );
 		
 		Erector erector = erectors.get( model.getClass() );
 		
@@ -135,7 +182,6 @@ public class ModelFactory {
 		for( ModelField modelField : erector.getModelFields() ) {
 			
 			logger.debug( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
-
 			
 			if ( modelField instanceof DefaultField ) {
 				
@@ -149,9 +195,17 @@ public class ModelFactory {
 				} 
 				
 				// Use value set in the model, otherwise use value set in blueprint
-				if ( value != null ) {
-					defaultField.setValue( value );
+				if ( value == null ) {
+					value = defaultField.getValue();
 				}
+				
+				// If value is an instance of FieldCallBack, eval the callback and use the value
+				if ( value != null & value instanceof FieldCallBack ) {
+					FieldCallBack callBack = (FieldCallBack)value;
+					value = callBack.get( model );
+				}
+				
+				defaultField.setValue( value );
 				
 				try {
 					model = erector.getBlueprint().getTemplate().set( model, defaultField );
@@ -159,7 +213,7 @@ public class ModelFactory {
 					throw new CreateModelException( e );
 				}
 				
-			} else if ( modelField instanceof MappedField ) {
+		    } else if ( modelField instanceof MappedField ) {
 				
 				MappedField mappedField = (MappedField)modelField;
 				
@@ -167,11 +221,11 @@ public class ModelFactory {
 				try {
 					value = erector.getBlueprint().getTemplate().get( model, mappedField );
 				} catch (BlueprintTemplateException e) {
-					throw new CreateModelException( e );
+					// Get does not exist
 				}
 				
 				if ( value == null ) {
-					value = this.createModel( mappedField.getFieldClass() );
+					value = this.createModel( mappedField.getTarget() );
 				} else {
 					value = this.createModel( value );
 				}
@@ -180,6 +234,37 @@ public class ModelFactory {
 				
 				try {
 					model = erector.getBlueprint().getTemplate().set( model, mappedField );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
+				}
+				
+			} else if ( modelField instanceof MappedListField ) {
+				
+				MappedListField listField = (MappedListField)modelField;
+				
+				List modelList = null;
+				List createdList = new ArrayList();
+				
+				try {
+					modelList = (List)erector.getBlueprint().getTemplate().get( model, listField );
+				} catch (BlueprintTemplateException e) {
+					throw new CreateModelException( e );
+				}
+				
+				if ( modelList == null ) {
+					for ( int x = 0; x < listField.getSize(); x ++ ) {
+						createdList.add( this.createModel( listField.getTarget() ) );
+					}
+				} else {
+					for ( Object object : modelList ) {
+						createdList.add( this.createModel( object ) );
+					}
+				}
+				
+				listField.setValue( createdList );
+				
+				try {
+					model = erector.getBlueprint().getTemplate().set( model, listField );
 				} catch (BlueprintTemplateException e) {
 					throw new CreateModelException( e );
 				}

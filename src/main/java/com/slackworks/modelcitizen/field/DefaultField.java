@@ -8,6 +8,7 @@ public class DefaultField implements ModelField {
 	private String name;
 	private Object value;
 	private Class fieldClass;
+	private Class target;
 
 	public Class getFieldClass() {
 		return fieldClass;
@@ -31,6 +32,14 @@ public class DefaultField implements ModelField {
 	
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public Class getTarget() {
+		return target;
+	}
+
+	public void setTarget(Class target) {
+		this.target = target;
 	}
 	
 	
