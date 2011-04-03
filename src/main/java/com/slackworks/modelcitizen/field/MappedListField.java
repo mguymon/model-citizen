@@ -1,5 +1,9 @@
 package com.slackworks.modelcitizen.field;
 
+/**
+ * A {@link MappedList} annotated Field in the {@link Blueprint} that is mapped 
+ * to a {@link List} comprised of Models with a registered {@Blueprint}. 
+ */
 public class MappedListField implements ModelField {
 
 	private String name;
@@ -11,7 +15,6 @@ public class MappedListField implements ModelField {
 	public void setName( String name ) {
 		this.name = name;
 	}
-	
 	
 	public String getName() {
 		return name;
@@ -29,11 +32,20 @@ public class MappedListField implements ModelField {
 		this.target = target;
 	}
 
+	/**
+	 * The target Class with registered {@link Blueprint} that List is comprised of.
+	 * If not set, defaults to annotated field's Class.s
+	 */
 	public Class getTarget() {
 		return target;
 	}
 
 
+	/**
+	 * Size of List to create
+	 * 
+	 * @return int
+	 */
 	public int getSize() {
 		return size;
 	}

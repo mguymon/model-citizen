@@ -31,11 +31,21 @@ public class ModelFactory {
 	private List<Blueprint> blueprints;
 	private Map<Class,Erector> erectors = new HashMap<Class,Erector>();
 	
+	/**
+	 * Create new instance
+	 */
 	public ModelFactory() {
 		blueprints = new ArrayList<Blueprint>();
 		erectors = new HashMap<Class,Erector>();
 	}
 	
+	/**
+	 * Register a List of {@link Blueprint}, Class<Blueprint>, or String
+	 * class names of Blueprint
+	 * 
+	 * @param blueprints List
+	 * @throws RegisterBlueprintException
+	 */
 	public void setRegisterBlueprints( List blueprints ) throws RegisterBlueprintException {
 		for( Object blueprint : blueprints ) {
 			if ( blueprint instanceof Class ) {
@@ -52,6 +62,12 @@ public class ModelFactory {
 		}
 	}
 	
+	/**
+	 * Register a {@link Blueprint} from Class
+	 * 
+	 * @param clazz Blueprint class
+	 * @throws RegisterBlueprintException
+	 */
 	public void registerBlueprint( Class<Blueprint> clazz ) throws RegisterBlueprintException {
 		Blueprint blueprint = null;
 		
@@ -66,16 +82,25 @@ public class ModelFactory {
 		registerBlueprint( blueprint );
 	}
 	
+	/**
+	 * Register {@link Blueprint} from instance.
+	 * 
+	 * @param blueprint {@link Blueprint}
+	 * @throws RegisterBlueprintException
+	 */
 	public void registerBlueprint( Blueprint blueprint ) throws RegisterBlueprintException {
 		
 		List<ModelField> modelFields = new ArrayList<ModelField>();
 		
 		logger.info( "Registering blueprint for {} {}", blueprint.getTarget(), blueprint.getTarget().getAnnotations() );
 		
+		// Iterate Blueprint public fields for ModelCitizen annotations
 		Field[] fields = blueprint.getClass().getFields();
-		
 		for( Field field: fields ) {
+			
 			logger.debug( "{} {}", field.getName(), field.getAnnotations() );
+			
+			// Process @Default
 			if ( field.getAnnotation( Default.class ) != null ) {
 				
 				DefaultField defaultField = new DefaultField();
@@ -97,6 +122,7 @@ public class ModelFactory {
 				
 			}
 			
+			// Process @Mapped
 			Mapped mapped = field.getAnnotation( Mapped.class ); 
 			if ( mapped != null ) {
 				MappedField mappedField = new MappedField();
@@ -114,6 +140,7 @@ public class ModelFactory {
 				logger.info( "Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
 			}
 			
+			// Process @MappedList
 			MappedList mappedCollection = field.getAnnotation( MappedList.class );
 			if ( mappedCollection != null ) {
 				MappedListField listField = new MappedListField();
@@ -145,7 +172,7 @@ public class ModelFactory {
 	}
 	
 	/**
-	 * Create a Model from a registered {@link Blueprint}
+	 * Create a Model for a registered {@link Blueprint}
 	 * 
 	 * @param clazz Model class
 	 * @return Model
@@ -162,8 +189,8 @@ public class ModelFactory {
 	}
 	
 	/**
-	 * Create a Model from a registered {@link Blueprint}. Values set in the
-	 * model will not be overridden by defaults set in the {@link Blueprint}.
+	 * Create a Model for a registered {@link Blueprint}. Values set in the
+	 * model will not be overridden by defaults in the {@link Blueprint}.
 	 * 
 	 * @param model Object
 	 * @return Model
@@ -183,6 +210,7 @@ public class ModelFactory {
 			
 			logger.debug( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
 			
+			// Process DefaultField
 			if ( modelField instanceof DefaultField ) {
 				
 				DefaultField defaultField = (DefaultField)modelField;
@@ -213,6 +241,7 @@ public class ModelFactory {
 					throw new CreateModelException( e );
 				}
 				
+			// Process MappedField
 		    } else if ( modelField instanceof MappedField ) {
 				
 				MappedField mappedField = (MappedField)modelField;
@@ -238,6 +267,7 @@ public class ModelFactory {
 					throw new CreateModelException( e );
 				}
 				
+			// Process MappedListField
 			} else if ( modelField instanceof MappedListField ) {
 				
 				MappedListField listField = (MappedListField)modelField;
