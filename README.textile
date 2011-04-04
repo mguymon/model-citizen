@@ -1,6 +1,6 @@
 Model generator for Java.
 
-Models are defined by blueprints to set default values using annotations.
+Models are defined by blueprints to set default values using annotations. "Wiki":https://github.com/mguymon/model-citizen/wiki has examples.
 
 Inspired by "FactoryGirl":https://github.com/thoughtbot/factory_girl .
 
