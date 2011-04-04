@@ -17,12 +17,13 @@ public abstract class Policy {
 	public abstract Class getTarget();
 	
 	/**
+	 * Process the model with the Policy.
 	 * 
 	 * @param modelFactory {@link ModelFactory}
 	 * @param blueprint {@link Blueprint}
 	 * @param modelField {@link ModelField}
 	 * @param model Object
-	 * @return <M>
+	 * @return <M> model
 	 * @throws PolicyException
 	 */
 	public abstract <M> M process( ModelFactory modelFactory, Blueprint blueprint, ModelField modelField, M model ) throws PolicyException;

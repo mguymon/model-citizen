@@ -17,30 +17,30 @@ import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
 public class CarBlueprint implements Blueprint {
 
-		@Default
-		public String make = "car make";
-		
-		@Default
-		public String manufacturer = "car manufacturer";
-		
-		@Default
-		public Integer milage = 100;
-		
-		@Default
-		public Map status = new HashMap();
-		
-		@MappedList(target = Wheel.class, size = 4)
-		public List<Wheel> wheels;
+	@Default
+	public String make = "car make";
 
-		@Mapped
-		public Driver driver;
-		
-		public Class getTarget() {
-			return Car.class;
-		}
+	@Default
+	public String manufacturer = "car manufacturer";
 
-		public BlueprintTemplate getTemplate() {
-			return new JavaBeanTemplate();
-		}
-		
+	@Default
+	public Integer milage = 100;
+
+	@Default
+	public Map status = new HashMap();
+
+	@MappedList(target = Wheel.class, size = 4)
+	public List<Wheel> wheels;
+
+	@Mapped
+	public Driver driver;
+
+	public Class getTarget() {
+		return Car.class;
 	}
+
+	public BlueprintTemplate getTemplate() {
+		return new JavaBeanTemplate();
+	}
+
+}
