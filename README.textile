@@ -1,6 +1,10 @@
-Model generator for Java.
+Annotation based model factory for Java.
 
-Models are defined by blueprints to set default values using annotations. "Wiki":https://github.com/mguymon/model-citizen/wiki has examples.
+Models are mapped by blueprints using annotated fields. Blueprints are registered
+with the ModelFactory. Blueprints contain default values and references to other
+blueprinted models. The ModelFactory can then create models based on the blueprints.
+
+"Wiki":https://github.com/mguymon/model-citizen/wiki of examples.
 
 Inspired by "FactoryGirl":https://github.com/thoughtbot/factory_girl .
 
