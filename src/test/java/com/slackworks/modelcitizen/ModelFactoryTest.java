@@ -3,6 +3,7 @@ package com.slackworks.modelcitizen;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 import org.junit.Before;
@@ -41,6 +42,15 @@ public class ModelFactoryTest {
 		assertEquals( wheelBlueprint, modelFactory.getBlueprints().get(1) );
 		assertEquals( driverBlueprint, modelFactory.getBlueprints().get(2) );
 		assertEquals( userBlueprint, modelFactory.getBlueprints().get(3) );
+	}
+	
+	@Test(expected=RegisterBlueprintException.class)
+	public void testSetRegisterBlueprintsWithException() throws RegisterBlueprintException {
+		List blueprints = new ArrayList();
+		blueprints.add( carBlueprint );
+		blueprints.add( new Integer(8) );
+		
+		modelFactory.setRegisterBlueprints( blueprints );
 	}
 	
 	@Test

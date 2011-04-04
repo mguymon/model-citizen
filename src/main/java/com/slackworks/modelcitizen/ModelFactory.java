@@ -72,14 +72,23 @@ public class ModelFactory {
 			if ( blueprint instanceof Class ) {
 				registerBlueprint( (Class)blueprint );
 			} else if ( blueprint instanceof String ) {
-				try {
-					registerBlueprint( (Class<Blueprint>)Class.forName( (String)blueprint) );
-				} catch (ClassNotFoundException e) {
-					throw new RegisterBlueprintException(e);
-				}
-			} else {
+				registerBlueprint( (String)blueprint );
+			} else if ( blueprint instanceof String ) {
 				registerBlueprint( (Blueprint)blueprint );
+			} else {
+				throw new RegisterBlueprintException( "Only supports List comprised of Class<Blueprint>, Blueprint, or String className" );
 			}
+		}
+	}
+	
+	/**
+	 * Register a {@link Blueprint} from a String Class name
+	 */
+	public void registerBlueprint( String className ) throws RegisterBlueprintException {
+		try {
+			registerBlueprint( (Class<Blueprint>)Class.forName( className ) );
+		} catch (ClassNotFoundException e) {
+			throw new RegisterBlueprintException(e);
 		}
 	}
 	
