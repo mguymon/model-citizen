@@ -2,11 +2,13 @@ Annotation based model factory for Java.
 
 "https://github.com/mguymon/model-citizen":https://github.com/mguymon/model-citizen
 
-Models are mapped by blueprints using annotated fields. Blueprints are registered
-with the ModelFactory. Blueprints contain default values and references to other
-blueprinted models. The ModelFactory can then create models based on the blueprints.
+A Model is mapped by a Blueprint using annotated fields. Blueprints contain 
+default values and references to other blueprinted models. The ModelFactory can 
+create Models based on registered Blueprints. A Model already created can be
+passed into the ModelFactory as a Reference Model, which will be used as the basis
+for the new Model. 
 
 "Wiki":https://github.com/mguymon/model-citizen/wiki of examples.
 
-Inspired by "FactoryGirl":https://github.com/thoughtbot/factory_girl .
+Inspired by "FactoryGirl":https://github.com/thoughtbot/factory_girl 
 
