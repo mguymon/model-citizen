@@ -104,19 +104,4 @@ public class ModelFactoryTest {
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 	}
-	
-	@Test
-	public void testCreateModelWithFieldCallBack() throws CreateModelException {
-		User user = modelFactory.createModel( User.class );
-		
-		assertNotNull( user.getUsername() );
-		assertTrue( user.getUsername().contains("username") );
-		
-		assertNotNull( user.getEmails() );
-		assertEquals( 3, user.getEmails().size() );
-		for ( String email : user.getEmails() ) {
-			assertTrue( email.contains( "email" ) );
-			assertTrue( email.contains( "@test.net" ) );
-		}
-	}
 }

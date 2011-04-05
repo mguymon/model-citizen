@@ -63,7 +63,7 @@ public class ModelFactory {
 			
 			policies.add( (BlueprintPolicy)policy );
 			
-			logger.debug( "Setting BlueprintPolicy {} for {}", policy, policy.getTarget() );
+			logger.info( "Setting BlueprintPolicy {} for {}", policy, policy.getTarget() );
 			
 			blueprintPolicies.put( policy.getTarget(), policies );
 		
@@ -82,7 +82,7 @@ public class ModelFactory {
 			
 			policies.add( (FieldPolicy)policy );
 			
-			logger.debug( "Setting FieldPolicy {} for {}", policy, policy.getTarget() );
+			logger.info( "Setting FieldPolicy {} for {}", policy, policy.getTarget() );
 			
 			fieldPolicies.put( policy.getTarget(), policies );
 		}
@@ -161,8 +161,6 @@ public class ModelFactory {
 		// Iterate Blueprint public fields for ModelCitizen annotations
 		Field[] fields = blueprint.getClass().getFields();
 		for( Field field: fields ) {
-			
-			logger.debug( "{} {}", field.getName(), field.getAnnotations() );
 			
 			// Process @Default
 			if ( field.getAnnotation( Default.class ) != null ) {
@@ -244,7 +242,6 @@ public class ModelFactory {
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( Class<T> clazz ) throws CreateModelException {
-		logger.debug( "Creating with Class for {}", clazz );
 		try {
 			return createModel( clazz.newInstance() );
 		} catch (InstantiationException e) {
@@ -262,7 +259,6 @@ public class ModelFactory {
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( Class<T> clazz, boolean withPolicies) throws CreateModelException {
-		logger.debug( "Creating with Class for {} with Policies {}", clazz, withPolicies );
 		try {
 			return createModel( clazz.newInstance(), withPolicies );
 		} catch (InstantiationException e) {
@@ -293,7 +289,6 @@ public class ModelFactory {
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( T model, boolean withPolicies ) throws CreateModelException {
-		logger.debug( "Creating for {} with Policies {}", model, withPolicies );
 		
 		Erector erector = erectors.get( model.getClass() );
 		
@@ -336,7 +331,7 @@ public class ModelFactory {
 		
 		for( ModelField modelField : erector.getModelFields() ) {
 			
-			logger.debug( "  ModelField {}", ReflectionToStringBuilder.toString(modelField) );
+			logger.debug( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
 
 			Object value = null;
 			
@@ -352,7 +347,6 @@ public class ModelFactory {
 							Command command = policy.process( this, erector, modelField, createdModel );
 							if ( command != null ) {
 								erector.addCommand( modelField, command );
-								logger.debug( "ARRRRRRG {}", erector.getCommands( modelField ) );
 							}
 						} catch (PolicyException e) {
 							new CreateModelException(e);
@@ -361,7 +355,7 @@ public class ModelFactory {
 				}
 			}
 			
-			logger.debug( "ModelField commands: {}", erector.getCommands(modelField));
+			logger.debug( "  ModelField commands: {}", erector.getCommands(modelField));
 			
 			if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 				
@@ -458,11 +452,7 @@ public class ModelFactory {
 						throw new CreateModelException( e );
 					}
 				}
-			
-				logger.debug( "    setting {} to {}", modelField.getName(), value );
-			} else {
-				logger.debug( "    injection skipped, {}", ReflectionToStringBuilder.toString( createdModel ) );
-			}
+			} 
 		}
 		
 		return createdModel;
