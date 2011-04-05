@@ -30,7 +30,7 @@ import com.slackworks.modelcitizen.field.ModelField;
 import com.slackworks.modelcitizen.template.BlueprintTemplateException;
 
 /**
- * Enforce a @Mapped field in a @Blueprint as a Singleton {@link AbstractPolicy}
+ * Enforce a @Mapped field in a @Blueprint as a Singleton {@link Policy}
  * for creating models. 
  * 
  * If constructed with a Class, the first attempt to set @Mapped instance of Class
