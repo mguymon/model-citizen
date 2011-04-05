@@ -17,7 +17,7 @@ import com.slackworks.modelcitizen.model.Car;
 import com.slackworks.modelcitizen.model.Driver;
 import com.slackworks.modelcitizen.model.User;
 import com.slackworks.modelcitizen.model.Wheel;
-import com.slackworks.modelcitizen.policy.SingletonPolicy;
+import com.slackworks.modelcitizen.policy.MappedSingletonPolicy;
 
 public class ModelFactoryTest {
 

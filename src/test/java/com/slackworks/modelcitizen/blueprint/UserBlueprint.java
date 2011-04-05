@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
-import com.slackworks.modelcitizen.Blueprint;
-import com.slackworks.modelcitizen.FieldCallBack;
+import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
+import com.slackworks.modelcitizen.field.FieldCallBack;
 import com.slackworks.modelcitizen.model.User;
-import com.slackworks.modelcitizen.template.BlueprintTemplate;
-import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
-public class UserBlueprint implements Blueprint {
+@Blueprint(User.class )
+public class UserBlueprint {
 	
 	@Default
 	public FieldCallBack<String> username = new FieldCallBack<String>() {
@@ -38,12 +36,4 @@ public class UserBlueprint implements Blueprint {
 		}
 		
 	};
-	
-	public Class getTarget() {
-		return User.class;
-	}
-
-	public BlueprintTemplate getTemplate() {
-		return new JavaBeanTemplate();
-	}
 }

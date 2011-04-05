@@ -16,7 +16,7 @@ import com.slackworks.modelcitizen.blueprint.WheelBlueprint;
 import com.slackworks.modelcitizen.model.Car;
 import com.slackworks.modelcitizen.model.Driver;
 
-public class SingletonPolicyTest {
+public class MappedSingletonPolicyTest {
 	
 	private ModelFactory modelFactory;
 	private CarBlueprint carBlueprint = new CarBlueprint();
@@ -34,8 +34,8 @@ public class SingletonPolicyTest {
 	}
 	
 	@Test
-	public void SingletonPolicyWithClass() throws ModelFactoryException {
-		modelFactory.addPolicy( new SingletonPolicy( Driver.class ) );
+	public void singletonPolicyWithClass() throws ModelFactoryException {
+		modelFactory.addPolicy( new MappedSingletonPolicy( Driver.class ) );
 		
 		Car car1 = modelFactory.createModel( Car.class );
 		Car car2 = modelFactory.createModel( Car.class );
@@ -48,9 +48,9 @@ public class SingletonPolicyTest {
 	}
 	
 	@Test
-	public void SingletonPolicyWithModel() throws ModelFactoryException {
+	public void singletonPolicyWithModel() throws ModelFactoryException {
 		Driver driver = modelFactory.createModel( Driver.class );
-		modelFactory.addPolicy( new SingletonPolicy( driver ) );
+		modelFactory.addPolicy( new MappedSingletonPolicy( driver ) );
 		
 		Car car1 = modelFactory.createModel( Car.class );
 		Car car2 = modelFactory.createModel( Car.class );

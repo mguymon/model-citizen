@@ -35,4 +35,5 @@ public interface ModelField {
 	 * @return Class
 	 */
 	public Class getFieldClass();
+	
 }

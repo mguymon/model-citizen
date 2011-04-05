@@ -1,23 +1,64 @@
 package com.slackworks.modelcitizen;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import com.slackworks.modelcitizen.erector.Command;
 import com.slackworks.modelcitizen.field.ModelField;
+import com.slackworks.modelcitizen.template.BlueprintTemplate;
 
 /**
- * Erector for a Class to create an instance from a {@link Blueprint}
+ * Erector for a Class to create an instance from a {@link Blueprint} annotated Class
  */
 public class Erector {
 
-	private Blueprint blueprint;
-	private List<ModelField> modelFields;
-	private Class targetClass;
+	private static final Set<Command> emptySet = new HashSet<Command>();
 	
-	public Blueprint getBlueprint() {
+	private Object blueprint;
+	private List<ModelField> modelFields;
+	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
+	private BlueprintTemplate blueprintTemplate;
+	private Class target;
+	private Object reference;
+	
+
+	public void addCommands(ModelField modelField, Set<Command> commands) {
+		for( Command command : commands ) {
+			addCommand( modelField, command );
+		}
+	}
+	
+	public void addCommand( ModelField modelField, Command command ) {
+		Set<Command> commands = modelFieldCommands.get( modelField );
+		if ( commands == null ) {
+			commands = new HashSet<Command>();
+		}
+		
+		commands.add( command );
+		modelFieldCommands.put( modelField, commands );
+	}
+	
+	public Set<Command> getCommands( ModelField modelField ) {
+		Set<Command> commands = modelFieldCommands.get( modelField );
+		if ( commands != null ) {
+			return commands;
+		} else {
+			return emptySet;
+		}
+	}
+	
+	public void clearCommands() {
+		modelFieldCommands = new HashMap<ModelField,Set<Command>>();
+	}
+	
+	public Object getBlueprint() {
 		return blueprint;
 	}
 	
-	public void setBlueprint(Blueprint blueprint) {
+	public void setBlueprint(Object blueprint) {
 		this.blueprint = blueprint;
 	}
 	
@@ -29,12 +70,28 @@ public class Erector {
 		this.modelFields = modelFields;
 	}
 	
-	public Class getTargetClass() {
-		return targetClass;
+	public BlueprintTemplate getTemplate() {
+		return blueprintTemplate;
+	}
+
+	public void setTemplate(BlueprintTemplate blueprintTemplate) {
+		this.blueprintTemplate = blueprintTemplate;
+	}
+
+	public Class getTarget() {
+		return target;
 	}
 	
-	public void setTargetClass(Class targetClass) {
-		this.targetClass = targetClass;
+	public void setTarget(Class target) {
+		this.target = target;
+	}
+
+	public Object getReference() {
+		return reference;
+	}
+
+	public void setReference(Object reference) {
+		this.reference = reference;
 	}
 	
 }

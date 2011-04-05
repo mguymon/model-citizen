@@ -1,4 +1,4 @@
-package com.slackworks.modelcitizen;
+package com.slackworks.modelcitizen.field;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -25,7 +25,7 @@ public abstract class FieldCallBack<T> {
 	 * @param model Object
 	 * @return <T> instance of Field class
 	 */
-	public abstract T get( Object model );
+	public abstract T get( Object referenceModel );
 	
 	
 	/**

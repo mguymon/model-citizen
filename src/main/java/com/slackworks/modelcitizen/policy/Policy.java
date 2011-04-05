@@ -1,39 +1,19 @@
 package com.slackworks.modelcitizen.policy;
 
-import com.slackworks.modelcitizen.Blueprint;
+import com.slackworks.modelcitizen.Erector;
 import com.slackworks.modelcitizen.ModelFactory;
 import com.slackworks.modelcitizen.field.ModelField;
 
 /**
- * Policies for creating Models
+ * Policy parent, should implement child Policy
  */
-public abstract class Policy {
+public interface Policy {
 
 	/**
 	 * Class target of the Policy that has been mapped by a {@link Blueprint}
 	 * 
 	 * @return Class
 	 */
-	public abstract Class getTarget();
+	public Class getTarget();
 	
-	/**
-	 * Process the model with the Policy.
-	 * 
-	 * @param modelFactory {@link ModelFactory}
-	 * @param blueprint {@link Blueprint}
-	 * @param modelField {@link ModelField}
-	 * @param model Object
-	 * @return <M> model
-	 * @throws PolicyException
-	 */
-	public abstract <M> M process( ModelFactory modelFactory, Blueprint blueprint, ModelField modelField, M model ) throws PolicyException;
-	
-	/**
-	 * Status of {@link Policy#process(ModelFactory, Blueprint, ModelField, Object)}
-	 * 
-	 * @return {@link PolicyStatus}
-	 */
-	public PolicyStatus getStatus() {
-		return PolicyStatus.CONTINUE;
-	}
 }

@@ -2,13 +2,12 @@ package com.slackworks.modelcitizen.blueprint;
 
 import java.util.ArrayList;
 
-import com.slackworks.modelcitizen.Blueprint;
+import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.model.Wheel;
-import com.slackworks.modelcitizen.template.BlueprintTemplate;
-import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
-public class WheelBlueprint implements Blueprint {
+@Blueprint(Wheel.class)
+public class WheelBlueprint {
 
 
 	@Default
@@ -19,13 +18,5 @@ public class WheelBlueprint implements Blueprint {
 
 	@Default
 	public Object option = new ArrayList();
-
-	public Class getTarget() {
-		return Wheel.class;
-	}
-
-	public BlueprintTemplate getTemplate() {
-		return new JavaBeanTemplate();
-	}
 
 }

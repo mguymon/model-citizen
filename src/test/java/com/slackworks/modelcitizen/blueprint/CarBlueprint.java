@@ -5,17 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 
-import com.slackworks.modelcitizen.Blueprint;
+import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.annotation.MappedList;
 import com.slackworks.modelcitizen.model.Car;
 import com.slackworks.modelcitizen.model.Driver;
 import com.slackworks.modelcitizen.model.Wheel;
-import com.slackworks.modelcitizen.template.BlueprintTemplate;
-import com.slackworks.modelcitizen.template.JavaBeanTemplate;
 
-public class CarBlueprint implements Blueprint {
+@Blueprint( Car.class )
+public class CarBlueprint {
 
 	@Default
 	public String make = "car make";
@@ -34,13 +33,5 @@ public class CarBlueprint implements Blueprint {
 
 	@Mapped
 	public Driver driver;
-
-	public Class getTarget() {
-		return Car.class;
-	}
-
-	public BlueprintTemplate getTemplate() {
-		return new JavaBeanTemplate();
-	}
 
 }
