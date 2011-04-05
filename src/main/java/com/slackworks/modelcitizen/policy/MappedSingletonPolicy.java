@@ -34,8 +34,10 @@ import com.slackworks.modelcitizen.template.BlueprintTemplateException;
  * for creating models. 
  * 
  * If constructed with a Class, the first attempt to set @Mapped instance of Class
- * will use {@link ModelFactory#createModel(Class)} to create singleton to use 
- * for all instances of Class in registered {@link Blueprint}s. 
+ * will use {@link ModelFactory#createModel(Class, false)} to create singleton to use 
+ * for all instances of Class in registered {@link Blueprint}s. Note: 
+ * the {@link ModelFactory#createModel(Class,false)} will not run any Policy 
+ * for the creation.
  * 
  * If constructed with a Model, the Model will be used for all @Mapped instances of
  * Model's class in registered {@link Blueprint}s.

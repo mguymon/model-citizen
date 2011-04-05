@@ -69,7 +69,15 @@ public class ModelFactory {
 		erectors = new HashMap<Class,Erector>();
 	}
 	
+	/**
+	 * Add Policy to ModelFactory
+	 *  
+	 * @param policy {@link FieldPolicy} or {@link BlueprintPolicy}
+	 * @throws PolicyException
+	 */
 	public void addPolicy( Policy policy ) throws PolicyException {
+		
+		// Add BlueprintPolicy
 		if ( policy instanceof BlueprintPolicy ) {
 			if ( erectors.get( policy.getTarget() ) == null ) {
 				throw new PolicyException( "Blueprint does not exist for BlueprintPolicy target: " + policy.getTarget() );
@@ -86,7 +94,7 @@ public class ModelFactory {
 			
 			blueprintPolicies.put( policy.getTarget(), policies );
 		
-		
+		// Add FieldPolicy
 		} else if ( policy instanceof FieldPolicy ) {
 			
 			// XXX: force FieldPolicy's to be mapped to a blueprint? Limits their scope, but enables validation
@@ -209,8 +217,11 @@ public class ModelFactory {
 				MappedField mappedField = new MappedField();
 				mappedField.setName( field.getName() );
 				
+				// If @Mapped(target) not set, use Field's class
 				if ( NotSet.class.equals( mapped.target() ) ) {
 					mappedField.setTarget( field.getType() );
+					
+				// Use @Mapped(target) for MappedField#target
 				} else {
 					mappedField.setTarget( mapped.target() );
 				}
@@ -229,8 +240,11 @@ public class ModelFactory {
 				listField.setFieldClass( field.getType() );
 				listField.setSize( mappedCollection.size() );
 				
+				// If @MappedList(target) not set, use Field's class
 				if ( NotSet.class.equals( mappedCollection.target() ) ) {
 					listField.setTarget( field.getType() );
+					
+				// Use @MappedList(target) for MappedListField#target
 				} else {
 					listField.setTarget( mappedCollection.target() );
 				}
@@ -244,6 +258,7 @@ public class ModelFactory {
 		
 		blueprints.add( blueprint );
 		
+		// Create Erector for this Blueprint
 		Erector erector = new Erector();
 		erector.setTemplate( new JavaBeanTemplate() );
 		erector.setBlueprint( blueprint );

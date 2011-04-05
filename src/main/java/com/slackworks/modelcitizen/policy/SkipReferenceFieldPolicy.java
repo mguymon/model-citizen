@@ -60,7 +60,7 @@ public class SkipReferenceFieldPolicy implements BlueprintPolicy {
 	}
 
 	/**
-	 * Prevents Model from being set by the reference model
+	 * Prevents Model from being set by the Reference Model
 	 */
 	public Map<ModelField,Set<Command>> process(ModelFactory modelFactory, Erector erector, Object model) throws PolicyException {
 		
