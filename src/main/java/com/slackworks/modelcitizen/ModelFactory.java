@@ -1,5 +1,23 @@
 package com.slackworks.modelcitizen;
 
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements. See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+   *
+ * http://www.apache.org/licenses/LICENSE-2.0
+   *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -276,8 +295,8 @@ public class ModelFactory {
 	 * @return Model
 	 * @throws CreateModelException
 	 */
-	public <T> T createModel( T model ) throws CreateModelException {
-		return createModel( model, true );
+	public <T> T createModel( T referenceModel ) throws CreateModelException {
+		return createModel( referenceModel, true );
 	}
 	
 	/**
@@ -288,15 +307,15 @@ public class ModelFactory {
 	 * @return Model
 	 * @throws CreateModelException
 	 */
-	public <T> T createModel( T model, boolean withPolicies ) throws CreateModelException {
+	public <T> T createModel( T referenceModel, boolean withPolicies ) throws CreateModelException {
 		
-		Erector erector = erectors.get( model.getClass() );
+		Erector erector = erectors.get( referenceModel.getClass() );
 		
 		if ( erector == null ) {
-			throw new CreateModelException( "Unregistered class: " + model.getClass() );
+			throw new CreateModelException( "Unregistered class: " + referenceModel.getClass() );
 		}
 		
-		erector.setReference( model );
+		erector.setReference( referenceModel );
 		erector.clearCommands();
 		
 		T createdModel;
@@ -366,7 +385,7 @@ public class ModelFactory {
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_REFERENCE_INJECTION ) ) {
 						try {
-							value = erector.getTemplate().get( model, defaultField.getName() );
+							value = erector.getTemplate().get( referenceModel, defaultField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						} 
@@ -382,7 +401,7 @@ public class ModelFactory {
 					// If value is an instance of FieldCallBack, eval the callback and use the value
 					if ( value != null & value instanceof FieldCallBack ) {
 						FieldCallBack callBack = (FieldCallBack)value;
-						value = callBack.get( model );
+						value = callBack.get( referenceModel );
 					}
 					
 					try {
@@ -398,7 +417,7 @@ public class ModelFactory {
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_REFERENCE_INJECTION ) ) {
 						try {
-							value = erector.getTemplate().get( model, mappedField.getName() );
+							value = erector.getTemplate().get( referenceModel, mappedField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
@@ -428,7 +447,7 @@ public class ModelFactory {
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 						try {
-							modelList = (List)erector.getTemplate().get( model, listField.getName() );
+							modelList = (List)erector.getTemplate().get( referenceModel, listField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
