@@ -34,6 +34,8 @@ import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.annotation.MappedList;
+import com.slackworks.modelcitizen.annotation.NotSet;
+import com.slackworks.modelcitizen.annotation.Nullable;
 import com.slackworks.modelcitizen.erector.Command;
 import com.slackworks.modelcitizen.field.DefaultField;
 import com.slackworks.modelcitizen.field.FieldCallBack;
@@ -216,6 +218,10 @@ public class ModelFactory {
 			if ( mapped != null ) {
 				MappedField mappedField = new MappedField();
 				mappedField.setName( field.getName() );
+				
+				if ( field.getAnnotation( Nullable.class ) != null ) {
+					mappedField.setNullable( true );
+				}
 				
 				// If @Mapped(target) not set, use Field's class
 				if ( NotSet.class.equals( mapped.target() ) ) {
@@ -439,8 +445,10 @@ public class ModelFactory {
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( value == null ) {
-							value = this.createModel( mappedField.getTarget() );
+						if ( value == null   ) {
+							if ( !mappedField.isNullable() ) {
+								value = this.createModel( mappedField.getTarget() );
+							}
 						} else {
 							value = this.createModel( value );
 						}

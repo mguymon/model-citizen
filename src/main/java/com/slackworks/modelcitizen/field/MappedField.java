@@ -24,54 +24,23 @@ import java.lang.reflect.Field;
  * A {@link Mapped} annotated Field in the {@link Blueprint} that is mapped 
  * to a registered {@Blueprint}
  */
-public class MappedField implements ModelField {
+public class MappedField extends ModelField {
 
-	private String name;
-	private Object value;
-	private Class fieldClass;
-	private Class target;
-	
-	public Class getFieldClass() {
-		return fieldClass;
+	private boolean nullable = false;
+
+	public boolean isNullable() {
+		return nullable;
 	}
 
-	public void setFieldClass(Class fieldClass) {
-		this.fieldClass = fieldClass;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Object getValue() {
-		return value;
-	}
-	
-	public void setValue( Object value ) {
-		this.value = value;
-	}
-
-	public Class getTarget() {
-		return target;
-	}
-
-	public void setTarget(Class target) {
-		this.target = target;
+	public void setNullable(boolean nullable) {
+		this.nullable = nullable;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((fieldClass == null) ? 0 : fieldClass.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((target == null) ? 0 : target.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		int result = super.hashCode();
+		result = prime * result + (nullable ? 1231 : 1237);
 		return result;
 	}
 
@@ -79,32 +48,15 @@ public class MappedField implements ModelField {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		MappedField other = (MappedField) obj;
-		if (fieldClass == null) {
-			if (other.fieldClass != null)
-				return false;
-		} else if (!fieldClass.equals(other.fieldClass))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (target == null) {
-			if (other.target != null)
-				return false;
-		} else if (!target.equals(other.target))
-			return false;
-		if (value == null) {
-			if (other.value != null)
-				return false;
-		} else if (!value.equals(other.value))
+		if (nullable != other.nullable)
 			return false;
 		return true;
 	}
+	
 	
 }

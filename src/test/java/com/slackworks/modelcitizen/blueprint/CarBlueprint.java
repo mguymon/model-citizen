@@ -27,6 +27,7 @@ import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.annotation.MappedList;
+import com.slackworks.modelcitizen.annotation.Nullable;
 import com.slackworks.modelcitizen.model.Car;
 import com.slackworks.modelcitizen.model.Driver;
 import com.slackworks.modelcitizen.model.Wheel;
@@ -51,5 +52,9 @@ public class CarBlueprint {
 
 	@Mapped
 	public Driver driver;
+	
+	@Mapped
+	@Nullable
+	public Driver passenger = null;
 
 }

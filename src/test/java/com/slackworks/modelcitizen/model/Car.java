@@ -28,6 +28,7 @@ public class Car {
 	private Map status;
 	private List<Wheel> wheels;
 	private Driver driver;
+	private Driver passenger;
 	
 	public Car() {
 		
@@ -81,5 +82,12 @@ public class Car {
 		this.driver = driver;
 	}
 	
+	public Driver getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Driver passenger) {
+		this.passenger = passenger;
+	}
 	
 }
