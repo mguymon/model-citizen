@@ -21,6 +21,7 @@ package com.slackworks.modelcitizen;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +35,7 @@ import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.annotation.MappedList;
+import com.slackworks.modelcitizen.annotation.MappedSet;
 import com.slackworks.modelcitizen.annotation.NotSet;
 import com.slackworks.modelcitizen.annotation.Nullable;
 import com.slackworks.modelcitizen.erector.Command;
@@ -41,6 +43,7 @@ import com.slackworks.modelcitizen.field.DefaultField;
 import com.slackworks.modelcitizen.field.FieldCallBack;
 import com.slackworks.modelcitizen.field.MappedListField;
 import com.slackworks.modelcitizen.field.MappedField;
+import com.slackworks.modelcitizen.field.MappedSetField;
 import com.slackworks.modelcitizen.field.ModelField;
 import com.slackworks.modelcitizen.policy.BlueprintPolicy;
 import com.slackworks.modelcitizen.policy.FieldPolicy;
@@ -255,9 +258,74 @@ public class ModelFactory {
 					listField.setTarget( mappedCollection.target() );
 				}
 				
+				// If @MappedList(targetList) not set, use ArrayList
+				if ( NotSet.class.equals( mappedCollection.targetList() ) ) {
+					listField.setTargetList( ArrayList.class );
+				} else {
+					
+					// Ensure that the targetList implements List
+					boolean implementsList = false;
+					for( Class interf : mappedCollection.targetList().getInterfaces() ) {
+						if ( List.class.equals( interf ) ) {
+							implementsList = true;
+							break;
+						}
+					}
+					
+					if ( !implementsList ) {
+						throw new RegisterBlueprintException( "@MappedList targetList must implement List for field " + field.getName() );
+					}
+					
+					listField.setTargetList( mappedCollection.targetList() );
+				}
+				
 				modelFields.add( listField );
 				
-				logger.info( "  Setting mapped collection for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
+				logger.info( "  Setting mapped list for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
+				
+			}
+			
+			// Process @MappedSet
+			MappedSet mappedSet = field.getAnnotation( MappedSet.class );
+			if ( mappedSet != null ) {
+				MappedSetField setField = new MappedSetField();
+				setField.setName( field.getName() );
+				setField.setFieldClass( field.getType() );
+				setField.setSize( mappedSet.size() );
+				
+				// If @MappedSet(target) not set, use Field's class
+				if ( NotSet.class.equals( mappedSet.target() ) ) {
+					setField.setTarget( field.getType() );
+					
+				// Use @MappedSet(target) for MappedSet#target
+				} else {
+					setField.setTarget( mappedSet.target() );
+				}
+				
+				// If @MappedList(targetList) not set, use HashSet
+				if ( NotSet.class.equals( mappedSet.targetSet() ) ) {
+					setField.setTargetSet( HashSet.class );
+				} else {
+					
+					// Ensure that the targetSet implements Set
+					boolean implementsSet = false;
+					for( Class interf : mappedSet.targetSet().getInterfaces() ) {
+						if ( Set.class.equals( interf ) ) {
+							implementsSet = true;
+							break;
+						}
+					}
+					
+					if ( !implementsSet ) {
+						throw new RegisterBlueprintException( "@MappedSet targetSet must implement Set for field " + field.getName() );
+					}
+					
+					setField.setTargetSet( mappedSet.targetSet() );
+				}
+				
+				modelFields.add( setField );
+				
+				logger.info( "  Setting mapped set for {} to {} as <{}>", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget() });
 				
 			}
 		}
@@ -449,9 +517,7 @@ public class ModelFactory {
 							if ( !mappedField.isNullable() ) {
 								value = this.createModel( mappedField.getTarget() );
 							}
-						} else {
-							value = this.createModel( value );
-						}
+						} 
 					}
 					
 					try {
@@ -466,7 +532,11 @@ public class ModelFactory {
 					MappedListField listField = (MappedListField)modelField;
 					
 					List modelList = null;
-					value = new ArrayList();
+					try {
+						value =  ( List )erector.getTemplate().construct( listField.getTargetList() );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 						try {
@@ -490,6 +560,44 @@ public class ModelFactory {
 					
 					try {
 						createdModel = erector.getTemplate().set( createdModel, listField.getName(), value );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
+					
+			    // Process MappedSetField
+				} else if ( modelField instanceof MappedSetField ) {
+					
+					MappedSetField setField = (MappedSetField)modelField;
+					
+					Set modelSet = null;
+					try {
+						value = erector.getTemplate().construct( setField.getTargetSet() );
+					} catch (BlueprintTemplateException e) {
+						throw new CreateModelException( e );
+					}
+					
+					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
+						try {
+							modelSet = (Set)erector.getTemplate().get( referenceModel, setField.getName() );
+						} catch (BlueprintTemplateException e) {
+							throw new CreateModelException( e );
+						}
+					}
+					
+					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
+						if ( modelSet == null ) {
+							for ( int x = 0; x < setField.getSize(); x ++ ) {
+								((Set)value).add( this.createModel( setField.getTarget() ) );
+							}
+						} else {
+							for ( Object object : modelSet ) {
+								((Set)value).add( this.createModel( object ) );
+							}
+						}
+					}
+					
+					try {
+						createdModel = erector.getTemplate().set( createdModel, setField.getName(), value );
 					} catch (BlueprintTemplateException e) {
 						throw new CreateModelException( e );
 					}

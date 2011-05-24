@@ -20,6 +20,7 @@ package com.slackworks.modelcitizen.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Car {
 	private String make;
@@ -27,6 +28,7 @@ public class Car {
 	private Integer milage;
 	private Map status;
 	private List<Wheel> wheels;
+	private Set<Wheel> spares;
 	private Driver driver;
 	private Driver passenger;
 	
@@ -72,6 +74,14 @@ public class Car {
 
 	public void setWheels(List<Wheel> wheels) {
 		this.wheels = wheels;
+	}
+
+	public Set<Wheel> getSpares() {
+		return spares;
+	}
+
+	public void setSpares(Set<Wheel> spares) {
+		this.spares = spares;
 	}
 
 	public Driver getDriver() {

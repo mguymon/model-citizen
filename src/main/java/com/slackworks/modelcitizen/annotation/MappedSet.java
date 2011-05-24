@@ -26,8 +26,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MappedList {
+public @interface MappedSet {
 	int size() default 1;
     Class target();
-    Class targetList() default NotSet.class;
+    Class targetSet() default NotSet.class;
 }

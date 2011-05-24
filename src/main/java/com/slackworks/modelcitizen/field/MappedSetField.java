@@ -22,10 +22,10 @@ package com.slackworks.modelcitizen.field;
  * A {@link MappedList} annotated Field in the {@link Blueprint} that is mapped 
  * to a {@link List} comprised of Models with a registered {@Blueprint}. 
  */
-public class MappedListField extends ModelField {
+public class MappedSetField extends ModelField {
 
 	private int size;
-	private Class targetList;
+	private Class targetSet;
 	
 	/**
 	 * Size of List to create
@@ -40,12 +40,12 @@ public class MappedListField extends ModelField {
 		this.size = size;
 	}
 
-	public Class getTargetList() {
-		return targetList;
+	public Class getTargetSet() {
+		return targetSet;
 	}
 
-	public void setTargetList(Class targetList) {
-		this.targetList = targetList;
+	public void setTargetSet(Class targetSet) {
+		this.targetSet = targetSet;
 	}
 
 	@Override
@@ -53,11 +53,12 @@ public class MappedListField extends ModelField {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + size;
-		if ( targetList != null ) {
-			result = prime * result + targetList.hashCode();
+		if ( targetSet != null ) {
+			result = prime * result + targetSet.hashCode();
 		}
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -67,15 +68,15 @@ public class MappedListField extends ModelField {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MappedListField other = (MappedListField) obj;
+		MappedSetField other = (MappedSetField) obj;
 		if (size != other.size)
 			return false;
 		
-		if ( targetList != null ) {
-			if ( !targetList.equals( other.getTargetList() ) ) {
+		if ( targetSet != null ) {
+			if ( !targetSet.equals( other.getTargetSet() ) ) {
 				return false;
 			}
-		} else if ( other.getTargetList() != null ) {
+		} else if ( other.getTargetSet() != null ) {
 			return false;
 		}
 		

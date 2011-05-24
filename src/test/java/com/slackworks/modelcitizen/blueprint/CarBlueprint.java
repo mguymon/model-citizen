@@ -21,12 +21,14 @@ package com.slackworks.modelcitizen.blueprint;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
 import com.slackworks.modelcitizen.annotation.MappedList;
+import com.slackworks.modelcitizen.annotation.MappedSet;
 import com.slackworks.modelcitizen.annotation.Nullable;
 import com.slackworks.modelcitizen.model.Car;
 import com.slackworks.modelcitizen.model.Driver;
@@ -49,6 +51,9 @@ public class CarBlueprint {
 
 	@MappedList(target = Wheel.class, size = 4)
 	public List<Wheel> wheels;
+	
+	@MappedSet(target = Wheel.class, size = 1)
+	public Set<Wheel> spares;
 
 	@Mapped
 	public Driver driver;
