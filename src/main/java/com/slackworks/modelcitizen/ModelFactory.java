@@ -212,7 +212,7 @@ public class ModelFactory {
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
 				
-				logger.info( "  Setting default for {} to {}", defaultField.getName(), defaultField.getValue() );
+				logger.debug( "  Setting default for {} to {}", defaultField.getName(), defaultField.getValue() );
 				
 			}
 			
@@ -238,7 +238,7 @@ public class ModelFactory {
 				mappedField.setFieldClass( field.getType() );
 				modelFields.add( mappedField );
 				
-				logger.info( "  Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
+				logger.debug( "  Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
 			}
 			
 			// Process @MappedList
@@ -281,7 +281,7 @@ public class ModelFactory {
 				
 				modelFields.add( listField );
 				
-				logger.info( "  Setting mapped list for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
+				logger.debug( "  Setting mapped list for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
 				
 			}
 			
@@ -325,7 +325,7 @@ public class ModelFactory {
 				
 				modelFields.add( setField );
 				
-				logger.info( "  Setting mapped set for {} to {} as <{}>", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget() });
+				logger.debug( "  Setting mapped set for {} to {} as <{}>", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget() });
 				
 			}
 		}
