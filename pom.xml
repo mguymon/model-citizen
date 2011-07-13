@@ -18,14 +18,13 @@
         <developerConnection>scm:git:git@github.com/mguymon/model-citizen.git</developerConnection>
         <connection>git@github.com/mguymon/model-citizen.git</connection>
     </scm>
-	
-	<repositories>
-		<repository>
-		    <id>reflections-repo</id>
-		    <name>Reflections Maven2 Repository</name>
-		    <url>http://reflections.googlecode.com/svn/repo</url>
-	    </repository>
-	</repositories>
+	<developers>
+	    <developer>
+	      <id>mguymon</id>
+	      <name>Michael Guymon</name>
+	      <email>michael.guymon@gmail.com</email>
+	    </developer>
+    </developers>
 		
     <dependencies>
         <!-- Compile scope -->
@@ -50,9 +49,9 @@
             <version>1.6.1</version>
         </dependency>
 		<dependency>
-		    <groupId>org.reflections</groupId>
-		    <artifactId>reflections</artifactId>
-		    <version>0.9.5-RC2</version>
+		    <groupId>com.metapossum</groupId>
+		    <artifactId>metapossum-scanner</artifactId>
+		    <version>1.0</version>
 		</dependency>
         
         <!-- Test Scope -->
@@ -75,6 +74,39 @@
 			        <target>1.6</target>
 			    </configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 	    </plugins>
 	</build>
+	
+	<reporting>
+	    <plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-report-plugin</artifactId>
+	      </plugin>
+	    </plugins>
+    </reporting>
 </project>

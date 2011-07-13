@@ -20,6 +20,7 @@ package com.slackworks.modelcitizen;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ModelFactoryTest {
 	public void testRegisterBlueprintsByPackage() throws RegisterBlueprintException {
 		modelFactory = new ModelFactory(); // reset modelFactory to set loading by package
 		modelFactory.setRegisterBlueprintsByPackage( "com.slackworks.modelcitizen" );
-		
+				
 		List<Class> blueprintClasses = new ArrayList<Class>();
 		for ( Object blueprint : modelFactory.getBlueprints() ) {
 			blueprintClasses.add( blueprint.getClass() );

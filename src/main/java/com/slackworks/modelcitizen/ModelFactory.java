@@ -18,6 +18,7 @@ package com.slackworks.modelcitizen;
  * limitations under the License.
  */
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,10 +30,10 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.metapossum.utils.scanner.reflect.ClassesInPackageScanner;
 import com.slackworks.modelcitizen.annotation.Blueprint;
 import com.slackworks.modelcitizen.annotation.Default;
 import com.slackworks.modelcitizen.annotation.Mapped;
@@ -127,11 +128,17 @@ public class ModelFactory {
 	 * 
 	 * @param _package String package to scan
 	 * @throws RegisterBlueprintException
+	 * @throws IOException 
 	 */
 	public void setRegisterBlueprintsByPackage( String _package ) throws RegisterBlueprintException {
-		Reflections reflections = new Reflections( _package);
-        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Blueprint.class);
-        
+		
+		Set<Class<?>> annotated = null;
+		try {
+			annotated = new ClassesInPackageScanner().findAnnotatedClasses( _package, Blueprint.class);
+		} catch (IOException e) {
+			throw new RegisterBlueprintException(e);
+		}
+		
         logger.info( "Scanned {} and found {}", _package, annotated );
         
         this.setRegisterBlueprints( annotated );
