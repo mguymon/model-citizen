@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.slackworks</groupId>
     <artifactId>modelcitizen</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>model-citizen</name>
     <url>https://github.com/mguymon/model-citizen</url>
@@ -19,6 +19,14 @@
         <connection>git@github.com/mguymon/model-citizen.git</connection>
     </scm>
 	
+	<repositories>
+		<repository>
+		    <id>reflections-repo</id>
+		    <name>Reflections Maven2 Repository</name>
+		    <url>http://reflections.googlecode.com/svn/repo</url>
+	    </repository>
+	</repositories>
+		
     <dependencies>
         <!-- Compile scope -->
         <dependency>
@@ -41,6 +49,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.6.1</version>
         </dependency>
+		<dependency>
+		    <groupId>org.reflections</groupId>
+		    <artifactId>reflections</artifactId>
+		    <version>0.9.5-RC2</version>
+		</dependency>
         
         <!-- Test Scope -->
         <dependency>

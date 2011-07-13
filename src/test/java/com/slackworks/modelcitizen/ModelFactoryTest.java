@@ -52,6 +52,22 @@ public class ModelFactoryTest {
 		modelFactory.registerBlueprint( userBlueprint );
 	}
 	
+	@Test 
+	public void testRegisterBlueprintsByPackage() throws RegisterBlueprintException {
+		modelFactory = new ModelFactory(); // reset modelFactory to set loading by package
+		modelFactory.setRegisterBlueprintsByPackage( "com.slackworks.modelcitizen" );
+		
+		List<Class> blueprintClasses = new ArrayList<Class>();
+		for ( Object blueprint : modelFactory.getBlueprints() ) {
+			blueprintClasses.add( blueprint.getClass() );
+		}
+		
+		assertTrue( "CarBlueprint should be registered", blueprintClasses.contains( CarBlueprint.class) );
+		assertTrue( "WheelBlueprint should be registered", blueprintClasses.contains( WheelBlueprint.class) );
+		assertTrue( "DriverBlueprint should be registered", blueprintClasses.contains( DriverBlueprint.class) );
+		assertTrue( "UserBlueprint should be registered", blueprintClasses.contains( UserBlueprint.class) );
+	}
+	
 	@Test
 	public void testRegisterBlueprint() throws RegisterBlueprintException {
 		assertEquals( carBlueprint, modelFactory.getBlueprints().get(0) );

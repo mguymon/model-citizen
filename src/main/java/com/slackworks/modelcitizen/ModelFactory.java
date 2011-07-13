@@ -20,6 +20,7 @@ package com.slackworks.modelcitizen;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -121,13 +123,28 @@ public class ModelFactory {
 	}
 	
 	/**
+	 * Register all {@link Blueprint} in package.
+	 * 
+	 * @param _package String package to scan
+	 * @throws RegisterBlueprintException
+	 */
+	public void setRegisterBlueprintsByPackage( String _package ) throws RegisterBlueprintException {
+		Reflections reflections = new Reflections( _package);
+        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Blueprint.class);
+        
+        logger.info( "Scanned {} and found {}", _package, annotated );
+        
+        this.setRegisterBlueprints( annotated );
+	}
+	
+	/**
 	 * Register a List of {@link Blueprint}, Class<Blueprint>, or String
 	 * class names of Blueprint
 	 * 
 	 * @param blueprints List
 	 * @throws RegisterBlueprintException
 	 */
-	public void setRegisterBlueprints( List blueprints ) throws RegisterBlueprintException {
+	public void setRegisterBlueprints( Collection blueprints ) throws RegisterBlueprintException {
 		for( Object blueprint : blueprints ) {
 			if ( blueprint instanceof Class ) {
 				registerBlueprint( (Class)blueprint );
