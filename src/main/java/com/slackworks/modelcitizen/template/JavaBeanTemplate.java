@@ -26,8 +26,6 @@ import org.apache.commons.lang.reflect.ConstructorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.slackworks.modelcitizen.field.ModelField;
-
 /**
  * Implementation of BlueprintTemplate using Reflection for a JavaBean Model
  */
@@ -35,6 +33,7 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 
 	private Logger logger = LoggerFactory.getLogger( this.getClass() );
 	
+	@SuppressWarnings("unchecked")
 	public <T> T construct( Class<T> modelClass ) throws BlueprintTemplateException {
 		try {
 			return (T)ConstructorUtils.invokeConstructor( modelClass, null );
