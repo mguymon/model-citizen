@@ -317,8 +317,11 @@ public class ModelFactory {
 				setField.setFieldClass( field.getType() );
 				setField.setSize( mappedSet.size() );
 				
-				// If @MappedSet(target) not set, use Field's class
+				// XXX: @MappedSet( target ) is required
+				// If @MappedSet(target) not set
 				if ( NotSet.class.equals( mappedSet.target() ) ) {
+					
+					// XXX: incorrect, should use generic defined by Set, luckily annotation forces target to be set
 					setField.setTarget( field.getType() );
 					
 				// Use @MappedSet(target) for MappedSet#target
@@ -326,7 +329,7 @@ public class ModelFactory {
 					setField.setTarget( mappedSet.target() );
 				}
 				
-				// If @MappedList(targetList) not set, use HashSet
+				// If @MappedSet(targetSet) not set, use HashSet
 				if ( NotSet.class.equals( mappedSet.targetSet() ) ) {
 					setField.setTargetSet( HashSet.class );
 				} else {
@@ -420,6 +423,7 @@ public class ModelFactory {
 	 * @return Model
 	 * @throws CreateModelException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> T createModel( T referenceModel, boolean withPolicies ) throws CreateModelException {
 		
 		Erector erector = erectors.get( referenceModel.getClass() );
@@ -487,7 +491,9 @@ public class ModelFactory {
 				}
 			}
 			
-			logger.debug( "  ModelField commands: {}", erector.getCommands(modelField));
+			if ( erector.getCommands(modelField).size() > 0 ) {
+				logger.debug( "  ModelField commands: {}", erector.getCommands(modelField));
+			}
 			
 			if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 				
@@ -593,28 +599,28 @@ public class ModelFactory {
 					
 					MappedSetField setField = (MappedSetField)modelField;
 					
-					Set modelSet = null;
 					try {
 						value = erector.getTemplate().construct( setField.getTargetSet() );
 					} catch (BlueprintTemplateException e) {
 						throw new CreateModelException( e );
 					}
 					
+					Set referenceModelSet = null;
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 						try {
-							modelSet = (Set)erector.getTemplate().get( referenceModel, setField.getName() );
+							referenceModelSet = (Set)erector.getTemplate().get( referenceModel, setField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( modelSet == null ) {
+						if ( referenceModelSet == null ) {
 							for ( int x = 0; x < setField.getSize(); x ++ ) {
 								((Set)value).add( this.createModel( setField.getTarget() ) );
 							}
 						} else {
-							for ( Object object : modelSet ) {
+							for ( Object object : referenceModelSet ) {
 								((Set)value).add( this.createModel( object ) );
 							}
 						}
