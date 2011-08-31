@@ -22,9 +22,9 @@
         </license>
     </licenses>
     <scm>
-        <url>&gt;scm:git:git@github.com/mguymon/model-citizen.git</url>
+        <url>scm:git:git@github.com/mguymon/model-citizen.git</url>
         <developerConnection>scm:git:git@github.com/mguymon/model-citizen.git</developerConnection>
-        <connection>git@github.com/mguymon/model-citizen.git</connection>
+        <connection>scm:git@github.com/mguymon/model-citizen.git</connection>
     </scm>
 	<developers>
 	    <developer>
