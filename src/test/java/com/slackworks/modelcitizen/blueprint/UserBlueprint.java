@@ -31,7 +31,7 @@ import com.slackworks.modelcitizen.model.User;
 public class UserBlueprint {
 	
 	@Default
-	public FieldCallBack username = new FieldCallBack() {
+	FieldCallBack username = new FieldCallBack() {
 
 		@Override
 		public String get( Object model) {
@@ -41,7 +41,7 @@ public class UserBlueprint {
 	};
 	
 	@Default
-	public FieldCallBack emails = new FieldCallBack() {
+	FieldCallBack emails = new FieldCallBack() {
 
 		@Override
 		public List<String> get( Object model) {

@@ -212,11 +212,13 @@ public class ModelFactory {
 		
 		List<ModelField> modelFields = new ArrayList<ModelField>();
 		
-		logger.info( "Registering blueprint for {}", target );
+		logger.debug( "Registering blueprint for {}", target );
 		
 		// Iterate Blueprint public fields for ModelCitizen annotations
-		Field[] fields = blueprint.getClass().getFields();
+		Field[] fields = blueprint.getClass().getDeclaredFields();
 		for( Field field: fields ) {
+			
+			field.setAccessible( true );
 			
 			// Process @Default
 			if ( field.getAnnotation( Default.class ) != null ) {
