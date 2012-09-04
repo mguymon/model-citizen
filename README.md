@@ -127,6 +127,11 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
+## Future Features
+
+* Spring support: Model instances can be pased by Spring
+* Multiple Blueprints: Allow multiple Blueprints for the same class
+
 ## License
 
 Licensed to the Apache Software Foundation (ASF) under one or more
