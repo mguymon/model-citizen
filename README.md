@@ -114,10 +114,10 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
            matching field's Class. Mapped class can be set by the _target_ param. 
 * **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
                class of the List is set by the  _target_ param and the number of
-               Models created is set by the _size_ param.
+               Models created is set by the _size_ param, the default is 1.
 * **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
               class of the Set is set by the  _target_ param and the number of
-              Models created is set by the _size_ param.
+              Models created is set by the _size_ param, the default is 1.
 * **@Nullable**: Specifies this field can be null and not to set a value.
 
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
