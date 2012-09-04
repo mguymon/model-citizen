@@ -20,7 +20,8 @@ Presently only supports [template for JavaBean Models](https://github.com/mguymo
       <version>0.2.4</version>
     </dependency>
     
-May have to use the Sonatype Repo directly
+May have to directly add the Sonatype Repo directly if the sync to Maven Central
+is slow.
 
     <repositories>
       <repository>
@@ -40,9 +41,9 @@ May have to use the Sonatype Repo directly
 
 ### Creating a model overriding defaults
 
-  Car car = new Car()
-  car.setMake( "Caddie" );
-  car = modelFactory.createModel(car);
+    Car car = new Car()
+    car.setMake( "Caddie" );
+    car = modelFactory.createModel(car);
 
 ### The Car Model
 
@@ -105,7 +106,7 @@ May have to use the Sonatype Repo directly
 
 ## Blueprint 
 
-A blueprint is a Class anototated with @Blueprint and contains annotated fields. 
+A blueprint is a Class anototated with _@Blueprint_ and contains annotated fields. 
 Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
@@ -120,7 +121,8 @@ Everything else is ignored by the _ModelFactory_.
               Models created is set by the _size_ param.
 * @Nullable: Specifies this field can be null and not to set a value.
 
-[Wiki](https://github.com/mguymon/model-citizen/wiki of examples)
+[Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
+includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
 Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
