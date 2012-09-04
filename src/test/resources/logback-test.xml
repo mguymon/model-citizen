@@ -6,7 +6,7 @@
     </layout>
   </appender>
 
-  <logger name="com.slackworks.modelcitizen" level="DEBUG"/>
+  <logger name="com.tobedevoured.modelcitizen" level="DEBUG"/>
   <root>
     <level value="INFO" />
 	<appender-ref ref="STDOUT" />
