@@ -19,6 +19,16 @@ Presently only supports [template for JavaBean Models](https://github.com/mguymo
       <artifactId>modelcitizen</artifactId>
       <version>0.2.4</version>
     </dependency>
+    
+May have to use the Sonatype Repo directly
+
+    <repositories>
+      <repository>
+        <id>oss.sonatype.org</id>
+        <name>Sonatype Repository</name>
+        <url>https://oss.sonatype.org/content/groups/public</url>
+      </repository>
+    </repositories>
 
 ## A Simple Example
 
