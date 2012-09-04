@@ -20,8 +20,7 @@ Presently only supports [template for JavaBean Models](https://github.com/mguymo
       <version>0.2.4</version>
     </dependency>
     
-May have to directly add the Sonatype Repo directly if the sync to Maven Central
-is slow.
+May have to add the Sonatype Repo if the sync to Maven Central is slow.
 
     <repositories>
       <repository>
