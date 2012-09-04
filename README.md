@@ -110,16 +110,16 @@ A blueprint is a Class anototated with _@Blueprint_ and contains annotated field
 Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
-* @Default: The default value for the field.
-* @Mapped: The value is mapped to another @Blueprint, default is the blueprint for
+* **@Default**: The default value for the field.
+* **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
            matching field's Class. Mapped class can be set by the _target_ param. 
-* @MappedList: Creates a List of Models mapped to another blueprint. The Mapped
+* **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
                class of the List is set by the  _target_ param and the number of
                Models created is set by the _size_ param.
-* @MappedSet: Creates a Set of Models mapped to another blueprint. The Mapped
+* **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
               class of the Set is set by the  _target_ param and the number of
               Models created is set by the _size_ param.
-* @Nullable: Specifies this field can be null and not to set a value.
+* **@Nullable**: Specifies this field can be null and not to set a value.
 
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
