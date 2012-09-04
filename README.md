@@ -88,7 +88,7 @@ is slow.
 
 ### Car model's Blueprint
 
-    @Blueprint
+    @Blueprint(Car.class)
     public class CarBlueprint {
         
         @Default
