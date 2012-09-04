@@ -23,7 +23,7 @@ package com.tobedevoured.modelcitizen.field;
  * 
  * @author Michael Guymon
  */
-public abstract class FieldCallBack {
+public abstract class FieldCallback {
 	
 	/**
 	 * Get the Field value

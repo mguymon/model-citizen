@@ -24,14 +24,14 @@ import java.util.UUID;
 
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
-import com.tobedevoured.modelcitizen.field.FieldCallBack;
+import com.tobedevoured.modelcitizen.field.FieldCallback;
 import com.tobedevoured.modelcitizen.model.User;
 
 @Blueprint(User.class )
 public class UserBlueprint {
 	
 	@Default
-	FieldCallBack username = new FieldCallBack() {
+	FieldCallback username = new FieldCallback() {
 
 		@Override
 		public String get( Object model) {
@@ -41,7 +41,7 @@ public class UserBlueprint {
 	};
 	
 	@Default
-	FieldCallBack emails = new FieldCallBack() {
+	FieldCallback emails = new FieldCallback() {
 
 		@Override
 		public List<String> get( Object model) {

@@ -43,9 +43,9 @@ import com.tobedevoured.modelcitizen.annotation.NewInstance;
 import com.tobedevoured.modelcitizen.annotation.NotSet;
 import com.tobedevoured.modelcitizen.annotation.Nullable;
 import com.tobedevoured.modelcitizen.erector.Command;
-import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
+import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.field.DefaultField;
-import com.tobedevoured.modelcitizen.field.FieldCallBack;
+import com.tobedevoured.modelcitizen.field.FieldCallback;
 import com.tobedevoured.modelcitizen.field.MappedListField;
 import com.tobedevoured.modelcitizen.field.MappedField;
 import com.tobedevoured.modelcitizen.field.MappedSetField;
@@ -216,7 +216,7 @@ public class ModelFactory {
 		
 		logger.debug( "Registering blueprint for {}", target );
 		
-		ConstructorCallBack newInstance = null;
+		ConstructorCallback newInstance = null;
 		
 		// Iterate Blueprint public fields for ModelCitizen annotations
 		Field[] fields = blueprint.getClass().getDeclaredFields();
@@ -234,8 +234,8 @@ public class ModelFactory {
 					throw new RegisterBlueprintException( e );
 				}
 				
-				if ( fieldVal instanceof ConstructorCallBack ) {
-					newInstance = (ConstructorCallBack)fieldVal;
+				if ( fieldVal instanceof ConstructorCallback ) {
+					newInstance = (ConstructorCallback)fieldVal;
 				} else {
 					throw new RegisterBlueprintException( "Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid, @NewInstance can only be annotated on ConstructorCallback" );
 				}
@@ -557,8 +557,8 @@ public class ModelFactory {
 					}
 					
 					// If value is an instance of FieldCallBack, eval the callback and use the value
-					if ( value != null & value instanceof FieldCallBack ) {
-						FieldCallBack callBack = (FieldCallBack)value;
+					if ( value != null & value instanceof FieldCallback ) {
+						FieldCallback callBack = (FieldCallback)value;
 						value = callBack.get( referenceModel );
 					}
 					

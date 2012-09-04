@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.tobedevoured.modelcitizen.erector.Command;
-import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
+import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.field.ModelField;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
@@ -42,7 +42,7 @@ public class Erector {
 	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
 	private BlueprintTemplate blueprintTemplate;
 	private Class target;
-	private ConstructorCallBack newInstance;
+	private ConstructorCallback newInstance;
 	private Object reference;
 	
 	/**
@@ -129,11 +129,11 @@ public class Erector {
 		this.reference = reference;
 	}
 
-	public ConstructorCallBack getNewInstance() {
+	public ConstructorCallback getNewInstance() {
 		return newInstance;
 	}
 
-	public void setNewInstance(ConstructorCallBack newInstance) {
+	public void setNewInstance(ConstructorCallback newInstance) {
 		this.newInstance = newInstance;
 	}
 	

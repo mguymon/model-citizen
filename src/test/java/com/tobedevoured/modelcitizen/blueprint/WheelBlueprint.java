@@ -23,14 +23,14 @@ import java.util.ArrayList;
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.NewInstance;
-import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
+import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.model.Wheel;
 
 @Blueprint(Wheel.class)
 public class WheelBlueprint {
 
 	@NewInstance
-	ConstructorCallBack constructor = new ConstructorCallBack() {
+	ConstructorCallback constructor = new ConstructorCallback() {
 
 		@Override
 		public Object createInstance() {

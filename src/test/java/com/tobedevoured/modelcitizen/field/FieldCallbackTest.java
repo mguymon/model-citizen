@@ -31,7 +31,7 @@ import com.tobedevoured.modelcitizen.RegisterBlueprintException;
 import com.tobedevoured.modelcitizen.blueprint.UserBlueprint;
 import com.tobedevoured.modelcitizen.model.User;
 
-public class FieldCallBackTest {
+public class FieldCallbackTest {
 	
 	private ModelFactory modelFactory;
 	private UserBlueprint userBlueprint = new UserBlueprint();

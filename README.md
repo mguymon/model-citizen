@@ -17,7 +17,7 @@ Presently only supports [template for JavaBean Models](https://github.com/mguymo
     <dependency>
       <groupId>com.tobedevoured</groupId>
       <artifactId>modelcitizen</artifactId>
-      <version>0.2.4</version>
+      <version>0.3.0</version>
     </dependency>
     
 May have to directly add the Sonatype Repo directly if the sync to Maven Central
@@ -109,15 +109,18 @@ is slow.
 A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
+
 * **@Default**: The default value for the field.
 * **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
-           matching field's Class. Mapped class can be set by the _target_ param. 
+               matching field's Class. Mapped class can be set by the _target_ param. 
 * **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
-               class of the List is set by the  _target_ param and the number of
-               Models created is set by the _size_ param, the default is 1.
+                   class of the List is set by the  _target_ param and the number of
+                   Models created is set by the _size_ param, the default is 1.
 * **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
-              class of the Set is set by the  _target_ param and the number of
-              Models created is set by the _size_ param, the default is 1.
+                  class of the Set is set by the  _target_ param and the number of
+                  Models created is set by the _size_ param, the default is 1.
+* **@NewInstance**: Set on a field of ConstructCallBack to be used to create new
+                    instances of the model
 * **@Nullable**: Specifies this field can be null and not to set a value.
 
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
