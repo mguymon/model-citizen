@@ -12,6 +12,8 @@ for the new Model.
 
 Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/slackworks/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
 
+Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
+
 ## Install
 
     <dependency>
@@ -125,5 +127,19 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
-Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
+## License
 
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with this
+work for additional information regarding copyright ownership.  The ASF
+licenses this file to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+License for the specific language governing permissions and limitations under
+the License.
