@@ -50,12 +50,11 @@ for the new Model. </p>
 <pre><code>&lt;dependency&gt;
   &lt;groupId&gt;com.tobedevoured&lt;/groupId&gt;
   &lt;artifactId&gt;modelcitizen&lt;/artifactId&gt;
-  &lt;version&gt;0.2.4&lt;/version&gt;
+  &lt;version&gt;0.3.0&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
 
-<p>May have to directly add the Sonatype Repo directly if the sync to Maven Central
-is slow.</p>
+<p>May have to add the Sonatype Repo if the sync to Maven Central is slow.</p>
 
 <pre><code>&lt;repositories&gt;
   &lt;repository&gt;
@@ -154,15 +153,19 @@ public class CarBlueprint {
 <strong><a href="https://github.com/default" class="user-mention">@default</a></strong>: The default value for the field.</li>
 <li>
 <strong>@Mapped</strong>: The value is mapped to another <a href="https://github.com/blueprint" class="user-mention">@blueprint</a>, default is the blueprint for
-       matching field's Class. Mapped class can be set by the <em>target</em> param. </li>
+           matching field's Class. Mapped class can be set by the <em>target</em> param. </li>
 <li>
 <strong>@MappedList</strong>: Creates a List of Models mapped to another blueprint. The Mapped
-           class of the List is set by the  <em>target</em> param and the number of
-           Models created is set by the <em>size</em> param, the default is 1.</li>
+               class of the List is set by the  <em>target</em> param and the number of
+               Models created is set by the <em>size</em> param, the default is 1.</li>
 <li>
 <strong>@MappedSet</strong>: Creates a Set of Models mapped to another blueprint. The Mapped
-          class of the Set is set by the  <em>target</em> param and the number of
-          Models created is set by the <em>size</em> param, the default is 1.</li>
+              class of the Set is set by the  <em>target</em> param and the number of
+              Models created is set by the <em>size</em> param, the default is 1.</li>
+<li>
+<strong><a href="https://github.com/newinstance" class="user-mention">@newinstance</a></strong>: Set on a <em>ConstructCallback</em> field. The callback is used to create new
+                instances of the model by the <em>ModelFactory</em>
+</li>
 <li>
 <strong><a href="https://github.com/nullable" class="user-mention">@nullable</a></strong>: Specifies this field can be null and not to set a value.</li>
 </ul><p><a href="https://github.com/mguymon/model-citizen/wiki">Wiki</a> of examples that
