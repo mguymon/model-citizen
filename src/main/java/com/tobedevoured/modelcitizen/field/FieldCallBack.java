@@ -20,6 +20,8 @@ package com.tobedevoured.modelcitizen.field;
 
 /**
  * Callback for a Field when the Model is created
+ * 
+ * @author Michael Guymon
  */
 public abstract class FieldCallBack {
 	

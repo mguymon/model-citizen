@@ -22,14 +22,23 @@ import java.util.ArrayList;
 
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
+import com.tobedevoured.modelcitizen.annotation.NewInstance;
+import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
 import com.tobedevoured.modelcitizen.model.Wheel;
 
 @Blueprint(Wheel.class)
 public class WheelBlueprint {
 
+	@NewInstance
+	ConstructorCallBack constructor = new ConstructorCallBack() {
 
-	@Default
-	public String name = "tire name";
+		@Override
+		public Object createInstance() {
+			Wheel wheel = new Wheel( "tire name" );
+			return wheel;
+		}
+		
+	};
 
 	@Default
 	public Integer size = 10;

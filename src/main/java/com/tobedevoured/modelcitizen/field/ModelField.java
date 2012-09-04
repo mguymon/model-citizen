@@ -20,6 +20,8 @@ package com.tobedevoured.modelcitizen.field;
 
 /**
  * Annotated Field in a {@link Blueprint}
+ * 
+ * @author Michael Guymon
  */
 public abstract class ModelField {
 	

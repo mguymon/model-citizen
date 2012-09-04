@@ -23,6 +23,10 @@ public class Wheel {
     public Integer size;
     public Object option;
     
+    public Wheel( String name ) {
+    	this.name = name;
+    }
+    
     public String getName() {
         return name;
     }

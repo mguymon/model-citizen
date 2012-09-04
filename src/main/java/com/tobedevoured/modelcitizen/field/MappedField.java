@@ -23,6 +23,8 @@ import java.lang.reflect.Field;
 /**
  * A {@link Mapped} annotated Field in the {@link Blueprint} that is mapped 
  * to a registered {@Blueprint}
+ * 
+ * @author Michael Guymon
  */
 public class MappedField extends ModelField {
 

@@ -39,9 +39,11 @@ import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.Mapped;
 import com.tobedevoured.modelcitizen.annotation.MappedList;
 import com.tobedevoured.modelcitizen.annotation.MappedSet;
+import com.tobedevoured.modelcitizen.annotation.NewInstance;
 import com.tobedevoured.modelcitizen.annotation.NotSet;
 import com.tobedevoured.modelcitizen.annotation.Nullable;
 import com.tobedevoured.modelcitizen.erector.Command;
+import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
 import com.tobedevoured.modelcitizen.field.DefaultField;
 import com.tobedevoured.modelcitizen.field.FieldCallBack;
 import com.tobedevoured.modelcitizen.field.MappedListField;
@@ -214,11 +216,30 @@ public class ModelFactory {
 		
 		logger.debug( "Registering blueprint for {}", target );
 		
+		ConstructorCallBack newInstance = null;
+		
 		// Iterate Blueprint public fields for ModelCitizen annotations
 		Field[] fields = blueprint.getClass().getDeclaredFields();
 		for( Field field: fields ) {
 			
 			field.setAccessible( true );
+			
+			if ( field.getAnnotation( NewInstance.class ) != null ) {
+				Object fieldVal = null;
+				try {
+					fieldVal = field.get( blueprint );
+				} catch (IllegalArgumentException e) {
+					throw new RegisterBlueprintException( e );
+				} catch (IllegalAccessException e) {
+					throw new RegisterBlueprintException( e );
+				}
+				
+				if ( fieldVal instanceof ConstructorCallBack ) {
+					newInstance = (ConstructorCallBack)fieldVal;
+				} else {
+					throw new RegisterBlueprintException( "Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid, @NewInstance can only be annotated on ConstructorCallback" );
+				}
+			}
 			
 			// Process @Default
 			if ( field.getAnnotation( Default.class ) != null ) {
@@ -367,6 +388,7 @@ public class ModelFactory {
 		erector.setBlueprint( blueprint );
 		erector.setModelFields( modelFields );
 		erector.setTarget( target );
+		erector.setNewInstance( newInstance );
 		
 		erectors.put( target, erector );
 	}
@@ -379,28 +401,27 @@ public class ModelFactory {
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( Class<T> clazz ) throws CreateModelException {
-		try {
-			return createModel( clazz.newInstance() );
-		} catch (InstantiationException e) {
-			throw new CreateModelException( e );
-		} catch (IllegalAccessException e) {
-			throw new CreateModelException( e );
-		}
+		return createModel( clazz, true );
 	}
 
 	/**
 	 * Create a Model for a registered {@link Blueprint}
 	 * 
 	 * @param clazz Model class
+	 * @param withPolicies boolean if Policies should be applied to the create
 	 * @return Model
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( Class<T> clazz, boolean withPolicies) throws CreateModelException {
+		Erector erector = erectors.get( clazz);
+		
+		if ( erector == null ) {
+			throw new CreateModelException( "Unregistered class: " + clazz );
+		}
+		
 		try {
-			return createModel( clazz.newInstance(), withPolicies );
-		} catch (InstantiationException e) {
-			throw new CreateModelException( e );
-		} catch (IllegalAccessException e) {
+			return createModel( erector, (T)erector.createNewInstance(), withPolicies );
+		} catch (BlueprintTemplateException e) {
 			throw new CreateModelException( e );
 		}
 	}
@@ -422,24 +443,40 @@ public class ModelFactory {
 	 * model will not be overridden by defaults in the {@link Blueprint}.
 	 * 
 	 * @param model Object
+	 * @param withPolicies boolean if Policies should be applied to the create
 	 * @return Model
 	 * @throws CreateModelException
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> T createModel( T referenceModel, boolean withPolicies ) throws CreateModelException {
-		
 		Erector erector = erectors.get( referenceModel.getClass() );
 		
 		if ( erector == null ) {
 			throw new CreateModelException( "Unregistered class: " + referenceModel.getClass() );
 		}
 		
+		return createModel( erector, referenceModel, withPolicies );
+	}
+	
+	/**
+	 * Create a Model for a registered {@link Blueprint} using {@link Erector}.
+	 * Values set in the model will not be overridden by defaults in the 
+	 * {@link Blueprint}.
+	 * 
+	 * @param erector {@link Erector}
+	 * @param referenceModel T
+	 * @param withPolicies boolean if Policies should be applied to the create
+	 * @return T new Model
+	 * @throws CreateModelException
+	 */
+	public <T> T createModel( Erector erector, T referenceModel, boolean withPolicies ) throws CreateModelException {
+		
 		erector.setReference( referenceModel );
 		erector.clearCommands();
 		
 		T createdModel;
 		try {
-			createdModel = (T)erector.getTemplate().construct( erector.getTarget() );
+			createdModel = (T)erector.createNewInstance();
 		} catch (BlueprintTemplateException e) {
 			throw new CreateModelException( e );
 		}

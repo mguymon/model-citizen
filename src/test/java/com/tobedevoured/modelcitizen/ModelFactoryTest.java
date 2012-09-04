@@ -97,14 +97,12 @@ public class ModelFactoryTest {
 		assertEquals( 4, car.getWheels().size() );
 		
 		for ( Wheel wheel : car.getWheels() ) {
-			assertEquals( wheelBlueprint.name, wheel.getName() );
 			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 		
 		assertEquals( 1, car.getSpares().size() );
 		for ( Wheel wheel : car.getSpares() ) {
-			assertEquals( wheelBlueprint.name, wheel.getName() );
 			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
@@ -113,13 +111,11 @@ public class ModelFactoryTest {
 		car.setManufacturer( "test manuf" );
 		
 		car.setWheels( new ArrayList<Wheel>() );
-		Wheel wheel = new Wheel();
-		wheel.setName( "mega tire" );
+		Wheel wheel = new Wheel( "mega tire");
 		car.getWheels().add(wheel);
 		
 		car.setSpares( new HashSet<Wheel>() );
-		wheel = new Wheel();
-		wheel.setName( "spare tire" );
+		wheel = new Wheel( "spare tire");
 		car.getSpares().add(wheel);
 		
 		car = modelFactory.createModel( car );
@@ -129,7 +125,7 @@ public class ModelFactoryTest {
 		assertEquals( carBlueprint.status, car.getStatus() );
 		
 		assertEquals( 1, car.getWheels().size() );
-		assertEquals( "mega tire", car.getWheels().get(0).getName() );
+		assertEquals( "tire name", car.getWheels().get(0).getName() );
 		assertEquals( wheelBlueprint.option, car.getWheels().get(0).getOption() );
 		assertEquals( wheelBlueprint.size, car.getWheels().get(0).getSize() );
 		
@@ -146,7 +142,6 @@ public class ModelFactoryTest {
 		assertEquals( 4, car.getWheels().size() );
 		
 		for ( Wheel wheel : car.getWheels() ) {
-			assertEquals( wheelBlueprint.name, wheel.getName() );
 			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}

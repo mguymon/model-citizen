@@ -25,8 +25,10 @@ import java.util.Map;
 import java.util.Set;
 
 import com.tobedevoured.modelcitizen.erector.Command;
+import com.tobedevoured.modelcitizen.field.ConstructorCallBack;
 import com.tobedevoured.modelcitizen.field.ModelField;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
+import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 
 /**
  * Erector for a Class to create an instance from a {@link Blueprint} annotated Class
@@ -40,9 +42,24 @@ public class Erector {
 	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
 	private BlueprintTemplate blueprintTemplate;
 	private Class target;
+	private ConstructorCallBack newInstance;
 	private Object reference;
 	
-
+	/**
+	 * Create new instance of {@link Erector#getTarget()}. Uses {@link #getNewInstance()}
+	 * if defined, otherwise fails back to {@link Template#constructor}
+	 * 
+	 * @return Object new instance
+	 * @throws BlueprintTemplateException 
+	 */
+	public Object createNewInstance() throws BlueprintTemplateException {
+		if ( this.getNewInstance() != null ) {
+			return this.getNewInstance().createInstance();
+		} else {
+			return this.getTemplate().construct( this.getTarget() );
+		}
+	}
+	
 	public void addCommands(ModelField modelField, Set<Command> commands) {
 		for( Command command : commands ) {
 			addCommand( modelField, command );
@@ -110,6 +127,14 @@ public class Erector {
 
 	public void setReference(Object reference) {
 		this.reference = reference;
+	}
+
+	public ConstructorCallBack getNewInstance() {
+		return newInstance;
+	}
+
+	public void setNewInstance(ConstructorCallBack newInstance) {
+		this.newInstance = newInstance;
 	}
 	
 }

@@ -19,7 +19,9 @@ package com.tobedevoured.modelcitizen.field;
  */
 
 /**
- * A {@link Default} annotated Field in the {@link Blueprint} with a default getValue();
+ * A {@link Default} annotated Field in the {@link Blueprint} with a default getValue()
+ 
+ * @author Michael Guymon
  */
 public class DefaultField extends ModelField {
 	
