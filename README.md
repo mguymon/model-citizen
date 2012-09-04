@@ -106,8 +106,7 @@ is slow.
 
 ## Blueprint 
 
-A blueprint is a Class anototated with _@Blueprint_ and contains annotated fields. 
-Everything else is ignored by the _ModelFactory_.
+A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
 * **@Default**: The default value for the field.
