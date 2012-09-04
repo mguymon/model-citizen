@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Model-citizen : Annotation based model factory for Java" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Model-citizen</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mguymon/model-citizen">View on GitHub</a>
+
+          <h1 id="project_title">Model-citizen</h1>
+          <h2 id="project_tagline">Annotation based model factory for Java</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mguymon/model-citizen/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mguymon/model-citizen/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Modle Citizen</h1>
+
+<p>Model Citizen is an annotation based model factory for Java.</p>
+
+<p><a href="https://github.com/mguymon/model-citizen">https://github.com/mguymon/model-citizen</a></p>
+
+<p>A Model is mapped by a <em><a href="https://github.com/blueprint" class="user-mention">@blueprint</a></em> using annotated fields. Blueprints contain 
+default values and references to other @Blueprinted models. The ModelFactory can 
+create Models based on registered Blueprints. A Model already created can be
+passed into the ModelFactory as a Reference Model, which will be used as the basis
+for the new Model. </p>
+
+<p>Presently only supports <a href="https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/slackworks/modelcitizen/template/JavaBeanTemplate.java">template for JavaBean Models</a>. For Models defaults to work, they must follow the <a href="http://en.wikibooks.org/wiki/Java_Programming/Java_Beans">JavaBean</a> getter. and setters.</p>
+
+<h2>Install</h2>
+
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.tobedevoured&lt;/groupId&gt;
+  &lt;artifactId&gt;modelcitizen&lt;/artifactId&gt;
+  &lt;version&gt;0.2.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>May have to directly add the Sonatype Repo directly if the sync to Maven Central
+is slow.</p>
+
+<pre><code>&lt;repositories&gt;
+  &lt;repository&gt;
+    &lt;id&gt;oss.sonatype.org&lt;/id&gt;
+    &lt;name&gt;Sonatype Repository&lt;/name&gt;
+    &lt;url&gt;https://oss.sonatype.org/content/groups/public&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre>
+
+<h2>A Simple Example</h2>
+
+<h3>Creating a model</h3>
+
+<pre><code>ModelFactory modelFactory = new ModelFactory();
+modelFactory.registerBlueprint( CarBlueprint.class );
+Car car = modelFactory.createModel(Car.class);
+</code></pre>
+
+<h3>Creating a model overriding defaults</h3>
+
+<pre><code>Car car = new Car()
+car.setMake( "Caddie" );
+car = modelFactory.createModel(car);
+</code></pre>
+
+<h3>The Car Model</h3>
+
+<pre><code>public class Car {
+    private String make;
+    private String manufacturer;
+    private Integer mileage;
+    private Map status;
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.milage = mileage;
+    }
+
+    public Map getStatus() {
+        return status;
+    }
+
+    public void setStatus(Map status) {
+        this.status = status;
+    }
+}
+</code></pre>
+
+<h3>Car model's Blueprint</h3>
+
+<pre><code>@Blueprint(Car.class)
+public class CarBlueprint {
+
+    @Default
+    String make = "car make";
+
+    @Default
+    String manufacturer = "car manufacturer";
+
+    @Default
+    Integer mileage = 100;
+
+    @Default
+    Map status = new HashMap();
+}
+</code></pre>
+
+<h2>Blueprint</h2>
+
+<p>A blueprint is a Class anototated with <em><a href="https://github.com/blueprint" class="user-mention">@blueprint</a>( Class )</em> and contains annotated fields. Everything else is ignored by the <em>ModelFactory</em>.</p>
+
+<h3>Field Annotations</h3>
+
+<ul>
+<li>
+<strong><a href="https://github.com/default" class="user-mention">@default</a></strong>: The default value for the field.</li>
+<li>
+<strong>@Mapped</strong>: The value is mapped to another <a href="https://github.com/blueprint" class="user-mention">@blueprint</a>, default is the blueprint for
+       matching field's Class. Mapped class can be set by the <em>target</em> param. </li>
+<li>
+<strong>@MappedList</strong>: Creates a List of Models mapped to another blueprint. The Mapped
+           class of the List is set by the  <em>target</em> param and the number of
+           Models created is set by the <em>size</em> param, the default is 1.</li>
+<li>
+<strong>@MappedSet</strong>: Creates a Set of Models mapped to another blueprint. The Mapped
+          class of the Set is set by the  <em>target</em> param and the number of
+          Models created is set by the <em>size</em> param, the default is 1.</li>
+<li>
+<strong><a href="https://github.com/nullable" class="user-mention">@nullable</a></strong>: Specifies this field can be null and not to set a value.</li>
+</ul><p><a href="https://github.com/mguymon/model-citizen/wiki">Wiki</a> of examples that
+includes <a href="https://github.com/mguymon/model-citizen/wiki/Callback-Example">Callbacks</a>, <a href="https://github.com/mguymon/model-citizen/wiki/Policy">Policies</a>, and <a href="https://github.com/mguymon/model-citizen/wiki/Register-By-Package">Package scanning for Blueprints</a>.</p>
+
+<p>Inspired by <a href="https://github.com/thoughtbot/factory_girl">FactoryGirl</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Model-citizen maintained by <a href="https://github.com/mguymon">mguymon</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
