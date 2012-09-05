@@ -511,12 +511,12 @@ public class ModelFactory {
 			Object value = null;
 			
 			if ( withPolicies ) {
-				List<FieldPolicy> fieldPolicies = this.getFieldPolicies().get( modelField.getTarget() );
-				if ( fieldPolicies != null ) {
+				List<FieldPolicy> policiesForSingleField = this.getFieldPolicies().get( modelField.getTarget() );
+				if ( policiesForSingleField != null ) {
 					
 					logger.debug( "  Running Field policies" );
 					
-					for ( FieldPolicy policy : fieldPolicies ) {
+					for ( FieldPolicy policy : policiesForSingleField ) {
 						try {
 							logger.info( "    processing {} for {}", policy, modelField.getTarget() );
 							Command command = policy.process( this, erector, modelField, createdModel );
@@ -549,11 +549,9 @@ public class ModelFactory {
 						} 
 					}
 					
-					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						// Use value set in the model, otherwise use value set in blueprint
-						if ( value == null ) {
-							value = defaultField.getValue();
-						}
+					// Use value set in the model, otherwise use value set in blueprint
+					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) && value == null ) {
+						value = defaultField.getValue();
 					}
 					
 					// If value is an instance of FieldCallBack, eval the callback and use the value
@@ -581,12 +579,8 @@ public class ModelFactory {
 						}
 					}
 					
-					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( value == null   ) {
-							if ( !mappedField.isNullable() ) {
-								value = this.createModel( mappedField.getTarget() );
-							}
-						} 
+					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) && value == null  && !mappedField.isNullable() ) {
+						value = this.createModel( mappedField.getTarget() );
 					}
 					
 					try {

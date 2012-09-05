@@ -23,16 +23,12 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.reflect.ConstructorUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of BlueprintTemplate using Reflection for a JavaBean Model
  */
 public class JavaBeanTemplate implements BlueprintTemplate {
 
-	private Logger logger = LoggerFactory.getLogger( this.getClass() );
-	
 	@SuppressWarnings("unchecked")
 	public <T> T construct( Class<T> modelClass ) throws BlueprintTemplateException {
 		try {

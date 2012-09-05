@@ -18,7 +18,6 @@ package com.tobedevoured.modelcitizen.field;
  * limitations under the License.
  */
 
-import java.lang.reflect.Field;
 
 /**
  * A {@link Mapped} annotated Field in the {@link Blueprint} that is mapped 
@@ -48,15 +47,19 @@ public class MappedField extends ModelField {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		MappedField other = (MappedField) obj;
-		if (nullable != other.nullable)
+		if (nullable != other.nullable) {
 			return false;
+		}
 		return true;
 	}
 	

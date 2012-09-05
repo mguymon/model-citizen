@@ -64,15 +64,19 @@ public class MappedSetField extends ModelField {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		MappedSetField other = (MappedSetField) obj;
-		if (size != other.size)
+		if (size != other.size) {
 			return false;
+		}
 		
 		if ( targetSet != null ) {
 			if ( !targetSet.equals( other.getTargetSet() ) ) {

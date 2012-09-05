@@ -35,7 +35,7 @@ import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
  */
 public class Erector {
 
-	private static final Set<Command> emptySet = new HashSet<Command>();
+	private static final Set<Command> EMPTY_SET = new HashSet<Command>();
 	
 	private Object blueprint;
 	private List<ModelField> modelFields;
@@ -81,7 +81,7 @@ public class Erector {
 		if ( commands != null ) {
 			return commands;
 		} else {
-			return emptySet;
+			return EMPTY_SET;
 		}
 	}
 	

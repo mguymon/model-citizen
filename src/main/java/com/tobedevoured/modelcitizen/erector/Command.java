@@ -25,22 +25,22 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public abstract class Command {
 
-	protected final String command;
+	private final String command;
 	
 	/**
 	 * Skip all injection
 	 */
-	public final static Command SKIP_INJECTION = new Command( "skip-injection" ) {};
+	public static final Command SKIP_INJECTION = new Command( "skip-injection" ) {};
 	
 	/**
 	 * Skip reference injection
 	 */
-	public final static Command SKIP_REFERENCE_INJECTION = new Command( "skip-reference-injection" ) {};
+	public static final Command SKIP_REFERENCE_INJECTION = new Command( "skip-reference-injection" ) {};
 	
 	/**
 	 * Skip blueprint injection
 	 */
-	public final static Command SKIP_BLUEPRINT_INJECTION = new Command( "skip-blueprint-injection" ) {};
+	public static final Command SKIP_BLUEPRINT_INJECTION = new Command( "skip-blueprint-injection" ) {};
 	
 	public String getCommand() {
 		return command;
@@ -60,18 +60,23 @@ public abstract class Command {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Command other = (Command) obj;
 		if (command == null) {
-			if (other.command != null)
+			if (other.command != null) {
 				return false;
-		} else if (!command.equals(other.command))
+			}
+		} else if (!command.equals(other.command)) {
 			return false;
+		}
 		return true;
 	}
 	

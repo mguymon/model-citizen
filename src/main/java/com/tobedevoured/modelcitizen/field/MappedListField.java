@@ -63,15 +63,19 @@ public class MappedListField extends ModelField {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		MappedListField other = (MappedListField) obj;
-		if (size != other.size)
+		if (size != other.size) {
 			return false;
+		}
 		
 		if ( targetList != null ) {
 			if ( !targetList.equals( other.getTargetList() ) ) {
