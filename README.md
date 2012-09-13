@@ -32,6 +32,51 @@ May have to add the Sonatype Repo if the sync to Maven Central is slow.
       </repository>
     </repositories>
 
+
+## Blueprint 
+
+A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
+
+### Field Annotations
+
+* **@Default**: The default value for the field.
+* **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
+               matching field's Class. Mapped class can be set by the _target_ param. 
+* **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
+                   class of the List is set by the  _target_ param and the number of
+                   Models created is set by the _size_ param, the default is 1.
+* **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
+                  class of the Set is set by the  _target_ param and the number of
+                  Models created is set by the _size_ param, the default is 1.
+* **@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
+                    instances of the model by the _ModelFactory_
+* **@Nullable**: Specifies this field can be null and not to set a value.
+
+## ModelFactory
+
+Creates new instances of Models based on registered Blueprints. It is possible to 
+[registered Blueprints by package](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
+
+A new instance is always constructed, unless specified by a 
+[Policy](https://github.com/mguymon/model-citizen/wiki/Policy).
+
+Example of creating a new _ModelFactory_ and registering the _CarBlueprint_
+
+    ModelFactory modelFactory = new ModelFactory();
+    modelFactory.registerBlueprint( CarBlueprint.class );
+    
+A Model with a registered Blueprint can then me created by Class:
+
+    modelFactory.createModel(Car.class);
+  
+or by passing a Model directly with override values: 
+
+    Car car = new Car();
+    car.setMake( "Truck" );
+    
+    # create a new Model using blueprint defaults, but overriding the Make to be Truck.
+    car = modelFactory.createModel(car); 
+
 ## A Simple Example
 
 ### Creating a model
@@ -46,6 +91,24 @@ May have to add the Sonatype Repo if the sync to Maven Central is slow.
     car.setMake( "Caddie" );
     car = modelFactory.createModel(car);
 
+### Car model's Blueprint
+
+    @Blueprint(Car.class)
+    public class CarBlueprint {
+        
+        @Default
+        String make = "car make";
+            
+        @Default
+        String manufacturer = "car manufacturer";
+            
+        @Default
+        Integer mileage = 100;
+            
+        @Default
+        Map status = new HashMap();
+    }
+    
 ### The Car Model
 
     public class Car {
@@ -87,45 +150,9 @@ May have to add the Sonatype Repo if the sync to Maven Central is slow.
         }
     }
 
-### Car model's Blueprint
-
-    @Blueprint(Car.class)
-    public class CarBlueprint {
-        
-        @Default
-        String make = "car make";
-            
-        @Default
-        String manufacturer = "car manufacturer";
-            
-        @Default
-        Integer mileage = 100;
-            
-        @Default
-        Map status = new HashMap();
-    }
-
-## Blueprint 
-
-A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
-
-### Field Annotations
-
-* **@Default**: The default value for the field.
-* **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
-               matching field's Class. Mapped class can be set by the _target_ param. 
-* **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
-                   class of the List is set by the  _target_ param and the number of
-                   Models created is set by the _size_ param, the default is 1.
-* **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
-                  class of the Set is set by the  _target_ param and the number of
-                  Models created is set by the _size_ param, the default is 1.
-* **@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
-                    instances of the model by the _ModelFactory_
-* **@Nullable**: Specifies this field can be null and not to set a value.
-
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
+
 
 ## Future Features
 
