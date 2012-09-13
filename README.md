@@ -12,6 +12,8 @@ for the new Model.
 
 Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
 
+[JavaDoc](http://mguymon.github.com/model-citizen/apidocs/index.html)
+
 Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 ## Install
