@@ -10,7 +10,7 @@ create Models based on registered Blueprints. A Model already created can be
 passed into the ModelFactory as a Reference Model, which will be used as the basis
 for the new Model. 
 
-Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/slackworks/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
+Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
 
 Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
