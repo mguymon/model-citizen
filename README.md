@@ -1,8 +1,6 @@
 # Model Citizen
 
-Model Citizen is an annotation based model factory for Java.
-
-https://github.com/mguymon/model-citizen
+Model Citizen is an annotation based model factory for Java, inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 A Model is mapped by a _@Blueprint_ using annotated fields. Blueprints contain 
 default values and references to other @Blueprinted models. The ModelFactory can 
@@ -12,9 +10,11 @@ for the new Model.
 
 Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
 
+
+<https://github.com/mguymon/model-citizen>
+
 [JavaDoc](http://mguymon.github.com/model-citizen/apidocs/index.html)
 
-Inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 ## Install
 
