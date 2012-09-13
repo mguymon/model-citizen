@@ -1,4 +1,4 @@
-# Modle Citizen
+# Model Citizen
 
 Model Citizen is an annotation based model factory for Java.
 
