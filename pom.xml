@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tobedevoured</groupId>
 	<artifactId>modelcitizen</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<packaging>jar</packaging>
 	<name>model-citizen</name>
 	<url>https://github.com/mguymon/model-citizen</url>
