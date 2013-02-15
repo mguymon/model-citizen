@@ -295,6 +295,7 @@ public class ModelFactory {
 				listField.setName( field.getName() );
 				listField.setFieldClass( field.getType() );
 				listField.setSize( mappedCollection.size() );
+                listField.setIgnoreEmpty( mappedCollection.ignoreEmpty() );
 				
 				// If @MappedList(target) not set, use Field's class
 				if ( NotSet.class.equals( mappedCollection.target() ) ) {
@@ -339,6 +340,7 @@ public class ModelFactory {
 				setField.setName( field.getName() );
 				setField.setFieldClass( field.getType() );
 				setField.setSize( mappedSet.size() );
+                setField.setIgnoreEmpty( mappedSet.ignoreEmpty() );
 				
 				// XXX: @MappedSet( target ) is required
 				// If @MappedSet(target) not set
@@ -430,7 +432,7 @@ public class ModelFactory {
 	 * Create a Model for a registered {@link Blueprint}. Values set in the
 	 * model will not be overridden by defaults in the {@link Blueprint}.
 	 * 
-	 * @param model Object
+	 * @param referenceModel Object
 	 * @return Model
 	 * @throws CreateModelException
 	 */
@@ -442,7 +444,7 @@ public class ModelFactory {
 	 * Create a Model for a registered {@link Blueprint}. Values set in the
 	 * model will not be overridden by defaults in the {@link Blueprint}.
 	 * 
-	 * @param model Object
+	 * @param referenceModel Object
 	 * @param withPolicies boolean if Policies should be applied to the create
 	 * @return Model
 	 * @throws CreateModelException
@@ -610,10 +612,11 @@ public class ModelFactory {
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( modelList == null ) {
+						if ( modelList == null || ( modelList.size() == 0 && !listField.isIgnoreEmpty() ) ) {
 							for ( int x = 0; x < listField.getSize(); x ++ ) {
 								((List)value).add( this.createModel( listField.getTarget() ) );
 							}
+
 						} else {
 							for ( Object object : modelList ) {
 								((List)value).add( this.createModel( object ) );
@@ -648,7 +651,7 @@ public class ModelFactory {
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( referenceModelSet == null ) {
+						if ( referenceModelSet == null || ( referenceModelSet.size() == 0 && !setField.isIgnoreEmpty() )) {
 							for ( int x = 0; x < setField.getSize(); x ++ ) {
 								((Set)value).add( this.createModel( setField.getTarget() ) );
 							}

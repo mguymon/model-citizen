@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.field;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,74 +19,69 @@ package com.tobedevoured.modelcitizen.field;
  */
 
 /**
- * A {@link MappedList} annotated Field in the {@link Blueprint} that is mapped 
- * to a {@link List} comprised of Models with a registered {@Blueprint}. 
- * 
+ * A {@link MappedList} annotated Field in the {@link Blueprint} that is mapped
+ * to a {@link List} comprised of Models with a registered {@Blueprint}.
+ *
  * @author Michael Guymon
  */
 public class MappedSetField extends ModelField {
 
-	private int size;
-	private Class targetSet;
-	
-	/**
-	 * Size of List to create
-	 * 
-	 * @return int
-	 */
-	public int getSize() {
-		return size;
-	}
+    private int size;
+    private Class targetSet;
+    private boolean ignoreEmpty;
 
-	public void setSize(int size) {
-		this.size = size;
-	}
+    /**
+     * Size of List to create
+     *
+     * @return int
+     */
+    public int getSize() {
+        return size;
+    }
 
-	public Class getTargetSet() {
-		return targetSet;
-	}
+    public void setSize(int size) {
+        this.size = size;
+    }
 
-	public void setTargetSet(Class targetSet) {
-		this.targetSet = targetSet;
-	}
+    public Class getTargetSet() {
+        return targetSet;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + size;
-		if ( targetSet != null ) {
-			result = prime * result + targetSet.hashCode();
-		}
-		return result;
-	}
+    public void setTargetSet(Class targetSet) {
+        this.targetSet = targetSet;
+    }
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		MappedSetField other = (MappedSetField) obj;
-		if (size != other.size) {
-			return false;
-		}
-		
-		if ( targetSet != null ) {
-			if ( !targetSet.equals( other.getTargetSet() ) ) {
-				return false;
-			}
-		} else if ( other.getTargetSet() != null ) {
-			return false;
-		}
-		
-		return true;
-	}
+    public boolean isIgnoreEmpty() {
+        return ignoreEmpty;
+    }
 
+    public void setIgnoreEmpty(boolean ignoreEmpty) {
+        this.ignoreEmpty = ignoreEmpty;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        MappedSetField that = (MappedSetField) o;
+
+        if (ignoreEmpty != that.ignoreEmpty) return false;
+        if (size != that.size) return false;
+        if (!targetSet.equals(that.targetSet)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + size;
+        result = 31 * result + targetSet.hashCode();
+        result = 31 * result + (ignoreEmpty ? 1 : 0);
+        return result;
+    }
 }

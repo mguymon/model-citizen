@@ -24,6 +24,8 @@ public class Wheel {
     public String name;
     public Integer size;
     public List<Option> options;
+
+    public List<Option> variants;
     
     public Wheel( String name ) {
     	this.name = name;
@@ -52,5 +54,13 @@ public class Wheel {
     public void setOptions(List<Option> options) {
         
         this.options = options;
+    }
+
+    public List<Option> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<Option> variants) {
+        this.variants = variants;
     }
 }

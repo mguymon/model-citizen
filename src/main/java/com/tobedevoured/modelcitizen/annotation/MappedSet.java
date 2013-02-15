@@ -24,10 +24,34 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
+/**
+ * Field that is a List of Mapped Models
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MappedSet {
-	int size() default 1;
+    /**
+     * Number of instances to be created in Set, defaults to 1
+     * @return int
+     */
+    int size() default 1;
+
+    /**
+     * The target Blueprinted Class that is created
+     * @return Class
+     */
     Class target();
+
+    /**
+     * The List created, defaults to HashSet
+     * @return Class
+     */
     Class targetSet() default NotSet.class;
+
+    /**
+     * If true, do not create instances for an empty Set. Defaults
+     * to true.
+     * @return
+     */
+    boolean ignoreEmpty() default true;
 }

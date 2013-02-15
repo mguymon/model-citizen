@@ -28,8 +28,9 @@ public class MappedListField extends ModelField {
 
 	private int size;
 	private Class targetList;
-	
-	/**
+    private boolean ignoreEmpty;
+
+    /**
 	 * Size of List to create
 	 * 
 	 * @return int
@@ -50,42 +51,36 @@ public class MappedListField extends ModelField {
 		this.targetList = targetList;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + size;
-		if ( targetList != null ) {
-			result = prime * result + targetList.hashCode();
-		}
-		return result;
-	}
+    public boolean isIgnoreEmpty() {
+        return ignoreEmpty;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		MappedListField other = (MappedListField) obj;
-		if (size != other.size) {
-			return false;
-		}
-		
-		if ( targetList != null ) {
-			if ( !targetList.equals( other.getTargetList() ) ) {
-				return false;
-			}
-		} else if ( other.getTargetList() != null ) {
-			return false;
-		}
-		
-		return true;
-	}
+    public void setIgnoreEmpty(boolean ignoreEmpty) {
+        this.ignoreEmpty = ignoreEmpty;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        MappedListField that = (MappedListField) o;
+
+        if (ignoreEmpty != that.ignoreEmpty) return false;
+        if (size != that.size) return false;
+        if (!targetList.equals(that.targetList)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + size;
+        result = 31 * result + targetList.hashCode();
+        result = 31 * result + (ignoreEmpty ? 1 : 0);
+        return result;
+    }
 
 }

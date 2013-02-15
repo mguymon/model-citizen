@@ -24,8 +24,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
+/**
+ * Field that is Mapped to a Blueprint
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Mapped {
+    /**
+     * Class ModelFactory creates, defaults to the field Class
+     * @return Class
+     */
 	Class target() default NotSet.class;
 }

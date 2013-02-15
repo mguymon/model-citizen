@@ -28,6 +28,8 @@ import com.tobedevoured.modelcitizen.model.Wheel;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class MappedListFieldTest {
@@ -49,6 +51,26 @@ public class MappedListFieldTest {
         modelFactory.registerBlueprint(optionBlueprint);
     }
 
+
+    public void testEmptyListDoesNotInjectBlueprint() throws CreateModelException {
+        Wheel wheel = new Wheel("Test");
+        wheel.setOptions( new ArrayList<Option>() ); // prevents injection
+
+        Wheel factoryWheel = modelFactory.createModel( wheel );
+
+        assertEquals( 0, factoryWheel.getOptions().size() );
+        assertEquals( 3, factoryWheel.getVariants().size() );
+    }
+
+    public void testEmptyListInjectsBlueprint() throws CreateModelException {
+        Wheel wheel = new Wheel("Test");
+        wheel.setVariants( new ArrayList<Option>() );  // still injected due to ignoreEmpty = true
+
+        Wheel factoryWheel = modelFactory.createModel( wheel );
+
+        assertEquals( 3, factoryWheel.getOptions().size() );
+        assertEquals( 3, factoryWheel.getVariants().size() );
+    }
 
     @Test
     public void testNestedMappedLists() throws CreateModelException {

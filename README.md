@@ -52,7 +52,7 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
                   Models created is set by the _size_ param, the default is 1.
 * **@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
                     instances of the model by the _ModelFactory_
-* **@Nullable**: Specifies this field can be null and not to set a value.
+* **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
 ## ModelFactory
 

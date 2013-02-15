@@ -45,4 +45,7 @@ public class WheelBlueprint {
     @MappedList(target = Option.class, size = 3)
     public List<Option> options;
 
+    @MappedList(target = Option.class, size = 2, ignoreEmpty = false)
+    public List<Option> variants;
+
 }
