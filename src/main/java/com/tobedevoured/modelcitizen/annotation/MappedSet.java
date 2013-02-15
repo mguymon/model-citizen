@@ -31,19 +31,19 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MappedSet {
     /**
-     * Number of instances to be created in Set, defaults to 1
+     * Number of Models to be created by the ModelFactory and added to List, defaults to 1.
      * @return int
      */
     int size() default 1;
 
     /**
-     * The target Blueprinted Class that is created
+     * The target Blueprint Class used to create Models.
      * @return Class
      */
     Class target();
 
     /**
-     * The List created, defaults to HashSet
+     * The Set created, defaults to HashSet.
      * @return Class
      */
     Class targetSet() default NotSet.class;

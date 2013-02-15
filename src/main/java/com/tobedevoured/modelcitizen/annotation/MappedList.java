@@ -31,13 +31,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MappedList {
     /**
-     * Number of instances to be created in List, defaults to 1
+     * Number of Models to be created by the ModelFactory and added to List, defaults to 1.
      * @return int
      */
 	int size() default 1;
 
     /**
-     * The target Blueprinted Class that is created
+     * The target Blueprint Class used to create Models.
      * @return Class
      */
     Class target();
