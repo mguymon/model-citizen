@@ -1,4 +1,4 @@
-package com.tobedevoured.modelcitizen.model;
+package com.tobedevoured.modelcitizen.blueprint;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -18,39 +18,16 @@ package com.tobedevoured.modelcitizen.model;
  * limitations under the License.
  */
 
-import java.util.List;
+import com.tobedevoured.modelcitizen.annotation.Blueprint;
+import com.tobedevoured.modelcitizen.annotation.Default;
+import com.tobedevoured.modelcitizen.model.Option;
 
-public class Wheel {
-    public String name;
-    public Integer size;
-    public List<Option> options;
-    
-    public Wheel( String name ) {
-    	this.name = name;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public Integer getSize() {
-        return size;
-    }
-    
-    public void setSize(Integer size) {
-        this.size = size;
-    }
+import java.util.ArrayList;
 
-    public List<Option> getOptions() {
-        return options;
-    }
-    
-    public void setOptions(List<Option> options) {
-        
-        this.options = options;
-    }
+@Blueprint(Option.class)
+public class OptionBlueprint {
+
+	@Default
+	public String name = "option";
+
 }

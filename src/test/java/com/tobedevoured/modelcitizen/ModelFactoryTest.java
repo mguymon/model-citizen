@@ -26,13 +26,10 @@ import java.util.HashSet;
 import java.util.List;
 
 
+import com.tobedevoured.modelcitizen.blueprint.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tobedevoured.modelcitizen.blueprint.CarBlueprint;
-import com.tobedevoured.modelcitizen.blueprint.DriverBlueprint;
-import com.tobedevoured.modelcitizen.blueprint.UserBlueprint;
-import com.tobedevoured.modelcitizen.blueprint.WheelBlueprint;
 import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Wheel;
 
@@ -43,6 +40,7 @@ public class ModelFactoryTest {
 	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
 	private DriverBlueprint driverBlueprint = new DriverBlueprint();
 	private UserBlueprint userBlueprint = new UserBlueprint();
+    private OptionBlueprint optionBlueprint = new OptionBlueprint();
 	
 	@Before
 	public void setUp() throws RegisterBlueprintException {
@@ -51,6 +49,7 @@ public class ModelFactoryTest {
 		modelFactory.registerBlueprint( wheelBlueprint );
 		modelFactory.registerBlueprint( driverBlueprint );
 		modelFactory.registerBlueprint( userBlueprint );
+        modelFactory.registerBlueprint( optionBlueprint );
 	}
 	
 	@Test 
@@ -97,13 +96,11 @@ public class ModelFactoryTest {
 		assertEquals( 4, car.getWheels().size() );
 		
 		for ( Wheel wheel : car.getWheels() ) {
-			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 		
 		assertEquals( 1, car.getSpares().size() );
 		for ( Wheel wheel : car.getSpares() ) {
-			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 		
@@ -126,7 +123,6 @@ public class ModelFactoryTest {
 		
 		assertEquals( 1, car.getWheels().size() );
 		assertEquals( "tire name", car.getWheels().get(0).getName() );
-		assertEquals( wheelBlueprint.option, car.getWheels().get(0).getOption() );
 		assertEquals( wheelBlueprint.size, car.getWheels().get(0).getSize() );
 		
 	}
@@ -142,7 +138,6 @@ public class ModelFactoryTest {
 		assertEquals( 4, car.getWheels().size() );
 		
 		for ( Wheel wheel : car.getWheels() ) {
-			assertEquals( wheelBlueprint.option, wheel.getOption() );
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 	}

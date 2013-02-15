@@ -2,6 +2,7 @@ package com.tobedevoured.modelcitizen.field;
 
 import static org.junit.Assert.*;
 
+import com.tobedevoured.modelcitizen.blueprint.OptionBlueprint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,12 +15,14 @@ import com.tobedevoured.modelcitizen.model.Wheel;
 public class ConstructorCallbackTest {
 	
 	private ModelFactory modelFactory;
-	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
+    private WheelBlueprint wheelBlueprint = new WheelBlueprint();
+	private OptionBlueprint optionBlueprint = new OptionBlueprint();
 	
 	@Before
 	public void setUp() throws RegisterBlueprintException {
 		modelFactory = new ModelFactory();
 		modelFactory.registerBlueprint( wheelBlueprint );
+        modelFactory.registerBlueprint( optionBlueprint );
 	}
 	
 

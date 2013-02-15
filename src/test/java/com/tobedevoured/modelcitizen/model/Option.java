@@ -18,39 +18,14 @@ package com.tobedevoured.modelcitizen.model;
  * limitations under the License.
  */
 
-import java.util.List;
-
-public class Wheel {
+public class Option {
     public String name;
-    public Integer size;
-    public List<Option> options;
-    
-    public Wheel( String name ) {
+
+    public void setName(String name) {
     	this.name = name;
     }
     
     public String getName() {
         return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public Integer getSize() {
-        return size;
-    }
-    
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-    
-    public void setOptions(List<Option> options) {
-        
-        this.options = options;
     }
 }

@@ -18,13 +18,12 @@ package com.tobedevoured.modelcitizen.blueprint;
  * limitations under the License.
  */
 
-import java.util.ArrayList;
+import java.util.List;
 
-import com.tobedevoured.modelcitizen.annotation.Blueprint;
-import com.tobedevoured.modelcitizen.annotation.Default;
-import com.tobedevoured.modelcitizen.annotation.NewInstance;
+import com.tobedevoured.modelcitizen.annotation.*;
 import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.model.Wheel;
+import com.tobedevoured.modelcitizen.model.Option;
 
 @Blueprint(Wheel.class)
 public class WheelBlueprint {
@@ -43,7 +42,7 @@ public class WheelBlueprint {
 	@Default
 	public Integer size = 10;
 
-	@Default
-	public Object option = new ArrayList();
+    @MappedList(target = Option.class, size = 3)
+    public List<Option> options;
 
 }

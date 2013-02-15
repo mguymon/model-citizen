@@ -20,6 +20,7 @@ package com.tobedevoured.modelcitizen.annotation;
 
 import static org.junit.Assert.*;
 
+import com.tobedevoured.modelcitizen.blueprint.OptionBlueprint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,6 +38,7 @@ public class NullableTest {
 	private CarBlueprint carBlueprint = new CarBlueprint();
 	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
 	private DriverBlueprint driverBlueprint = new DriverBlueprint();
+    private OptionBlueprint optionBlueprint = new OptionBlueprint();
 	
 	@Before
 	public void setUp() throws RegisterBlueprintException {
@@ -44,6 +46,7 @@ public class NullableTest {
 		modelFactory.registerBlueprint( carBlueprint );
 		modelFactory.registerBlueprint( driverBlueprint );
 		modelFactory.registerBlueprint( wheelBlueprint );
+        modelFactory.registerBlueprint( optionBlueprint );
 	}
 	
 	@Test

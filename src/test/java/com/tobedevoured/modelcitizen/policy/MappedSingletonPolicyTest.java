@@ -30,6 +30,7 @@ import com.tobedevoured.modelcitizen.blueprint.CarBlueprint;
 import com.tobedevoured.modelcitizen.blueprint.DriverBlueprint;
 import com.tobedevoured.modelcitizen.blueprint.UserBlueprint;
 import com.tobedevoured.modelcitizen.blueprint.WheelBlueprint;
+import com.tobedevoured.modelcitizen.blueprint.OptionBlueprint;
 import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Driver;
 
@@ -40,6 +41,7 @@ public class MappedSingletonPolicyTest {
 	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
 	private DriverBlueprint driverBlueprint = new DriverBlueprint();
 	private UserBlueprint userBlueprint = new UserBlueprint();
+    private OptionBlueprint optionBlueprint = new OptionBlueprint();
 	
 	@Before
 	public void setUp() throws RegisterBlueprintException {
@@ -48,6 +50,7 @@ public class MappedSingletonPolicyTest {
 		modelFactory.registerBlueprint( wheelBlueprint );
 		modelFactory.registerBlueprint( driverBlueprint );
 		modelFactory.registerBlueprint( userBlueprint );
+        modelFactory.registerBlueprint( optionBlueprint );
 	}
 	
 	@Test
