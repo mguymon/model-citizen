@@ -40,19 +40,27 @@ May have to add the Sonatype Repo if the sync to Maven Central is slow.
 A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
+ **@Default**: The default value for the field.
 
-* **@Default**: The default value for the field.
-* **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
+**@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
                matching field's Class. Mapped class can be set by the _target_ param. 
-* **@MappedList**: Creates a List of Models mapped to another blueprint. The Mapped
-                   class of the List is set by the  _target_ param and the number of
-                   Models created is set by the _size_ param, the default is 1.
-* **@MappedSet**: Creates a Set of Models mapped to another blueprint. The Mapped
-                  class of the Set is set by the  _target_ param and the number of
-                  Models created is set by the _size_ param, the default is 1.
-* **@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
+
+**@MappedList**: Creates a List of Models mapped to another blueprint.
+  * _size_: Number of Models to be created by the ModelFactory and added to List, defaults to 1.
+  * _target_: The target Blueprint Class used to create Models
+  * _targetList_: The List created, defaults to ArrayList
+  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
+  
+**@MappedSet**: Creates a Set of Models mapped to another blueprint.
+  * _size_: Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
+  * _target_: The target Blueprint Class used to create Models
+  * _targetSet_: The Set created, defaults to HashSet
+  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
+
+**@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
                     instances of the model by the _ModelFactory_
-* **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
+                    
+**@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
 ## ModelFactory
 
