@@ -27,7 +27,7 @@ import java.util.ArrayList;
 @Blueprint(Option.class)
 public class OptionBlueprint {
 
-	@Default
+	@Default()
 	public String name = "option";
 
 }

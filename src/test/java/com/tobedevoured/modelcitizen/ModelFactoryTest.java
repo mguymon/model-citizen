@@ -27,11 +27,13 @@ import java.util.List;
 
 
 import com.tobedevoured.modelcitizen.blueprint.*;
+import com.tobedevoured.modelcitizen.model.Driver;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Wheel;
+import org.slf4j.LoggerFactory;
 
 public class ModelFactoryTest {
 
@@ -111,20 +113,17 @@ public class ModelFactoryTest {
 		Wheel wheel = new Wheel( "mega tire");
 		car.getWheels().add(wheel);
 		
-		car.setSpares( new HashSet<Wheel>() );
-		wheel = new Wheel( "spare tire");
-		car.getSpares().add(wheel);
+		car.setSpares(new HashSet<Wheel>());
 		
 		car = modelFactory.createModel( car );
 		assertEquals( "new make", car.getMake() );
 		assertEquals( "test manuf", car.getManufacturer() );
 		assertEquals( carBlueprint.milage, car.getMilage() );
 		assertEquals( carBlueprint.status, car.getStatus() );
-		
-		assertEquals( 1, car.getWheels().size() );
-		assertEquals( "tire name", car.getWheels().get(0).getName() );
-		assertEquals( wheelBlueprint.size, car.getWheels().get(0).getSize() );
-		
+
+
+        assertEquals( "Car Wheels blueprint forced to the mapping of 4", 4, car.getWheels().size() );
+		assertEquals( "The Car reference model should have 0 spares", 0, car.getSpares().size() );
 	}
 	
 	@Test
@@ -141,4 +140,13 @@ public class ModelFactoryTest {
 			assertEquals( wheelBlueprint.size, wheel.getSize() );
 		}
 	}
+
+    @Test
+    public void testDriverNameIsForced() throws CreateModelException {
+        Driver driver = new Driver();
+        driver.setName( "Test Name");
+        driver = modelFactory.createModel( Driver.class );
+
+        assertEquals( "Driver name is a forced default", "Lev the Driver", driver.getName() );
+    }
 }

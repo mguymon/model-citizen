@@ -25,8 +25,8 @@ import com.tobedevoured.modelcitizen.model.Driver;
 @Blueprint(Driver.class )
 public class DriverBlueprint {
 
-		@Default
-		public String name = "driver's name";
+		@Default(force=true)
+		public String name = "Lev the Driver";
 		
 		@Default
 		public Integer age= 16;

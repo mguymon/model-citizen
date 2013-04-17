@@ -26,5 +26,10 @@ import java.lang.annotation.RetentionPolicy;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Default {
-	
+    /**
+     * Force the value of the Default to always be set, even if
+     * the target field already has a value. Default is false.
+     * @return boolean
+     */
+    boolean force() default false;
 }

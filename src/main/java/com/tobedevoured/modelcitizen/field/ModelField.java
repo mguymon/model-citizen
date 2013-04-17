@@ -24,7 +24,8 @@ package com.tobedevoured.modelcitizen.field;
  * @author Michael Guymon
  */
 public abstract class ModelField {
-	
+
+    private boolean force = false;
 	private String name;
 	private Object value;
 	private Class fieldClass;
@@ -61,6 +62,15 @@ public abstract class ModelField {
 	public void setTarget(Class target) {
 		this.target = target;
 	}
+
+
+    public boolean isForce() {
+        return force;
+    }
+
+    public void setForce(boolean force) {
+        this.force = force;
+    }
 
 	@Override
 	public int hashCode() {
@@ -121,6 +131,4 @@ public abstract class ModelField {
 		}
 		return true;
 	}
-
-	
 }

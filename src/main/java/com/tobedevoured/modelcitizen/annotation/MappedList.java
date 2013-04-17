@@ -51,7 +51,14 @@ public @interface MappedList {
     /**
      * If true, do not create instances for an empty List. Defaults
      * to true.
-     * @return
+     * @return boolean
      */
     boolean ignoreEmpty() default true;
+
+    /**
+     * Force the value of the MappedList to always be set, even if
+     * the target field already has a value. Default is false.
+     * @return boolean
+     */
+    boolean force() default false;
 }

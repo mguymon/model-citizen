@@ -49,7 +49,7 @@ public class CarBlueprint {
 	@Default
 	public Map status = new HashMap();
 
-	@MappedList(target = Wheel.class, size = 4)
+	@MappedList(target = Wheel.class, size = 4, force=true)
 	public List<Wheel> wheels;
 	
 	@MappedSet(target = Wheel.class, size = 1)

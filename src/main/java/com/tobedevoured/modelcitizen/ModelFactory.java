@@ -240,12 +240,14 @@ public class ModelFactory {
 					throw new RegisterBlueprintException( "Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid, @NewInstance can only be annotated on ConstructorCallback" );
 				}
 			}
-			
-			// Process @Default
-			if ( field.getAnnotation( Default.class ) != null ) {
+
+            // Process @Default
+            Default defaultAnnotation = field.getAnnotation( Default.class );
+            if (defaultAnnotation != null ) {
 				
 				DefaultField defaultField = new DefaultField();
 				defaultField.setName( field.getName() );
+                defaultField.setForce( defaultAnnotation.force() );
 				
 				try {
 					defaultField.setValue( field.get( blueprint ) );
@@ -259,7 +261,7 @@ public class ModelFactory {
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
 				
-				logger.debug( "  Setting default for {} to {}", defaultField.getName(), defaultField.getValue() );
+				logger.debug( "  Setting default for {} to {} and forced {}", new Object[] {defaultField.getName(), defaultField.getValue(), defaultField.isForce()});
 				
 			}
 			
@@ -296,6 +298,7 @@ public class ModelFactory {
 				listField.setFieldClass( field.getType() );
 				listField.setSize( mappedCollection.size() );
                 listField.setIgnoreEmpty( mappedCollection.ignoreEmpty() );
+                listField.setForce( mappedCollection.force() );
 				
 				// If @MappedList(target) not set, use Field's class
 				if ( NotSet.class.equals( mappedCollection.target() ) ) {
@@ -329,7 +332,7 @@ public class ModelFactory {
 				
 				modelFields.add( listField );
 				
-				logger.debug( "  Setting mapped list for {} to {} as <{}>", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget() });
+				logger.debug( "  Setting mapped list for {} to {} as <{}> and forced {}", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget(), listField.isForce() });
 				
 			}
 			
@@ -341,6 +344,7 @@ public class ModelFactory {
 				setField.setFieldClass( field.getType() );
 				setField.setSize( mappedSet.size() );
                 setField.setIgnoreEmpty( mappedSet.ignoreEmpty() );
+                setField.setForce( mappedSet.force() );
 				
 				// XXX: @MappedSet( target ) is required
 				// If @MappedSet(target) not set
@@ -377,7 +381,7 @@ public class ModelFactory {
 				
 				modelFields.add( setField );
 				
-				logger.debug( "  Setting mapped set for {} to {} as <{}>", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget() });
+				logger.debug( "  Setting mapped set for {} to {} as <{}> and is forced {}", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget(), setField.isForce() });
 				
 			}
 		}
@@ -542,7 +546,7 @@ public class ModelFactory {
 				if ( modelField instanceof DefaultField ) {
 					
 					DefaultField defaultField = (DefaultField)modelField;
-					
+
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_REFERENCE_INJECTION ) ) {
 						try {
 							value = erector.getTemplate().get( referenceModel, defaultField.getName() );
@@ -551,8 +555,9 @@ public class ModelFactory {
 						} 
 					}
 					
-					// Use value set in the model, otherwise use value set in blueprint
-					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) && value == null ) {
+					// If null or the field forces, use value set in blueprint, otherwise
+                    // use the value of the reference model
+					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) && (value == null || defaultField.isForce() )) {
 						value = defaultField.getValue();
 					}
 					
@@ -612,7 +617,8 @@ public class ModelFactory {
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( modelList == null || ( modelList.size() == 0 && !listField.isIgnoreEmpty() ) ) {
+                        // Inject models into List If list is null or force is true or it is an empty list that is ignored
+						if ( (modelList == null || listField.isForce()) || ( modelList.size() == 0 && !listField.isIgnoreEmpty() ) ) {
 							for ( int x = 0; x < listField.getSize(); x ++ ) {
 								((List)value).add( this.createModel( listField.getTarget() ) );
 							}
@@ -651,7 +657,8 @@ public class ModelFactory {
 					}
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_BLUEPRINT_INJECTION ) ) {
-						if ( referenceModelSet == null || ( referenceModelSet.size() == 0 && !setField.isIgnoreEmpty() )) {
+                        // Inject models into Set If list is null or force is true or it is an empty set that is ignored
+                        if ( (referenceModelSet == null || setField.isForce()) || ( referenceModelSet.size() == 0 && !setField.isIgnoreEmpty() )) {
 							for ( int x = 0; x < setField.getSize(); x ++ ) {
 								((Set)value).add( this.createModel( setField.getTarget() ) );
 							}

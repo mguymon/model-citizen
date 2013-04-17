@@ -41,6 +41,7 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
 
 ### Field Annotations
  **@Default**: The default value for the field.
+   * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false.
 
 **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
                matching field's Class. Mapped class can be set by the _target_ param. 
@@ -50,12 +51,14 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
   * _target_: The target Blueprint Class used to create Models
   * _targetList_: The List created, defaults to ArrayList
   * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
+  * _force_:  Force the value of the MappedList to always be set, even if the target field already has a value. Default is false.
   
 **@MappedSet**: Creates a Set of Models mapped to another blueprint.
   * _size_: Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
   * _target_: The target Blueprint Class used to create Models
   * _targetSet_: The Set created, defaults to HashSet
   * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
+  * _force_:  Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
 
 **@NewInstance**: Set on a _ConstructCallback_ field. The callback is used to create new
                     instances of the model by the _ModelFactory_

@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -86,5 +87,15 @@ public class MappedListFieldTest {
                 assertEquals("option", option.getName());
             }
         }
+    }
+
+    @Test
+    public void testForceAlwaysCreatesMappedList() throws CreateModelException {
+
+        Car car = new Car();
+        car.setWheels(Arrays.asList( new Wheel[]{ new Wheel("test") } ) );
+        car = modelFactory.createModel(car);
+
+        assertEquals("force=true ensures wheels will be injected", 4, car.getWheels().size());
     }
 }
