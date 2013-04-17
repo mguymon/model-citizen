@@ -21,7 +21,7 @@ Presently only supports [template for JavaBean Models](https://github.com/mguymo
     <dependency>
       <groupId>com.tobedevoured</groupId>
       <artifactId>modelcitizen</artifactId>
-      <version>0.3.1</version>
+      <version>0.3.2</version>
     </dependency>
     
 May have to add the Sonatype Repo if the sync to Maven Central is slow.
