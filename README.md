@@ -60,7 +60,7 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
   * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
   * _force_:  Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
 
-**@NewInstance**: Set on a [ConstructCallback](https://github.com/mguymon/model-citizen/wiki/Callback-Example) field. The callback is used to create new
+**@NewInstance**: Set on a [ConstructorCallback](https://github.com/mguymon/model-citizen/wiki/Callback-Example) field. The callback is used to create new
                     instances of the model by the _ModelFactory_
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
