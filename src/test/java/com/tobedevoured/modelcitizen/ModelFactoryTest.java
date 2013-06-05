@@ -19,6 +19,11 @@ package com.tobedevoured.modelcitizen;
  */
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -148,5 +153,15 @@ public class ModelFactoryTest {
         driver = modelFactory.createModel( Driver.class );
 
         assertEquals( "Driver name is a forced default", "Lev the Driver", driver.getName() );
+    }
+
+    @Test
+    public void testBlueprintConstructorOnlyTriggeredOncePerCreateModelInvocation() throws Exception {
+        Erector erector = mock(Erector.class);
+        modelFactory.getErectors().put(Car.class, erector);
+
+        modelFactory.createModel(Car.class);
+
+        verify(erector, times(1)).createNewInstance();
     }
 }
