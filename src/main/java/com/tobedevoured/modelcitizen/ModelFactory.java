@@ -424,13 +424,9 @@ public class ModelFactory {
 		if ( erector == null ) {
 			throw new CreateModelException( "Unregistered class: " + clazz );
 		}
-		
-		try {
-			return createModel( erector, (T)erector.createNewInstance(), withPolicies );
-		} catch (BlueprintTemplateException e) {
-			throw new CreateModelException( e );
-		}
-	}
+
+        return createModel( erector, null, withPolicies );
+    }
 	
 	/**
 	 * Create a Model for a registered {@link Blueprint}. Values set in the
@@ -470,14 +466,13 @@ public class ModelFactory {
 	 * {@link Blueprint}.
 	 * 
 	 * @param erector {@link Erector}
-	 * @param referenceModel T
+	 * @param referenceModel T the reference model instance, or null
 	 * @param withPolicies boolean if Policies should be applied to the create
 	 * @return T new Model
 	 * @throws CreateModelException
 	 */
 	public <T> T createModel( Erector erector, T referenceModel, boolean withPolicies ) throws CreateModelException {
 		
-		erector.setReference( referenceModel );
 		erector.clearCommands();
 		
 		T createdModel;
@@ -486,7 +481,10 @@ public class ModelFactory {
 		} catch (BlueprintTemplateException e) {
 			throw new CreateModelException( e );
 		}
-		
+
+        final T nonNullReferenceModel = referenceModel == null ? createdModel : referenceModel;
+        erector.setReference(nonNullReferenceModel);
+
 		if ( withPolicies ) {
 			List<BlueprintPolicy> blueprintPolicies = this.getBlueprintPolicies().get( erector.getTarget() );
 			if ( blueprintPolicies != null ) {
@@ -549,7 +547,7 @@ public class ModelFactory {
 
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_REFERENCE_INJECTION ) ) {
 						try {
-							value = erector.getTemplate().get( referenceModel, defaultField.getName() );
+							value = erector.getTemplate().get( nonNullReferenceModel, defaultField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						} 
@@ -564,7 +562,7 @@ public class ModelFactory {
 					// If value is an instance of FieldCallBack, eval the callback and use the value
 					if ( value != null & value instanceof FieldCallback ) {
 						FieldCallback callBack = (FieldCallback)value;
-						value = callBack.get( referenceModel );
+						value = callBack.get( nonNullReferenceModel );
 					}
 					
 					try {
@@ -580,7 +578,7 @@ public class ModelFactory {
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_REFERENCE_INJECTION ) ) {
 						try {
-							value = erector.getTemplate().get( referenceModel, mappedField.getName() );
+							value = erector.getTemplate().get( nonNullReferenceModel, mappedField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
@@ -610,7 +608,7 @@ public class ModelFactory {
 					
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 						try {
-							modelList = (List)erector.getTemplate().get( referenceModel, listField.getName() );
+							modelList = (List)erector.getTemplate().get( nonNullReferenceModel, listField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
@@ -650,7 +648,7 @@ public class ModelFactory {
 					Set referenceModelSet = null;
 					if ( !erector.getCommands( modelField ).contains( Command.SKIP_INJECTION ) ) {
 						try {
-							referenceModelSet = (Set)erector.getTemplate().get( referenceModel, setField.getName() );
+							referenceModelSet = (Set)erector.getTemplate().get( nonNullReferenceModel, setField.getName() );
 						} catch (BlueprintTemplateException e) {
 							throw new CreateModelException( e );
 						}
