@@ -131,7 +131,7 @@ public class ModelFactory {
 	 * @param _package String package to scan
 	 * @throws RegisterBlueprintException
 	 * @throws IOException 
-	 */
+     */
 	public void setRegisterBlueprintsByPackage( String _package ) throws RegisterBlueprintException {
 		
 		Set<Class<?>> annotated = null;
@@ -261,7 +261,7 @@ public class ModelFactory {
 				defaultField.setFieldClass( field.getType() );
 				modelFields.add( defaultField );
 				
-				logger.debug( "  Setting default for {} to {} and forced {}", new Object[] {defaultField.getName(), defaultField.getValue(), defaultField.isForce()});
+				logger.trace( "  Setting default for {} to {} and forced {}", new Object[] {defaultField.getName(), defaultField.getValue(), defaultField.isForce()});
 				
 			}
 			
@@ -287,7 +287,7 @@ public class ModelFactory {
 				mappedField.setFieldClass( field.getType() );
 				modelFields.add( mappedField );
 				
-				logger.debug( "  Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
+				logger.trace( "  Setting mapped for {} to {}", mappedField.getName(), mappedField.getTarget());
 			}
 			
 			// Process @MappedList
@@ -332,7 +332,7 @@ public class ModelFactory {
 				
 				modelFields.add( listField );
 				
-				logger.debug( "  Setting mapped list for {} to {} as <{}> and forced {}", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget(), listField.isForce() });
+				logger.trace( "  Setting mapped list for {} to {} as <{}> and forced {}", new Object[] { listField.getName(), listField.getFieldClass(), listField.getTarget(), listField.isForce() });
 				
 			}
 			
@@ -381,7 +381,7 @@ public class ModelFactory {
 				
 				modelFields.add( setField );
 				
-				logger.debug( "  Setting mapped set for {} to {} as <{}> and is forced {}", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget(), setField.isForce() });
+				logger.trace( "  Setting mapped set for {} to {} as <{}> and is forced {}", new Object[] { setField.getName(), setField.getFieldClass(), setField.getTarget(), setField.isForce() });
 				
 			}
 		}
@@ -510,7 +510,7 @@ public class ModelFactory {
 		
 		for( ModelField modelField : erector.getModelFields() ) {
 			
-			logger.debug( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
+			logger.trace( "ModelField {}", ReflectionToStringBuilder.toString(modelField) );
 
 			Object value = null;
 			

@@ -62,7 +62,7 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 	}
 	
 	public Object get( Object model, String property ) throws BlueprintTemplateException {
-        logger.debug( "Getting property [{}] for Model [{}]", property, model );
+        logger.trace( "Getting property [{}] for Model [{}]", property, model );
 		try {
 			return PropertyUtils.getProperty( model, property );
 		} catch (IllegalAccessException propertyException) {

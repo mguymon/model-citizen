@@ -79,7 +79,7 @@ public class LoadBlueprintsTest {
     public void testSetRegisterBlueprintsWithException() throws RegisterBlueprintException {
         List blueprints = new ArrayList();
         blueprints.add( carBlueprint );
-        blueprints.add( new Integer(8) );
+        blueprints.add( 8 );
 
         modelFactory.setRegisterBlueprints( blueprints );
     }
