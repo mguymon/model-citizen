@@ -57,7 +57,7 @@ public class ByReferenceTest {
         Car car = modelFactory.createModel( new Car() );
         assertEquals( carBlueprint.make, car.getMake() );
         assertEquals( carBlueprint.manufacturer, car.getManufacturer() );
-        assertEquals( new Float(0.0), new Float(car.getMilage()) );
+        assertEquals( new Float(0.0), new Float(car.getMileage()) );
         assertEquals( carBlueprint.status, car.getStatus() );
         assertEquals( 4, car.getWheels().size() );
 
@@ -82,7 +82,7 @@ public class ByReferenceTest {
         car = modelFactory.createModel( car );
         assertEquals( "new make", car.getMake() );
         assertEquals( "test manuf", car.getManufacturer() );
-        assertEquals( 0.0, car.getMilage(), 0 );
+        assertEquals( 0.0, car.getMileage(), 0 );
         assertEquals( carBlueprint.status, car.getStatus() );
 
 

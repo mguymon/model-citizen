@@ -18,17 +18,10 @@ package com.tobedevoured.modelcitizen.modelfactory;
  * limitations under the License.
  */
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 
 import com.tobedevoured.modelcitizen.CreateModelException;
@@ -37,14 +30,12 @@ import com.tobedevoured.modelcitizen.ModelFactory;
 import com.tobedevoured.modelcitizen.RegisterBlueprintException;
 import com.tobedevoured.modelcitizen.blueprint.*;
 import com.tobedevoured.modelcitizen.field.ModelField;
-import com.tobedevoured.modelcitizen.model.Driver;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Wheel;
-import org.slf4j.LoggerFactory;
 
 public class ByClassTest {
 
@@ -86,14 +77,14 @@ public class ByClassTest {
 
         Erector erector = modelFactory.getErectors().get(Car.class);
 
-        ModelField modelField = erector.getModelField("milage");
+        ModelField modelField = erector.getModelField("mileage");
         assertEquals(new Float(100.1), modelField.getValue() );
 
         // Val is zero because primitive initializes as zero
-        Object val = erector.getTemplate().get( new Car(), "milage");
+        Object val = erector.getTemplate().get( new Car(), "mileage");
         assertEquals(new Float(0.0), val );
 
         // Val is zero because primitive initializes as zero
-        assertEquals(0.0, car.getMilage(), 0);
+        assertEquals(0.0, car.getMileage(), 0);
     }
 }

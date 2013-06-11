@@ -86,7 +86,7 @@ public class LoadBlueprintsTest {
 
     @Test
     public void testDefaultFieldValue() throws NoSuchFieldException, IllegalAccessException {
-        Field field = carBlueprint.getClass().getDeclaredField("milage");
+        Field field = carBlueprint.getClass().getDeclaredField("mileage");
         Float val = (Float)field.get( carBlueprint );
         assertEquals(new Float(100.1), val);
     }

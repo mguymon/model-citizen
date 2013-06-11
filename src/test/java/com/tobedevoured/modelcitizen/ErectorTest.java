@@ -9,7 +9,6 @@ import com.tobedevoured.modelcitizen.template.JavaBeanTemplate;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.smartcardio.CardTerminal;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +25,7 @@ public class ErectorTest {
         defaultField = new DefaultField();
         defaultField.setName( "milage" );
         defaultField.setForce( false );
-        defaultField.setValue( carBlueprint.milage );
+        defaultField.setValue( carBlueprint.mileage );
         defaultField.setTarget( Float.class );
         defaultField.setFieldClass( Float.class );
 
@@ -41,8 +40,8 @@ public class ErectorTest {
     @Test
     public void testGet() throws BlueprintTemplateException {
         Car car = new Car();
-        car.setMilage( new Float(123.456) );
-        Float val = (Float)erector.getTemplate().get(car, "milage");
+        car.setMileage(new Float(123.456));
+        Float val = (Float)erector.getTemplate().get(car, "mileage");
         assertEquals( new Float(123.456), val);
     }
 }

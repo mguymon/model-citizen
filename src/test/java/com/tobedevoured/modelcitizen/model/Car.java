@@ -25,7 +25,7 @@ import java.util.Set;
 public class Car {
 	private String make;
 	private String manufacturer;
-	private float milage;
+	private float mileage;
 	private Map status;
 	private List<Wheel> wheels;
 	private Set<Wheel> spares;
@@ -52,12 +52,12 @@ public class Car {
 		this.manufacturer = manufacturer;
 	}
 
-	public float getMilage() {
-		return milage;
+	public float getMileage() {
+		return mileage;
 	}
 
-	public void setMilage(float milage) {
-		this.milage = milage;
+	public void setMileage(float mileage) {
+		this.mileage = mileage;
 	}
 
 	public Map getStatus() {
