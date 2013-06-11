@@ -66,7 +66,7 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
 ## Model
 
 Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). 
-For annotations to work with the tempalte, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter and setters
+For annotations to work with the template, the model must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter and setters
 for fields.
 
 ### Working with primitives
@@ -182,11 +182,6 @@ or by passing a Model directly with override values:
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
-
-## Future Features
-
-* Spring support: Model instances can be pased by Spring
-* Multiple Blueprints: Allow multiple Blueprints for the same class
 
 ## License
 
