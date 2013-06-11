@@ -3,12 +3,10 @@
 Model Citizen is an annotation based model factory for Java, inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 A Model is mapped by a _@Blueprint_ using annotated fields. Blueprints contain 
-default values and references to other @Blueprinted models. The ModelFactory can 
-create Models based on registered Blueprints. A Model already created can be
-passed into the ModelFactory as a Reference Model, which will be used as the basis
+default values and references to other @Blueprinted models. The _ModelFactory_ can 
+create models based on registered blueprints. A model already created can be
+passed into the _ModelFactory_ as a reference .odel, which will be used as the basis
 for the new Model. 
-
-Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). For Models defaults to work, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter. and setters.
 
 
 <https://github.com/mguymon/model-citizen>
@@ -64,6 +62,24 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
                     instances of the model by the _ModelFactory_
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
+
+## Model
+
+Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). 
+For annotations to work with the tempalte, they must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter and setters
+for fields.
+
+### Working with primitives
+
+[Primitive fields are intialized as zero](http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.12.5) and 
+will never be null. This will cause the _ModelFactory_ to think that a value has already been assigned to the model and 
+not assign one from the blueprint. To work around this, use the `force=true` in the blueprint to force that value is always assigned from the blueprint, for example:
+
+    @Blueprint(Car.class)
+    public class CarBlueprint {
+        
+        @Default(force=true)
+        float mileage = 100.1f;
 
 ## ModelFactory
 
