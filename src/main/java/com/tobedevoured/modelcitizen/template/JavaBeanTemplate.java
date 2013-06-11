@@ -22,14 +22,17 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.reflect.ConstructorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Implementation of BlueprintTemplate using Reflection for a JavaBean Model
  */
 public class JavaBeanTemplate implements BlueprintTemplate {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	public <T> T construct( Class<T> modelClass ) throws BlueprintTemplateException {
 		try {
 			return (T)ConstructorUtils.invokeConstructor( modelClass, null );
@@ -59,6 +62,7 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 	}
 	
 	public Object get( Object model, String property ) throws BlueprintTemplateException {
+        logger.debug( "Getting property [{}] for Model [{}]", property, model );
 		try {
 			return PropertyUtils.getProperty( model, property );
 		} catch (IllegalAccessException propertyException) {

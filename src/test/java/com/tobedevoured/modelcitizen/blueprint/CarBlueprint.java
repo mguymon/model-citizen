@@ -44,7 +44,7 @@ public class CarBlueprint {
 	public String manufacturer = "car manufacturer";
 
 	@Default
-	public Integer milage = 100;
+	public float milage = new Float(100.1);
 
 	@Default
 	public Map status = new HashMap();

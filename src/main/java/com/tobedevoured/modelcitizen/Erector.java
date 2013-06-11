@@ -18,11 +18,7 @@ package com.tobedevoured.modelcitizen;
  * limitations under the License.
  */
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.tobedevoured.modelcitizen.erector.Command;
 import com.tobedevoured.modelcitizen.field.ConstructorCallback;
@@ -31,23 +27,27 @@ import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 
 /**
- * Erector for a Class to create an instance from a {@link Blueprint} annotated Class
+ * Erector for a Class to create an instance from a {@link com.tobedevoured.modelcitizen.annotation.Blueprint} annotated Class
  */
 public class Erector {
 
 	private static final Set<Command> EMPTY_SET = new HashSet<Command>();
 	
 	private Object blueprint;
-	private List<ModelField> modelFields;
+	private Map<String,ModelField> modelFields;
 	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
 	private BlueprintTemplate blueprintTemplate;
 	private Class target;
 	private ConstructorCallback newInstance;
 	private Object reference;
-	
+
+    public Erector() {
+        modelFields = new HashMap<String,ModelField>();
+    }
+
 	/**
 	 * Create new instance of {@link Erector#getTarget()}. Uses {@link #getNewInstance()}
-	 * if defined, otherwise fails back to {@link Template#constructor}
+	 * if defined, otherwise fails back to {@link BlueprintTemplate#construct}
 	 * 
 	 * @return Object new instance
 	 * @throws BlueprintTemplateException 
@@ -97,12 +97,22 @@ public class Erector {
 		this.blueprint = blueprint;
 	}
 	
-	public List<ModelField> getModelFields() {
-		return modelFields;
+	public Collection<ModelField> getModelFields() {
+		return modelFields.values();
 	}
+
+    public ModelField getModelField(String name) {
+        return modelFields.get(name);
+    }
 	
-	public void setModelFields(List<ModelField> modelFields) {
-		this.modelFields = modelFields;
+	public void setModelFields(Collection<ModelField> modelFields) {
+        for( ModelField modelField: modelFields ) {
+            addModelField(modelField);
+        }
+    }
+
+    public void addModelField(ModelField modelField) {
+		this.modelFields.put(modelField.getName(), modelField);
 	}
 	
 	public BlueprintTemplate getTemplate() {
