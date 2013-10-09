@@ -25,6 +25,7 @@ import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.field.ModelField;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Erector for a Class to create an instance from a {@link com.tobedevoured.modelcitizen.annotation.Blueprint} annotated Class
@@ -54,6 +55,7 @@ public class Erector {
 	 */
 	public Object createNewInstance() throws BlueprintTemplateException {
 		if ( this.getNewInstance() != null ) {
+            // XXX: warn if the return of the callback is not the same class as the target?
 			return this.getNewInstance().createInstance();
 		} else {
 			return this.getTemplate().construct( this.getTarget() );
@@ -146,5 +148,12 @@ public class Erector {
 	public void setNewInstance(ConstructorCallback newInstance) {
 		this.newInstance = newInstance;
 	}
-	
+
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("blueprint", blueprint).
+                append("target", target).
+                append("reference", reference).
+                toString();
+    }
 }
