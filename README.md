@@ -63,6 +63,10 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
+#### Inheritance
+
+A Blueprint will inherit the fields of its parent, except for `@NewInstance`.
+
 ## Model
 
 Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). 
