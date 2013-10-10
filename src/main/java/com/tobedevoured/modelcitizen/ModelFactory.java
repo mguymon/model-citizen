@@ -213,7 +213,7 @@ public class ModelFactory {
         ConstructorCallback newInstance = null;
 
         // Get all fields for the blueprint target class
-        List<Field> fields = getAllFields(blueprint.getClass());
+        Collection<Field> fields = getAllFields(blueprint.getClass()).values();
         for (Field field : fields) {
 
             field.setAccessible(true);
@@ -701,30 +701,38 @@ public class ModelFactory {
         return fieldPolicies;
     }
 
-    private List<Field> getAllFields(Class clazz) {
+    /**
+     * Get complete inherited list of {@link Field} for Class, with the exception
+     * that {@link NewInstance} annotated fields are not inherited.
+     *
+     * @param clazz Class
+     * @return Map
+     */
+    private Map<String,Field> getAllFields(Class clazz) {
         return this.getAllFields(clazz, false);
     }
 
-    private List<Field> getAllFields(Class clazz, boolean isParent) {
-        List<Field> fields = new ArrayList<Field>();
+    private Map<String,Field> getAllFields(Class clazz, boolean isParent) {
+        Map<String,Field> fieldsMap = new HashMap<String,Field>();
+
+        Class superClazz = clazz.getSuperclass();
+        if(superClazz != null){
+            fieldsMap.putAll( getAllFields(superClazz, true) );
+        }
+
         for ( Field field: clazz.getDeclaredFields() ) {
             field.setAccessible(true);
 
             if (isParent) {
                 // NewInstance annotated fields are not inherited
                 if (field.getAnnotation(NewInstance.class) == null) {
-                    fields.add( field );
+                    fieldsMap.put( field.getName(), field );
                 }
             } else {
-                fields.add( field );
+                fieldsMap.put( field.getName(), field );
             }
         }
 
-        Class superClazz = clazz.getSuperclass();
-        if(superClazz != null){
-            fields.addAll( getAllFields(superClazz, true) );
-        }
-
-        return fields;
+        return fieldsMap;
     }
 }

@@ -21,11 +21,12 @@ package com.tobedevoured.modelcitizen.model;
 import java.util.List;
 
 public class Wheel {
-    public String name;
-    public Integer size;
-    public List<Option> options;
+    private String name;
+    private Integer size;
+    private String color;
+    private List<Option> options;
 
-    public List<Option> variants;
+    private List<Option> variants;
     
     public Wheel( String name ) {
     	this.name = name;
@@ -62,5 +63,13 @@ public class Wheel {
 
     public void setVariants(List<Option> variants) {
         this.variants = variants;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

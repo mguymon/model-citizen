@@ -13,12 +13,15 @@ public class SpareTireBlueprint extends WheelBlueprint {
     @Default
     public Integer mileLimit = 400;
 
+    @Default
+    public Integer size = 9;
+
     @NewInstance
     ConstructorCallback constructor = new ConstructorCallback() {
 
         @Override
         public Object createInstance() {
-            SpareTire spareTire = new SpareTire( "tire name" );
+            SpareTire spareTire = new SpareTire( "spare tire name" );
             return spareTire;
         }
 

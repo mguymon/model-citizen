@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tobedevoured</groupId>
     <artifactId>modelcitizen</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
     <packaging>jar</packaging>
     <name>model-citizen</name>
     <url>https://github.com/mguymon/model-citizen</url>
@@ -114,12 +114,13 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.2</version>
+                <artifactId>maven-gpg-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>test-jar</goal>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>

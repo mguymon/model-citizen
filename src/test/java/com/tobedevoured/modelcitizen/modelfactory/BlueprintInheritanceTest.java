@@ -46,8 +46,10 @@ public class BlueprintInheritanceTest {
         Wheel wheel = modelFactory.createModel( Wheel.class );
         SpareTire spareTire = modelFactory.createModel( SpareTire.class );
 
-        assertEquals( wheel.getName(), spareTire.getName() );
-        assertEquals( wheel.getSize(), spareTire.getSize() );
+        assertEquals(wheel.getColor(), spareTire.getColor() );
+
+        assertEquals( "spare tire name", spareTire.getName() );
+        assertEquals(9, (int)spareTire.getSize() );
         assertEquals( 400, (int)spareTire.getMileLimit() );
     }
 }

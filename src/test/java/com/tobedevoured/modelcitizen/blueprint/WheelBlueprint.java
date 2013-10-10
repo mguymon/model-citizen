@@ -42,6 +42,9 @@ public class WheelBlueprint {
 	@Default
 	public Integer size = 10;
 
+    @Default
+    public String color = "black";
+
     @MappedList(target = Option.class, size = 3)
     public List<Option> options;
 
