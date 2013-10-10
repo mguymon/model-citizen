@@ -84,8 +84,8 @@ not assign one from the blueprint. To work around this, use the `force=true` in 
     @Blueprint(Car.class)
     public class CarBlueprint {
         
-        @Default(force=true)
-        float mileage = 100.1f;
+    @Default(force=true)
+    float mileage = 100.1f;
 
 ## ModelFactory
 
