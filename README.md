@@ -1,5 +1,7 @@
 # Model Citizen
 
+[![Build Status](https://travis-ci.org/mguymon/model-citizen.png?branch=master)](https://travis-ci.org/mguymon/model-citizen)
+
 Model Citizen is an annotation based model factory for Java, inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 A Model is mapped by a _@Blueprint_ using annotated fields. Blueprints contain 
@@ -19,7 +21,7 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured</groupId>
       <artifactId>modelcitizen</artifactId>
-      <version>0.4.0</version>
+      <version>0.5.0</version>
     </dependency>
     
 May have to add the Sonatype Repo if the sync to Maven Central is slow.
