@@ -3,4 +3,5 @@ com.tobedevoured.modelcitizen.annotation
 com.tobedevoured.modelcitizen.blueprint
 com.tobedevoured.modelcitizen.field
 com.tobedevoured.modelcitizen.model
+com.tobedevoured.modelcitizen.modelfactory
 com.tobedevoured.modelcitizen.policy
