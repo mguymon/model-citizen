@@ -2,7 +2,7 @@
 
 ### 0.5.0 (October 8, 2013)
 
-* Allow for inheritenace in Blueprints ([Issue #16](https://github.com/mguymon/model-citizen/issues/16)]
+* Allow for inheritenace in Blueprints ([Issue #16](https://github.com/mguymon/model-citizen/issues/16))
 
 #### 0.5.1 (October 8, 2013)
 
