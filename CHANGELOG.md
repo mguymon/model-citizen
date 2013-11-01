@@ -10,7 +10,7 @@
 
 #### 0.5.2 (November 1, 2013
 
-* Update SLF4J ([Pull #17](https://github.com/mguymon/model-citizen/pull/17)) [thanks @salbito]
+* Update SLF4J ([Pull #17](https://github.com/mguymon/model-citizen/pull/17)) [thanks [salbito](https://github.com/salbito)]
 
 ### 0.4.0 (June 5, 2013)
 
