@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.field;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,30 +32,30 @@ import com.tobedevoured.modelcitizen.blueprint.UserBlueprint;
 import com.tobedevoured.modelcitizen.model.User;
 
 public class FieldCallbackTest {
-	
-	private ModelFactory modelFactory;
-	private UserBlueprint userBlueprint = new UserBlueprint();
-	
-	@Before
-	public void setUp() throws RegisterBlueprintException {
-		modelFactory = new ModelFactory();
-		modelFactory.registerBlueprint( userBlueprint );
-	}
-	
 
-	@Test
-	public void testCreateModelWithFieldCallBack() throws CreateModelException {
-		
-		User user = modelFactory.createModel( User.class );
-		
-		assertNotNull( user.getUsername() );
-		assertTrue( user.getUsername().contains("username") );
-		
-		assertNotNull( user.getEmails() );
-		assertEquals( 3, user.getEmails().size() );
-		for ( String email : user.getEmails() ) {
-			assertTrue( email.contains( "email" ) );
-			assertTrue( email.contains( "@test.net" ) );
-		}
-	}
+    private ModelFactory modelFactory;
+    private UserBlueprint userBlueprint = new UserBlueprint();
+
+    @Before
+    public void setUp() throws RegisterBlueprintException {
+        modelFactory = new ModelFactory();
+        modelFactory.registerBlueprint(userBlueprint);
+    }
+
+
+    @Test
+    public void testCreateModelWithFieldCallBack() throws CreateModelException {
+
+        User user = modelFactory.createModel(User.class);
+
+        assertNotNull(user.getUsername());
+        assertTrue(user.getUsername().contains("username"));
+
+        assertNotNull(user.getEmails());
+        assertEquals(3, user.getEmails().size());
+        for (String email : user.getEmails()) {
+            assertTrue(email.contains("email"));
+            assertTrue(email.contains("@test.net"));
+        }
+    }
 }

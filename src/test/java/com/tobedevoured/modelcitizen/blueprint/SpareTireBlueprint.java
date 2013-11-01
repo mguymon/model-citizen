@@ -21,7 +21,7 @@ public class SpareTireBlueprint extends WheelBlueprint {
 
         @Override
         public Object createInstance() {
-            SpareTire spareTire = new SpareTire( "spare tire name" );
+            SpareTire spareTire = new SpareTire("spare tire name");
             return spareTire;
         }
 

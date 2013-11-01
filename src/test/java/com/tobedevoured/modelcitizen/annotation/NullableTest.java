@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.annotation;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,26 +33,26 @@ import com.tobedevoured.modelcitizen.blueprint.WheelBlueprint;
 import com.tobedevoured.modelcitizen.model.Car;
 
 public class NullableTest {
-	
-	private ModelFactory modelFactory;
-	private CarBlueprint carBlueprint = new CarBlueprint();
-	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
-	private DriverBlueprint driverBlueprint = new DriverBlueprint();
+
+    private ModelFactory modelFactory;
+    private CarBlueprint carBlueprint = new CarBlueprint();
+    private WheelBlueprint wheelBlueprint = new WheelBlueprint();
+    private DriverBlueprint driverBlueprint = new DriverBlueprint();
     private OptionBlueprint optionBlueprint = new OptionBlueprint();
-	
-	@Before
-	public void setUp() throws RegisterBlueprintException {
-		modelFactory = new ModelFactory();
-		modelFactory.registerBlueprint( carBlueprint );
-		modelFactory.registerBlueprint( driverBlueprint );
-		modelFactory.registerBlueprint( wheelBlueprint );
-        modelFactory.registerBlueprint( optionBlueprint );
-	}
-	
-	@Test
-	public void testFieldNull() throws CreateModelException {
-		
-		Car car = modelFactory.createModel( Car.class );
-		assertNull( car.getPassenger() );
-	}
+
+    @Before
+    public void setUp() throws RegisterBlueprintException {
+        modelFactory = new ModelFactory();
+        modelFactory.registerBlueprint(carBlueprint);
+        modelFactory.registerBlueprint(driverBlueprint);
+        modelFactory.registerBlueprint(wheelBlueprint);
+        modelFactory.registerBlueprint(optionBlueprint);
+    }
+
+    @Test
+    public void testFieldNull() throws CreateModelException {
+
+        Car car = modelFactory.createModel(Car.class);
+        assertNull(car.getPassenger());
+    }
 }

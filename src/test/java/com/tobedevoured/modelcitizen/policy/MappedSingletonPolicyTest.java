@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.policy;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,49 +35,49 @@ import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Driver;
 
 public class MappedSingletonPolicyTest {
-	
-	private ModelFactory modelFactory;
-	private CarBlueprint carBlueprint = new CarBlueprint();
-	private WheelBlueprint wheelBlueprint = new WheelBlueprint();
-	private DriverBlueprint driverBlueprint = new DriverBlueprint();
-	private UserBlueprint userBlueprint = new UserBlueprint();
+
+    private ModelFactory modelFactory;
+    private CarBlueprint carBlueprint = new CarBlueprint();
+    private WheelBlueprint wheelBlueprint = new WheelBlueprint();
+    private DriverBlueprint driverBlueprint = new DriverBlueprint();
+    private UserBlueprint userBlueprint = new UserBlueprint();
     private OptionBlueprint optionBlueprint = new OptionBlueprint();
-	
-	@Before
-	public void setUp() throws RegisterBlueprintException {
-		modelFactory = new ModelFactory();
-		modelFactory.registerBlueprint( carBlueprint );
-		modelFactory.registerBlueprint( wheelBlueprint );
-		modelFactory.registerBlueprint( driverBlueprint );
-		modelFactory.registerBlueprint( userBlueprint );
-        modelFactory.registerBlueprint( optionBlueprint );
-	}
-	
-	@Test
-	public void singletonPolicyWithClass() throws ModelFactoryException {
-		modelFactory.addPolicy( new MappedSingletonPolicy( Driver.class ) );
-		
-		Car car1 = modelFactory.createModel( Car.class );
-		Car car2 = modelFactory.createModel( Car.class );
-		Car car3 = modelFactory.createModel( Car.class );
-		
-		Driver driver = car1.getDriver();
-		
-		assertEquals( car2.getDriver(), driver );
-		assertEquals( car3.getDriver(), driver );
-	}
-	
-	@Test
-	public void singletonPolicyWithModel() throws ModelFactoryException {
-		Driver driver = modelFactory.createModel( Driver.class );
-		modelFactory.addPolicy( new MappedSingletonPolicy( driver ) );
-		
-		Car car1 = modelFactory.createModel( Car.class );
-		Car car2 = modelFactory.createModel( Car.class );
-		Car car3 = modelFactory.createModel( Car.class );
-		
-		assertEquals( car1.getDriver(), driver );
-		assertEquals( car2.getDriver(), driver );
-		assertEquals( car3.getDriver(), driver );
-	}
+
+    @Before
+    public void setUp() throws RegisterBlueprintException {
+        modelFactory = new ModelFactory();
+        modelFactory.registerBlueprint(carBlueprint);
+        modelFactory.registerBlueprint(wheelBlueprint);
+        modelFactory.registerBlueprint(driverBlueprint);
+        modelFactory.registerBlueprint(userBlueprint);
+        modelFactory.registerBlueprint(optionBlueprint);
+    }
+
+    @Test
+    public void singletonPolicyWithClass() throws ModelFactoryException {
+        modelFactory.addPolicy(new MappedSingletonPolicy(Driver.class));
+
+        Car car1 = modelFactory.createModel(Car.class);
+        Car car2 = modelFactory.createModel(Car.class);
+        Car car3 = modelFactory.createModel(Car.class);
+
+        Driver driver = car1.getDriver();
+
+        assertEquals(car2.getDriver(), driver);
+        assertEquals(car3.getDriver(), driver);
+    }
+
+    @Test
+    public void singletonPolicyWithModel() throws ModelFactoryException {
+        Driver driver = modelFactory.createModel(Driver.class);
+        modelFactory.addPolicy(new MappedSingletonPolicy(driver));
+
+        Car car1 = modelFactory.createModel(Car.class);
+        Car car2 = modelFactory.createModel(Car.class);
+        Car car3 = modelFactory.createModel(Car.class);
+
+        assertEquals(car1.getDriver(), driver);
+        assertEquals(car2.getDriver(), driver);
+        assertEquals(car3.getDriver(), driver);
+    }
 }

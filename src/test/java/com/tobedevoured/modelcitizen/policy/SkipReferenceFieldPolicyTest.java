@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.policy;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,24 +31,24 @@ import com.tobedevoured.modelcitizen.model.User;
 
 public class SkipReferenceFieldPolicyTest {
 
-	private ModelFactory modelFactory;
-	private UserBlueprint userBlueprint = new UserBlueprint();
-	
-	@Before
-	public void setUp() throws RegisterBlueprintException {
-		modelFactory = new ModelFactory();
-		modelFactory.registerBlueprint( userBlueprint );
-	}
-	
-	@Test
-	public void alwaySetFieldPolicy() throws ModelFactoryException {
-		modelFactory.addPolicy( new SkipReferenceFieldPolicy( "username", User.class ) );
-		
-		User user1 = modelFactory.createModel( User.class );
-		User user2 = modelFactory.createModel( user1 );
-		
-		assertNotSame( user1.getUsername(), user2.getUsername() );
-		assertEquals( user1.getEmails(), user2.getEmails() );
-	}
-	
+    private ModelFactory modelFactory;
+    private UserBlueprint userBlueprint = new UserBlueprint();
+
+    @Before
+    public void setUp() throws RegisterBlueprintException {
+        modelFactory = new ModelFactory();
+        modelFactory.registerBlueprint(userBlueprint);
+    }
+
+    @Test
+    public void alwaySetFieldPolicy() throws ModelFactoryException {
+        modelFactory.addPolicy(new SkipReferenceFieldPolicy("username", User.class));
+
+        User user1 = modelFactory.createModel(User.class);
+        User user2 = modelFactory.createModel(user1);
+
+        assertNotSame(user1.getUsername(), user2.getUsername());
+        assertEquals(user1.getEmails(), user2.getEmails());
+    }
+
 }

@@ -55,22 +55,22 @@ public class MappedListFieldTest {
 
     public void testEmptyListDoesNotInjectBlueprint() throws CreateModelException {
         Wheel wheel = new Wheel("Test");
-        wheel.setOptions( new ArrayList<Option>() ); // prevents injection
+        wheel.setOptions(new ArrayList<Option>()); // prevents injection
 
-        Wheel factoryWheel = modelFactory.createModel( wheel );
+        Wheel factoryWheel = modelFactory.createModel(wheel);
 
-        assertEquals( 0, factoryWheel.getOptions().size() );
-        assertEquals( 3, factoryWheel.getVariants().size() );
+        assertEquals(0, factoryWheel.getOptions().size());
+        assertEquals(3, factoryWheel.getVariants().size());
     }
 
     public void testEmptyListInjectsBlueprint() throws CreateModelException {
         Wheel wheel = new Wheel("Test");
-        wheel.setVariants( new ArrayList<Option>() );  // still injected due to ignoreEmpty = true
+        wheel.setVariants(new ArrayList<Option>());  // still injected due to ignoreEmpty = true
 
-        Wheel factoryWheel = modelFactory.createModel( wheel );
+        Wheel factoryWheel = modelFactory.createModel(wheel);
 
-        assertEquals( 3, factoryWheel.getOptions().size() );
-        assertEquals( 3, factoryWheel.getVariants().size() );
+        assertEquals(3, factoryWheel.getOptions().size());
+        assertEquals(3, factoryWheel.getVariants().size());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class MappedListFieldTest {
     public void testForceAlwaysCreatesMappedList() throws CreateModelException {
 
         Car car = new Car();
-        car.setWheels(Arrays.asList( new Wheel[]{ new Wheel("test") } ) );
+        car.setWheels(Arrays.asList(new Wheel[]{new Wheel("test")}));
         car = modelFactory.createModel(car);
 
         assertEquals("force=true ensures wheels will be injected", 4, car.getWheels().size());

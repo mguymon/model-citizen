@@ -44,49 +44,49 @@ public class ByReferenceTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint( carBlueprint );
-        modelFactory.registerBlueprint( wheelBlueprint );
-        modelFactory.registerBlueprint( driverBlueprint );
-        modelFactory.registerBlueprint( userBlueprint );
-        modelFactory.registerBlueprint( optionBlueprint );
+        modelFactory.registerBlueprint(carBlueprint);
+        modelFactory.registerBlueprint(wheelBlueprint);
+        modelFactory.registerBlueprint(driverBlueprint);
+        modelFactory.registerBlueprint(userBlueprint);
+        modelFactory.registerBlueprint(optionBlueprint);
     }
 
     @Test
     public void testCreateModelWithModel() throws RegisterBlueprintException, CreateModelException {
 
-        Car car = modelFactory.createModel( new Car() );
-        assertEquals( carBlueprint.make, car.getMake() );
-        assertEquals( carBlueprint.manufacturer, car.getManufacturer() );
-        assertEquals( new Float(0.0), new Float(car.getMileage()) );
-        assertEquals( carBlueprint.status, car.getStatus() );
-        assertEquals( 4, car.getWheels().size() );
+        Car car = modelFactory.createModel(new Car());
+        assertEquals(carBlueprint.make, car.getMake());
+        assertEquals(carBlueprint.manufacturer, car.getManufacturer());
+        assertEquals(new Float(0.0), new Float(car.getMileage()));
+        assertEquals(carBlueprint.status, car.getStatus());
+        assertEquals(4, car.getWheels().size());
 
-        for ( Wheel wheel : car.getWheels() ) {
-            assertEquals( wheelBlueprint.size, wheel.getSize() );
+        for (Wheel wheel : car.getWheels()) {
+            assertEquals(wheelBlueprint.size, wheel.getSize());
         }
 
-        assertEquals( 1, car.getSpares().size() );
-        for ( Wheel wheel : car.getSpares() ) {
-            assertEquals( wheelBlueprint.size, wheel.getSize() );
+        assertEquals(1, car.getSpares().size());
+        for (Wheel wheel : car.getSpares()) {
+            assertEquals(wheelBlueprint.size, wheel.getSize());
         }
 
-        car.setMake( "new make" );
-        car.setManufacturer( "test manuf" );
+        car.setMake("new make");
+        car.setManufacturer("test manuf");
 
-        car.setWheels( new ArrayList<Wheel>() );
-        Wheel wheel = new Wheel( "mega tire");
+        car.setWheels(new ArrayList<Wheel>());
+        Wheel wheel = new Wheel("mega tire");
         car.getWheels().add(wheel);
 
         car.setSpares(new HashSet<Wheel>());
 
-        car = modelFactory.createModel( car );
-        assertEquals( "new make", car.getMake() );
-        assertEquals( "test manuf", car.getManufacturer() );
-        assertEquals( 0.0, car.getMileage(), 0 );
-        assertEquals( carBlueprint.status, car.getStatus() );
+        car = modelFactory.createModel(car);
+        assertEquals("new make", car.getMake());
+        assertEquals("test manuf", car.getManufacturer());
+        assertEquals(0.0, car.getMileage(), 0);
+        assertEquals(carBlueprint.status, car.getStatus());
 
 
-        assertEquals( "Car Wheels blueprint forced to the mapping of 4", 4, car.getWheels().size() );
-        assertEquals( "The Car reference model should have 0 spares", 0, car.getSpares().size() );
+        assertEquals("Car Wheels blueprint forced to the mapping of 4", 4, car.getWheels().size());
+        assertEquals("The Car reference model should have 0 spares", 0, car.getSpares().size());
     }
 }

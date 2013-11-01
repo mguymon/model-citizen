@@ -36,20 +36,20 @@ public class BlueprintInheritanceTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint( WheelBlueprint.class );
-        modelFactory.registerBlueprint( SpareTireBlueprint.class );
-        modelFactory.registerBlueprint( OptionBlueprint.class );
+        modelFactory.registerBlueprint(WheelBlueprint.class);
+        modelFactory.registerBlueprint(SpareTireBlueprint.class);
+        modelFactory.registerBlueprint(OptionBlueprint.class);
     }
 
     @Test
     public void spireTireBlueprintInheritsFromWheelBlueprint() throws CreateModelException {
-        Wheel wheel = modelFactory.createModel( Wheel.class );
-        SpareTire spareTire = modelFactory.createModel( SpareTire.class );
+        Wheel wheel = modelFactory.createModel(Wheel.class);
+        SpareTire spareTire = modelFactory.createModel(SpareTire.class);
 
-        assertEquals(wheel.getColor(), spareTire.getColor() );
+        assertEquals(wheel.getColor(), spareTire.getColor());
 
-        assertEquals( "spare tire name", spareTire.getName() );
-        assertEquals(9, (int)spareTire.getSize() );
-        assertEquals( 400, (int)spareTire.getMileLimit() );
+        assertEquals("spare tire name", spareTire.getName());
+        assertEquals(9, (int) spareTire.getSize());
+        assertEquals(400, (int) spareTire.getMileLimit());
     }
 }

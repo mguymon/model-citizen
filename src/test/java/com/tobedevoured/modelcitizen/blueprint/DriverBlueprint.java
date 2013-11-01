@@ -8,9 +8,9 @@ package com.tobedevoured.modelcitizen.blueprint;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
-   *
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
-   *
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,13 @@ import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.model.Driver;
 
-@Blueprint(Driver.class )
+@Blueprint(Driver.class)
 public class DriverBlueprint {
 
-		@Default(force=true)
-		public String name = "Lev the Driver";
-		
-		@Default
-		public Integer age= 16;
-		
-	}
+    @Default(force = true)
+    public String name = "Lev the Driver";
+
+    @Default
+    public Integer age = 16;
+
+}

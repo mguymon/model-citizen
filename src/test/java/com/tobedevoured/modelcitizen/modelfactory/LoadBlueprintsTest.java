@@ -44,50 +44,50 @@ public class LoadBlueprintsTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint( carBlueprint );
-        modelFactory.registerBlueprint( wheelBlueprint );
-        modelFactory.registerBlueprint( driverBlueprint );
-        modelFactory.registerBlueprint( userBlueprint );
-        modelFactory.registerBlueprint( optionBlueprint );
+        modelFactory.registerBlueprint(carBlueprint);
+        modelFactory.registerBlueprint(wheelBlueprint);
+        modelFactory.registerBlueprint(driverBlueprint);
+        modelFactory.registerBlueprint(userBlueprint);
+        modelFactory.registerBlueprint(optionBlueprint);
     }
 
     @Test
     public void testRegisterBlueprintsByPackage() throws RegisterBlueprintException {
         modelFactory = new ModelFactory(); // reset modelFactory to set loading by package
-        modelFactory.setRegisterBlueprintsByPackage( "com.tobedevoured.modelcitizen" );
+        modelFactory.setRegisterBlueprintsByPackage("com.tobedevoured.modelcitizen");
 
         List<Class> blueprintClasses = new ArrayList<Class>();
-        for ( Object blueprint : modelFactory.getBlueprints() ) {
-            blueprintClasses.add( blueprint.getClass() );
+        for (Object blueprint : modelFactory.getBlueprints()) {
+            blueprintClasses.add(blueprint.getClass());
         }
 
-        assertTrue( "CarBlueprint should be registered", blueprintClasses.contains( CarBlueprint.class) );
-        assertTrue( "WheelBlueprint should be registered", blueprintClasses.contains( WheelBlueprint.class) );
-        assertTrue( "DriverBlueprint should be registered", blueprintClasses.contains( DriverBlueprint.class) );
-        assertTrue( "UserBlueprint should be registered", blueprintClasses.contains( UserBlueprint.class) );
+        assertTrue("CarBlueprint should be registered", blueprintClasses.contains(CarBlueprint.class));
+        assertTrue("WheelBlueprint should be registered", blueprintClasses.contains(WheelBlueprint.class));
+        assertTrue("DriverBlueprint should be registered", blueprintClasses.contains(DriverBlueprint.class));
+        assertTrue("UserBlueprint should be registered", blueprintClasses.contains(UserBlueprint.class));
     }
 
     @Test
     public void testRegisterBlueprint() throws RegisterBlueprintException {
-        assertEquals( carBlueprint, modelFactory.getBlueprints().get(0) );
-        assertEquals( wheelBlueprint, modelFactory.getBlueprints().get(1) );
-        assertEquals( driverBlueprint, modelFactory.getBlueprints().get(2) );
-        assertEquals( userBlueprint, modelFactory.getBlueprints().get(3) );
+        assertEquals(carBlueprint, modelFactory.getBlueprints().get(0));
+        assertEquals(wheelBlueprint, modelFactory.getBlueprints().get(1));
+        assertEquals(driverBlueprint, modelFactory.getBlueprints().get(2));
+        assertEquals(userBlueprint, modelFactory.getBlueprints().get(3));
     }
 
-    @Test(expected=RegisterBlueprintException.class)
+    @Test(expected = RegisterBlueprintException.class)
     public void testSetRegisterBlueprintsWithException() throws RegisterBlueprintException {
         List blueprints = new ArrayList();
-        blueprints.add( carBlueprint );
-        blueprints.add( 8 );
+        blueprints.add(carBlueprint);
+        blueprints.add(8);
 
-        modelFactory.setRegisterBlueprints( blueprints );
+        modelFactory.setRegisterBlueprints(blueprints);
     }
 
     @Test
     public void testDefaultFieldValue() throws NoSuchFieldException, IllegalAccessException {
         Field field = carBlueprint.getClass().getDeclaredField("mileage");
-        Float val = (Float)field.get( carBlueprint );
+        Float val = (Float) field.get(carBlueprint);
         assertEquals(new Float(100.1), val);
     }
 }

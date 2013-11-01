@@ -49,40 +49,40 @@ public class ByClassTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint( carBlueprint );
-        modelFactory.registerBlueprint( wheelBlueprint );
-        modelFactory.registerBlueprint( driverBlueprint );
-        modelFactory.registerBlueprint( userBlueprint );
-        modelFactory.registerBlueprint( optionBlueprint );
+        modelFactory.registerBlueprint(carBlueprint);
+        modelFactory.registerBlueprint(wheelBlueprint);
+        modelFactory.registerBlueprint(driverBlueprint);
+        modelFactory.registerBlueprint(userBlueprint);
+        modelFactory.registerBlueprint(optionBlueprint);
     }
 
     @Test
     public void testCreateModelWithClass() throws RegisterBlueprintException, CreateModelException {
 
-        Car car = modelFactory.createModel( Car.class );
-        assertEquals( carBlueprint.make, car.getMake() );
-        assertEquals( carBlueprint.manufacturer, car.getManufacturer() );
-        assertEquals( carBlueprint.status, car.getStatus() );
-        assertEquals( 4, car.getWheels().size() );
+        Car car = modelFactory.createModel(Car.class);
+        assertEquals(carBlueprint.make, car.getMake());
+        assertEquals(carBlueprint.manufacturer, car.getManufacturer());
+        assertEquals(carBlueprint.status, car.getStatus());
+        assertEquals(4, car.getWheels().size());
 
-        for ( Wheel wheel : car.getWheels() ) {
-            assertEquals( wheelBlueprint.size, wheel.getSize() );
+        for (Wheel wheel : car.getWheels()) {
+            assertEquals(wheelBlueprint.size, wheel.getSize());
         }
     }
 
 
     @Test
     public void testBlueprintWithPrimitive() throws CreateModelException, BlueprintTemplateException {
-        Car car = modelFactory.createModel( Car.class );
+        Car car = modelFactory.createModel(Car.class);
 
         Erector erector = modelFactory.getErectors().get(Car.class);
 
         ModelField modelField = erector.getModelField("mileage");
-        assertEquals(new Float(100.1), modelField.getValue() );
+        assertEquals(new Float(100.1), modelField.getValue());
 
         // Val is zero because primitive initializes as zero
-        Object val = erector.getTemplate().get( new Car(), "mileage");
-        assertEquals(new Float(0.0), val );
+        Object val = erector.getTemplate().get(new Car(), "mileage");
+        assertEquals(new Float(0.0), val);
 
         // Val is zero because primitive initializes as zero
         assertEquals(0.0, car.getMileage(), 0);

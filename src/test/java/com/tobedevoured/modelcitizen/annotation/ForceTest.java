@@ -39,15 +39,15 @@ public class ForceTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint( driverBlueprint );
+        modelFactory.registerBlueprint(driverBlueprint);
     }
 
     @Test
     public void testDriverNameIsForced() throws CreateModelException {
         Driver driver = new Driver();
-        driver.setName( "Test Name");
-        driver = modelFactory.createModel( Driver.class );
+        driver.setName("Test Name");
+        driver = modelFactory.createModel(Driver.class);
 
-        assertEquals( "Driver name is a forced default", "Lev the Driver", driver.getName() );
+        assertEquals("Driver name is a forced default", "Lev the Driver", driver.getName());
     }
 }

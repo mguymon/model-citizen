@@ -23,25 +23,25 @@ public class ErectorTest {
     @Before
     public void setUp() throws RegisterBlueprintException {
         defaultField = new DefaultField();
-        defaultField.setName( "milage" );
-        defaultField.setForce( false );
-        defaultField.setValue( carBlueprint.mileage );
-        defaultField.setTarget( Float.class );
-        defaultField.setFieldClass( Float.class );
+        defaultField.setName("milage");
+        defaultField.setForce(false);
+        defaultField.setValue(carBlueprint.mileage);
+        defaultField.setTarget(Float.class);
+        defaultField.setFieldClass(Float.class);
 
         erector = new Erector();
-        erector.setTemplate( new JavaBeanTemplate() );
-        erector.setBlueprint( carBlueprint );
-        erector.setModelFields(Arrays.<ModelField>asList( defaultField ));
-        erector.setTarget( Car.class );
-        erector.setNewInstance( null );
+        erector.setTemplate(new JavaBeanTemplate());
+        erector.setBlueprint(carBlueprint);
+        erector.setModelFields(Arrays.<ModelField>asList(defaultField));
+        erector.setTarget(Car.class);
+        erector.setNewInstance(null);
     }
 
     @Test
     public void testGet() throws BlueprintTemplateException {
         Car car = new Car();
         car.setMileage(new Float(123.456));
-        Float val = (Float)erector.getTemplate().get(car, "mileage");
-        assertEquals( new Float(123.456), val);
+        Float val = (Float) erector.getTemplate().get(car, "mileage");
+        assertEquals(new Float(123.456), val);
     }
 }
