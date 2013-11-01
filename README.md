@@ -90,7 +90,7 @@ not assign one from the blueprint. To work around this, use the `force=true` in 
 ## ModelFactory
 
 Creates new instances of Models based on registered Blueprints. It is possible to 
-[registered Blueprints by package](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
+[register Blueprints by package](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
 A new instance is always constructed, unless specified by a 
 [Policy](https://github.com/mguymon/model-citizen/wiki/Policy).
