@@ -21,7 +21,7 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured</groupId>
       <artifactId>modelcitizen</artifactId>
-      <version>0.5.1</version>
+      <version>0.5.2</version>
     </dependency>
     
 May have to add the Sonatype Repo if the sync to Maven Central is slow.
