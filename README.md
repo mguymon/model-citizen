@@ -41,7 +41,7 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
 
 ### Field Annotations
  **@Default**: The default value for the field.
-   * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false.
+   * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
 
 **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
                matching field's Class. Mapped class can be set by the _target_ param. 
