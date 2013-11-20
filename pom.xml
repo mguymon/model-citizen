@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tobedevoured</groupId>
     <artifactId>modelcitizen</artifactId>
-    <version>0.5.2</version>
+    <version>0.6.0</version>
     <packaging>jar</packaging>
     <name>model-citizen</name>
     <url>https://github.com/mguymon/model-citizen</url>
@@ -71,6 +71,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
             <scope>test</scope>
         </dependency>
         <dependency>

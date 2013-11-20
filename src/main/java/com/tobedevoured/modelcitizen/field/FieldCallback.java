@@ -18,17 +18,20 @@ package com.tobedevoured.modelcitizen.field;
  * limitations under the License.
  */
 
+import com.tobedevoured.modelcitizen.callback.internal.Getable;
+
 /**
  * Callback for a Field when the Model is created
- * 
+ * @deprecated for {@link com.tobedevoured.modelcitizen.callback.FieldCallback}
  * @author Michael Guymon
  */
-public abstract class FieldCallback {
+@Deprecated
+public abstract class FieldCallback implements Getable {
 	
 	/**
 	 * Get the Field value
 	 * 
-	 * @param model Object
+	 * @param referenceModel Object
 	 * @return instance of Field class
 	 */
 	public abstract Object get( Object referenceModel );

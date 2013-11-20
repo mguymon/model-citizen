@@ -1,4 +1,4 @@
-package com.tobedevoured.modelcitizen.field;
+package com.tobedevoured.modelcitizen.callback;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -18,44 +18,37 @@ package com.tobedevoured.modelcitizen.field;
  * limitations under the License.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.tobedevoured.modelcitizen.CreateModelException;
 import com.tobedevoured.modelcitizen.ModelFactory;
 import com.tobedevoured.modelcitizen.RegisterBlueprintException;
-import com.tobedevoured.modelcitizen.blueprint.UserBlueprint;
-import com.tobedevoured.modelcitizen.model.User;
+import com.tobedevoured.modelcitizen.blueprint.CarBlueprint;
+import com.tobedevoured.modelcitizen.blueprint.DriverBlueprint;
+import com.tobedevoured.modelcitizen.blueprint.OptionBlueprint;
+import com.tobedevoured.modelcitizen.blueprint.WheelBlueprint;
+import com.tobedevoured.modelcitizen.model.Car;
+import com.tobedevoured.modelcitizen.model.Wheel;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-public class FieldCallbackTest {
-
+public class AfterCreateCallbackTest {
     private ModelFactory modelFactory;
-    private UserBlueprint userBlueprint = new UserBlueprint();
 
     @Before
     public void setUp() throws RegisterBlueprintException {
         modelFactory = new ModelFactory();
-        modelFactory.registerBlueprint(userBlueprint);
+        modelFactory.registerBlueprint(DriverBlueprint.class);
+        modelFactory.registerBlueprint(WheelBlueprint.class);
+        modelFactory.registerBlueprint(OptionBlueprint.class);
+        modelFactory.registerBlueprint(CarBlueprint.class);
     }
 
-
     @Test
-    public void testCreateModelWithFieldCallBack() throws CreateModelException {
+    public void carAfterCreateCallback() throws CreateModelException {
+        Car car = modelFactory.createModel(Car.class);
 
-        User user = modelFactory.createModel(User.class);
-
-        assertNotNull(user.getUsername());
-        assertTrue(user.getUsername().contains("username"));
-
-        assertNotNull(user.getEmails());
-        assertEquals(3, user.getEmails().size());
-        for (String email : user.getEmails()) {
-            assertTrue(email.contains("email"));
-            assertTrue(email.contains("@test.net"));
+        for( Wheel wheel: car.getWheels() ) {
+            assertEquals(car, wheel.getCar());
         }
     }
 }

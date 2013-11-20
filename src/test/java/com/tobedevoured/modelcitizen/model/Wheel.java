@@ -24,6 +24,7 @@ public class Wheel {
     private String name;
     private Integer size;
     private String color;
+    private Car car;
     private List<Option> options;
 
     private List<Option> variants;
@@ -71,5 +72,13 @@ public class Wheel {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

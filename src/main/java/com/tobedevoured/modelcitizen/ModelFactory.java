@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import com.tobedevoured.modelcitizen.callback.AfterCreateCallback;
+import com.tobedevoured.modelcitizen.callback.Callback;
+import com.tobedevoured.modelcitizen.callback.internal.Constructable;
+import com.tobedevoured.modelcitizen.callback.internal.Getable;
+import com.tobedevoured.modelcitizen.field.*;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import org.slf4j.Logger;
@@ -33,17 +38,9 @@ import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.Mapped;
 import com.tobedevoured.modelcitizen.annotation.MappedList;
 import com.tobedevoured.modelcitizen.annotation.MappedSet;
-import com.tobedevoured.modelcitizen.annotation.NewInstance;
 import com.tobedevoured.modelcitizen.annotation.NotSet;
 import com.tobedevoured.modelcitizen.annotation.Nullable;
 import com.tobedevoured.modelcitizen.erector.Command;
-import com.tobedevoured.modelcitizen.field.ConstructorCallback;
-import com.tobedevoured.modelcitizen.field.DefaultField;
-import com.tobedevoured.modelcitizen.field.FieldCallback;
-import com.tobedevoured.modelcitizen.field.MappedListField;
-import com.tobedevoured.modelcitizen.field.MappedField;
-import com.tobedevoured.modelcitizen.field.MappedSetField;
-import com.tobedevoured.modelcitizen.field.ModelField;
 import com.tobedevoured.modelcitizen.policy.BlueprintPolicy;
 import com.tobedevoured.modelcitizen.policy.FieldPolicy;
 import com.tobedevoured.modelcitizen.policy.Policy;
@@ -210,7 +207,9 @@ public class ModelFactory {
 
         logger.debug("Registering {} blueprint for {}", blueprint.getClass(), target);
 
-        ConstructorCallback newInstance = null;
+        Constructable newInstance = null;
+
+        List<Callback> afterCreateCallbacks = new ArrayList<Callback>();
 
         // Get all fields for the blueprint target class
         Collection<Field> fields = getAllFields(blueprint.getClass()).values();
@@ -218,7 +217,8 @@ public class ModelFactory {
 
             field.setAccessible(true);
 
-            if (field.getAnnotation(NewInstance.class) != null) {
+            // Register ConstructorCallback field
+            if ( field.getType().equals(ConstructorCallback.class) || field.getType().equals(com.tobedevoured.modelcitizen.callback.ConstructorCallback.class)) {
                 Object fieldVal = null;
                 try {
                     fieldVal = field.get(blueprint);
@@ -228,11 +228,38 @@ public class ModelFactory {
                     throw new RegisterBlueprintException(e);
                 }
 
-                if (fieldVal instanceof ConstructorCallback) {
-                    newInstance = (ConstructorCallback) fieldVal;
+                if (fieldVal instanceof Constructable) {
+                    logger.debug("Registering ConstructorCallback for {}", blueprint.getClass());
+                    newInstance = (Constructable) fieldVal;
                 } else {
-                    throw new RegisterBlueprintException("Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid, @NewInstance can only be annotated on ConstructorCallback");
+                    throw new RegisterBlueprintException("Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid ConstructorCallback");
                 }
+
+                // ConstructorCallback is only used to create new instance.
+                continue;
+            }
+
+            // Register AfterCreateCallback field
+            if ( field.getType().equals(AfterCreateCallback.class) ) {
+
+                Object fieldVal = null;
+                try {
+                    fieldVal = field.get(blueprint);
+                } catch (IllegalArgumentException e) {
+                    throw new RegisterBlueprintException(e);
+                } catch (IllegalAccessException e) {
+                    throw new RegisterBlueprintException(e);
+                }
+
+                if (fieldVal instanceof AfterCreateCallback) {
+                    logger.debug("Registering AfterCreateCallback for {}", blueprint.getClass());
+                    afterCreateCallbacks.add((AfterCreateCallback)fieldVal);
+                } else {
+                    throw new RegisterBlueprintException("Blueprint " + blueprint.getClass().getSimpleName() + " Field class for " + field.getName() + " is invalid AfterCreateCallback");
+                }
+
+                // AfterCreateCallback is only used in callbacks
+                continue;
             }
 
             // Process @Default
@@ -389,6 +416,7 @@ public class ModelFactory {
         erector.setModelFields(modelFields);
         erector.setTarget(target);
         erector.setNewInstance(newInstance);
+        erector.setCallbacks("afterCreate", afterCreateCallbacks);
 
         erectors.put(target, erector);
     }
@@ -556,8 +584,8 @@ public class ModelFactory {
                     }
 
                     // If value is an instance of FieldCallBack, eval the callback and use the value
-                    if (value != null & value instanceof FieldCallback) {
-                        FieldCallback callBack = (FieldCallback) value;
+                    if (value != null && value instanceof Getable) {
+                        Getable callBack = (Getable)value;
                         value = callBack.get(nonNullReferenceModel);
                     }
 
@@ -672,6 +700,18 @@ public class ModelFactory {
             }
         }
 
+        List<Callback> afterCreateCallbacks = erector.getCallbacks("afterCreate");
+        if ( afterCreateCallbacks != null ) {
+            for (Callback callback : afterCreateCallbacks ) {
+                if ( callback instanceof AfterCreateCallback ) {
+                    ((AfterCreateCallback)callback).afterCreate(createdModel);
+                } else {
+                    // XXX: should this toss an exception?
+                    logger.error("Invalid AfterCreateCallback registered for {}", referenceModel.getClass() );
+                }
+            }
+        }
+
         return createdModel;
     }
 
@@ -703,7 +743,7 @@ public class ModelFactory {
 
     /**
      * Get complete inherited list of {@link Field} for Class, with the exception
-     * that {@link NewInstance} annotated fields are not inherited.
+     * that {@link ConstructorCallback} fields are not inherited.
      *
      * @param clazz Class
      * @return Map
@@ -724,8 +764,8 @@ public class ModelFactory {
             field.setAccessible(true);
 
             if (isParent) {
-                // NewInstance annotated fields are not inherited
-                if (field.getAnnotation(NewInstance.class) == null) {
+                // ConstructorCallbacks are not inherited
+                if (!field.getType().equals( ConstructorCallback.class ) ) {
                     fieldsMap.put( field.getName(), field );
                 }
             } else {

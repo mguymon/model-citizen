@@ -24,7 +24,7 @@ import java.util.UUID;
 
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
-import com.tobedevoured.modelcitizen.field.FieldCallback;
+import com.tobedevoured.modelcitizen.callback.FieldCallback;
 import com.tobedevoured.modelcitizen.model.User;
 
 @Blueprint(User.class)

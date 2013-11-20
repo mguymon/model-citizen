@@ -21,14 +21,13 @@ package com.tobedevoured.modelcitizen.blueprint;
 import java.util.List;
 
 import com.tobedevoured.modelcitizen.annotation.*;
-import com.tobedevoured.modelcitizen.field.ConstructorCallback;
+import com.tobedevoured.modelcitizen.callback.ConstructorCallback;
 import com.tobedevoured.modelcitizen.model.Wheel;
 import com.tobedevoured.modelcitizen.model.Option;
 
 @Blueprint(Wheel.class)
 public class WheelBlueprint {
 
-    @NewInstance
     ConstructorCallback constructor = new ConstructorCallback() {
 
         @Override
@@ -50,5 +49,4 @@ public class WheelBlueprint {
 
     @MappedList(target = Option.class, size = 2, ignoreEmpty = false)
     public List<Option> variants;
-
 }

@@ -30,6 +30,7 @@ import com.tobedevoured.modelcitizen.annotation.Mapped;
 import com.tobedevoured.modelcitizen.annotation.MappedList;
 import com.tobedevoured.modelcitizen.annotation.MappedSet;
 import com.tobedevoured.modelcitizen.annotation.Nullable;
+import com.tobedevoured.modelcitizen.callback.AfterCreateCallback;
 import com.tobedevoured.modelcitizen.model.Car;
 import com.tobedevoured.modelcitizen.model.Driver;
 import com.tobedevoured.modelcitizen.model.Wheel;
@@ -61,5 +62,14 @@ public class CarBlueprint {
     @Mapped
     @Nullable
     public Driver passenger = null;
+
+    AfterCreateCallback<Car> afterCreate = new AfterCreateCallback<Car>() {
+        @Override
+        public void afterCreate(Car model) {
+            for(Wheel wheel : model.getWheels() ) {
+                wheel.setCar(model);
+            }
+        }
+    };
 
 }

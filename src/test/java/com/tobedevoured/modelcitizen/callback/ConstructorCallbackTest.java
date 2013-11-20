@@ -1,4 +1,4 @@
-package com.tobedevoured.modelcitizen.field;
+package com.tobedevoured.modelcitizen.callback;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
