@@ -27,6 +27,7 @@ for the new Model.
 ## Blueprint 
 
 A blueprint is a Class annotated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
+Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/master/src/test/java/com/tobedevoured/modelcitizen/blueprint) are a great example of how they work.
 
 ### Field Annotations
 **@Default**: The default value for the field.
