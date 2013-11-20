@@ -61,7 +61,7 @@ Callback fields can be used to inject values at the various stages of the model 
 
 **AfterCreateCallback**: Executed after the model has been constructed and all the fields are set.
 
-#### Inheritance
+### Inheritance
 
 A Blueprint will inherit the fields of its parent, except for `ConstructorCallback`.
 
