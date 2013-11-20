@@ -1,5 +1,11 @@
 ## Model Citizen Changelog
 
+### 0.6.0 (November 19, 2013)
+
+* Add AfterCreateCallback
+* Remove need for @NewInstance, just checks for ConstructorCallback directly
+* Create new callback package, deprecate old ConstructorCallback and FieldCallback
+
 ### 0.5.0 (October 8, 2013)
 
 * Allow for inheritenace in Blueprints ([Issue #16](https://github.com/mguymon/model-citizen/issues/16))
