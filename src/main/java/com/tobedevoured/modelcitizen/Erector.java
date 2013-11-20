@@ -20,8 +20,9 @@ package com.tobedevoured.modelcitizen;
 
 import java.util.*;
 
+import com.tobedevoured.modelcitizen.callback.Callback;
+import com.tobedevoured.modelcitizen.callback.internal.Constructable;
 import com.tobedevoured.modelcitizen.erector.Command;
-import com.tobedevoured.modelcitizen.field.ConstructorCallback;
 import com.tobedevoured.modelcitizen.field.ModelField;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
@@ -39,11 +40,13 @@ public class Erector {
 	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
 	private BlueprintTemplate blueprintTemplate;
 	private Class target;
-	private ConstructorCallback newInstance;
+	private Constructable newInstance;
 	private Object reference;
+    private Map<String, List<Callback>> callbacks;
 
     public Erector() {
         modelFields = new HashMap<String,ModelField>();
+        callbacks = new HashMap<String,List<Callback>>();
     }
 
 	/**
@@ -141,13 +144,22 @@ public class Erector {
 		this.reference = reference;
 	}
 
-	public ConstructorCallback getNewInstance() {
+	public Constructable getNewInstance() {
 		return newInstance;
 	}
 
-	public void setNewInstance(ConstructorCallback newInstance) {
+	public void setNewInstance(Constructable newInstance) {
 		this.newInstance = newInstance;
 	}
+
+    public void setCallbacks(String type, List<Callback> callbacks) {
+        this.callbacks.put(type, callbacks);
+    }
+
+
+    public List<Callback> getCallbacks(String type) {
+        return this.callbacks.get(type);
+    }
 
     public String toString() {
         return new ToStringBuilder(this).

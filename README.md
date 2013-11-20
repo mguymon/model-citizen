@@ -21,26 +21,15 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured</groupId>
       <artifactId>modelcitizen</artifactId>
-      <version>0.5.2</version>
+      <version>0.6.0</version>
     </dependency>
-    
-May have to add the Sonatype Repo if the sync to Maven Central is slow.
-
-    <repositories>
-      <repository>
-        <id>oss.sonatype.org</id>
-        <name>Sonatype Repository</name>
-        <url>https://oss.sonatype.org/content/groups/public</url>
-      </repository>
-    </repositories>
-
 
 ## Blueprint 
 
-A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
+A blueprint is a Class annotated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 
 ### Field Annotations
- **@Default**: The default value for the field.
+**@Default**: The default value for the field.
    * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
 
 **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
@@ -59,15 +48,22 @@ A blueprint is a Class anototated with _@Blueprint( Class )_ and contains annota
   * _targetSet_: The Set created, defaults to HashSet
   * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
   * _force_:  Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
-
-**@NewInstance**: Set on a [ConstructorCallback](https://github.com/mguymon/model-citizen/wiki/Callback-Example) field. The callback is used to create new
-                    instances of the model by the _ModelFactory_
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
+### Callbacks
+
+Callback fields can be used to inject values at the various stages of the model creation lifecycle:
+
+**ConstructorCallback**: Use when constructing a new instance of the model.
+
+**FieldCallback**: Injects the return of the callback for the annotated field value.
+
+**AfterCreateCallback**: Executed after the model has been constructed and all the fields are set.
+
 #### Inheritance
 
-A Blueprint will inherit the fields of its parent, except for `@NewInstance`.
+A Blueprint will inherit the fields of its parent, except for `ConstructorCallback`.
 
 ## Model
 

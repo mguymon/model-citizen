@@ -1,10 +1,4 @@
-package com.tobedevoured.modelcitizen.blueprint;
-
-import com.tobedevoured.modelcitizen.annotation.Blueprint;
-import com.tobedevoured.modelcitizen.annotation.Default;
-import com.tobedevoured.modelcitizen.callback.ConstructorCallback;
-import com.tobedevoured.modelcitizen.model.SpareTire;
-import com.tobedevoured.modelcitizen.model.Wheel;
+package com.tobedevoured.modelcitizen.callback;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -14,9 +8,9 @@ import com.tobedevoured.modelcitizen.model.Wheel;
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
- *
+   *
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+   *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,22 +18,20 @@ import com.tobedevoured.modelcitizen.model.Wheel;
  * limitations under the License.
  */
 
-@Blueprint(SpareTire.class)
-public class SpareTireBlueprint extends WheelBlueprint {
+import com.tobedevoured.modelcitizen.callback.internal.Getable;
 
-    @Default
-    public Integer mileLimit = 400;
+/**
+ * Callback for a Field when the Model is created
+ * 
+ * @author Michael Guymon
+ */
+public abstract class FieldCallback<T> implements Getable<T> {
 
-    @Default
-    public Integer size = 9;
-
-    ConstructorCallback constructor = new ConstructorCallback() {
-
-        @Override
-        public Object createInstance() {
-            SpareTire spareTire = new SpareTire("spare tire name");
-            return spareTire;
-        }
-
-    };
+	/**
+	 * Get the Field value
+	 * 
+	 * @param referenceModel Object
+	 * @return instance of Field class
+	 */
+	public abstract T get( Object referenceModel );
 }
