@@ -20,7 +20,9 @@ package com.tobedevoured.modelcitizen.callback.internal;
 
 import com.tobedevoured.modelcitizen.callback.Callback;
 
-// Helper interface to ease the transition to the new callback package
+/**
+ * Helper interface to ease the transition to the new callback package
+ */
 public interface Constructable extends Callback {
     Object createInstance();
 }
