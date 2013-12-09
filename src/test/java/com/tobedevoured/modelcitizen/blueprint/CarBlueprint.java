@@ -63,6 +63,7 @@ public class CarBlueprint {
     @Nullable
     public Driver passenger = null;
 
+    // Set the Car for each of the Car's wheels
     AfterCreateCallback<Car> afterCreate = new AfterCreateCallback<Car>() {
         @Override
         public void afterCreate(Car model) {
