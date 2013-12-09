@@ -56,11 +56,11 @@ Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/mas
 
 Callback fields can be used to inject values at the various stages of the model creation lifecycle:
 
-**ConstructorCallback**: Use when constructing a new instance of the model ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/CarBlueprint.java).
+**ConstructorCallback**: Use when constructing a new instance of the model ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/CarBlueprint.java)).
 
-**FieldCallback**: Injects the return of the callback for the annotated field value ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/UserBlueprint.java).
+**FieldCallback**: Injects the return of the callback for the annotated field value ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/UserBlueprint.java)).
 
-**AfterCreateCallback**: Executed after the model has been constructed and all the fields are set ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/SpareTireBlueprint.java).
+**AfterCreateCallback**: Executed after the model has been constructed and all the fields are set ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/SpareTireBlueprint.java)).
 
 ### Inheritance
 
