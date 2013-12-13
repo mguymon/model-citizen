@@ -7,7 +7,7 @@ Model Citizen is an annotation based model factory for Java, inspired by [Factor
 A Model is mapped by a _@Blueprint_ using annotated fields. Blueprints contain 
 default values and references to other @Blueprinted models. The _ModelFactory_ can 
 create models based on registered blueprints. A model already created can be
-passed into the _ModelFactory_ as a reference .odel, which will be used as the basis
+passed into the _ModelFactory_ as a reference model, which will be used as the basis
 for the new Model. 
 
 
