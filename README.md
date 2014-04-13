@@ -19,9 +19,9 @@ for the new Model.
 ## Install
 
     <dependency>
-      <groupId>com.tobedevoured</groupId>
-      <artifactId>modelcitizen</artifactId>
-      <version>0.6.0</version>
+      <groupId>com.tobedevoured.modelcitizen</groupId>
+      <artifactId>core</artifactId>
+      <version>0.7.0</version>
     </dependency>
 
 ## Blueprint 
