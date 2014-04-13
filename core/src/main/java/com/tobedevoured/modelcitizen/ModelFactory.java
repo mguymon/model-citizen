@@ -22,11 +22,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import com.tobedevoured.modelcitizen.callback.AfterCreateCallback;
-import com.tobedevoured.modelcitizen.callback.Callback;
-import com.tobedevoured.modelcitizen.callback.internal.Constructable;
-import com.tobedevoured.modelcitizen.callback.internal.Getable;
-import com.tobedevoured.modelcitizen.field.*;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import org.slf4j.Logger;
@@ -47,6 +42,12 @@ import com.tobedevoured.modelcitizen.policy.Policy;
 import com.tobedevoured.modelcitizen.policy.PolicyException;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 import com.tobedevoured.modelcitizen.template.JavaBeanTemplate;
+import com.tobedevoured.modelcitizen.callback.AfterCreateCallback;
+import com.tobedevoured.modelcitizen.callback.Callback;
+import com.tobedevoured.modelcitizen.callback.ConstructorCallback;
+import com.tobedevoured.modelcitizen.callback.internal.Constructable;
+import com.tobedevoured.modelcitizen.callback.internal.Getable;
+import com.tobedevoured.modelcitizen.field.*;
 
 /**
  * ModelFactory for generating Models. A Model's {@link Blueprint} is registered
@@ -499,7 +500,7 @@ public class ModelFactory {
 
         T createdModel;
         try {
-            createdModel = (T) erector.createNewInstance();
+            createdModel = (T) createNewInstance(erector);
         } catch (BlueprintTemplateException e) {
             throw new CreateModelException(e);
         }
@@ -595,7 +596,7 @@ public class ModelFactory {
                         throw new CreateModelException(e);
                     }
 
-                    // Process MappedField
+                // Process MappedField
                 } else if (modelField instanceof MappedField) {
 
                     MappedField mappedField = (MappedField) modelField;
@@ -618,7 +619,7 @@ public class ModelFactory {
                         throw new CreateModelException(e);
                     }
 
-                    // Process MappedListField
+                // Process MappedListField
                 } else if (modelField instanceof MappedListField) {
 
                     MappedListField listField = (MappedListField) modelField;
@@ -658,7 +659,7 @@ public class ModelFactory {
                         throw new CreateModelException(e);
                     }
 
-                    // Process MappedSetField
+                // Process MappedSetField
                 } else if (modelField instanceof MappedSetField) {
 
                     MappedSetField setField = (MappedSetField) modelField;
@@ -713,6 +714,10 @@ public class ModelFactory {
         }
 
         return createdModel;
+    }
+
+    protected Object createNewInstance(Erector erector) throws BlueprintTemplateException {
+        return erector.createNewInstance();
     }
 
     /**

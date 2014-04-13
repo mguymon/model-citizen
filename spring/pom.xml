@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.tobedevoured.modelcitizen</groupId>
+    <artifactId>spring</artifactId>
+    <packaging>jar</packaging>
+    <name>spring</name>
+
+    <parent>
+        <groupId>com.tobedevoured.modelcitizen</groupId>
+        <artifactId>parent</artifactId>
+        <relativePath>../pom.xml</relativePath>
+        <version>0.7.0</version>
+    </parent>
+
+    <url>https://github.com/mguymon/model-citizen</url>
+    <description>
+        Model Citizen is an annotation based model factory for Java.
+        A Model is mapped by a Blueprint using annotated fields. Blueprints contain
+        default values and references to other blueprinted models. The ModelFactory can
+        create Models based on registered Blueprints. A Model already created can be
+        passed into the ModelFactory as a Reference Model, which will be used as the basis
+        for the new Model.
+    </description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>scm:git:git@github.com:mguymon/model-citizen.git</url>
+        <developerConnection>scm:git:git@github.com:mguymon/model-citizen.git</developerConnection>
+        <connection>scm:git:git@github.com:mguymon/model-citizen.git</connection>
+    </scm>
+    <developers>
+        <developer>
+            <id>mguymon</id>
+            <name>Michael Guymon</name>
+            <email>michael@tobedevoured.com</email>
+        </developer>
+    </developers>
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
+    <dependencies>
+        <!-- Compile scope -->
+        <dependency>
+            <groupId>com.tobedevoured.modelcitizen</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tobedevoured.modelcitizen</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.0.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
