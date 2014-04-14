@@ -224,8 +224,6 @@ This provides a new class [ModelFactoryBean](https://github.com/mguymon/model-ci
 
 #### Example @SpringBlueprint with Spring support
 
-A blueprint is a Class annotated with _@SpringBlueprint_
-
     @Blueprint(SportsCar.class)
     @SpringBlueprint
     public class SportsCarBlueprint {
