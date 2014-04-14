@@ -214,7 +214,7 @@ ModelFactory should work with Spring 3.x, so you can easily exclude ModelFactory
     
 ### What does this give me?
 
-This provides a new class [ModelFactoryBean](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/ModelFactoryBean.java) and annotation [@SpringBlueprint](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/annotation/SpringBlueprint.java), when registered with Spring, allows the `@SpringBlueprint` and models created by the ModelFactoryBean to be injected by Spring.
+This provides a new class [ModelFactoryBean](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/ModelFactoryBean.java) and annotation [@SpringBlueprint](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/annotation/SpringBlueprint.java). When the ModelFactoryBean is registered with Spring, it allows the `@SpringBlueprint` and models created by the ModelFactoryBean to be injected by Spring.
 
 #### Example ModelFactoryBean
 
