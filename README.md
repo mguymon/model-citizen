@@ -27,7 +27,7 @@ for the new Model.
 ## Blueprint 
 
 A blueprint is a Class annotated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
-Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/master/src/test/java/com/tobedevoured/modelcitizen/blueprint) are a great example of how they work.
+Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint) are a great example of how they work.
 
 ### Field Annotations
 **@Default**: The default value for the field.
@@ -56,11 +56,11 @@ Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/mas
 
 Callback fields can be used to inject values at the various stages of the model creation lifecycle:
 
-**ConstructorCallback**: Use when constructing a new instance of the model ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/CarBlueprint.java)).
+**ConstructorCallback**: Use when constructing a new instance of the model ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint/CarBlueprint.java)).
 
-**FieldCallback**: Injects the return of the callback for the annotated field value ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/UserBlueprint.java)).
+**FieldCallback**: Injects the return of the callback for the annotated field value ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint/UserBlueprint.java)).
 
-**AfterCreateCallback**: Executed after the model has been constructed and all the fields are set ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/src/test/java/com/tobedevoured/modelcitizen/blueprint/SpareTireBlueprint.java)).
+**AfterCreateCallback**: Executed after the model has been constructed and all the fields are set ([example blueprint](https://github.com/mguymon/model-citizen/blob/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint/SpareTireBlueprint.java)).
 
 ### Inheritance
 
@@ -68,7 +68,7 @@ A Blueprint will inherit the fields of its parent, except for `ConstructorCallba
 
 ## Model
 
-Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). 
+Presently only supports [template for JavaBean Models](https://github.com/mguymon/model-citizen/blob/master/core/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java). 
 For annotations to work with the template, the model must follow the [JavaBean](http://en.wikibooks.org/wiki/Java_Programming/Java_Beans) getter and setters
 for fields.
 
