@@ -185,7 +185,59 @@ or by passing a Model directly with override values:
 [Wiki](https://github.com/mguymon/model-citizen/wiki) of examples that
 includes [Callbacks](https://github.com/mguymon/model-citizen/wiki/Callback-Example), [Policies](https://github.com/mguymon/model-citizen/wiki/Policy), and [Package scanning for Blueprints](https://github.com/mguymon/model-citizen/wiki/Register-By-Package).
 
+## Spring Support
 
+There is an optional jar that provides additional support for Spring:
+
+
+    <dependency>
+      <groupId>com.tobedevoured.modelcitizen</groupId>
+      <artifactId>spring</artifactId>
+      <version>0.7.0</version>
+    </dependency>
+    
+### Avoiding Spring jar collisions
+
+ModelFactory should work with Spring 3.x, so you can easily exclude ModelFactory's Spring depedency and use the existing one in your pom.
+
+    <dependency>
+      <groupId>com.tobedevoured.modelcitizen</groupId>
+      <artifactId>spring</artifactId>
+      <version>0.7.0</version>
+      <exclusions>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    
+### What does this give me?
+
+This provides a new class [ModelFactoryBean](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/ModelFactoryBean.java) and annotation [@SpringBlueprint](https://github.com/mguymon/model-citizen/blob/master/spring/src/main/java/com/tobedevoured/modelcitizen/spring/annotation/SpringBlueprint.java), when registered with Spring, allows the `@SpringBlueprint` and models created by the ModelFactoryBean to be injected by Spring.
+
+#### Example ModelFactoryBean
+
+    <bean id="modelFactory" class="com.tobedevoured.modelcitizen.spring.ModelFactoryBean" >
+        <property name="registerBlueprintsByPackage" value="com.tobedevoured.modelcitizen" />
+    </bean>
+
+#### Example @SpringBlueprint with Spring support
+
+A blueprint is a Class annotated with _@SpringBlueprint_
+
+    @Blueprint(SportsCar.class)
+    @SpringBlueprint
+    public class SportsCarBlueprint {
+
+        @Autowired
+        SportsCarRepository sportsCarRepository;
+        
+        @Default
+        Integer topSpeed = 100;
+    }
+    
+    
 ## License
 
 Licensed to the Apache Software Foundation (ASF) under one or more
