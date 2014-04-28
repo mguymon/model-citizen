@@ -1,6 +1,6 @@
 ## Model Citizen Changelog
 
-### 0.7.0 (April 12, 2013)
+### 0.7.0 (April 12, 2014)
 * Add Spring Support
 
 ### 0.6.0 (November 19, 2013)
