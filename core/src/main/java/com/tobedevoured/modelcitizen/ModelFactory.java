@@ -705,7 +705,7 @@ public class ModelFactory {
         if ( afterCreateCallbacks != null ) {
             for (Callback callback : afterCreateCallbacks ) {
                 if ( callback instanceof AfterCreateCallback ) {
-                    ((AfterCreateCallback)callback).afterCreate(createdModel);
+                    createdModel = ((AfterCreateCallback<T>)callback).afterCreate(createdModel);
                 } else {
                     // XXX: should this toss an exception?
                     logger.error("Invalid AfterCreateCallback registered for {}", referenceModel.getClass() );

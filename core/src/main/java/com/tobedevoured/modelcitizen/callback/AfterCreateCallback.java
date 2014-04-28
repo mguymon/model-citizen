@@ -23,5 +23,5 @@ package com.tobedevoured.modelcitizen.callback;
  * @param <T> class of target model
  */
 public abstract class AfterCreateCallback<T> implements Callback {
-    public abstract void afterCreate(T model);
+    public abstract T afterCreate(T model);
 }
