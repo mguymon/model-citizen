@@ -8,7 +8,7 @@ import com.tobedevoured.modelcitizen.model.ImmutableModel;
 public class ImmutableModelBlueprint {
 
     @Default
-    String stringValue = "a value";
+    String privateField = "a value";
 
     @Default(force = true)
     int intValue = 5;

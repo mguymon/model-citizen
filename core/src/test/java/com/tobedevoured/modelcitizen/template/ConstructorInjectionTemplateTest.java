@@ -30,7 +30,7 @@ public class ConstructorInjectionTemplateTest {
         ImmutableModel model = modelFactory.createModel(erector, null, true);
 
         // values set via blueprint
-        assertThat(model.stringValue, is("a value"));
+        assertThat(model.getPrivateField(), is("a value"));
         assertThat(model.intValue, is(5));
 
         // default values for reference types

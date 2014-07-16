@@ -3,7 +3,6 @@ package com.tobedevoured.modelcitizen.model;
 public class ImmutableModel {
 
     public final Object objectValue;
-    public final String stringValue;
     public final int intValue;
     public final short shortValue;
     public final long longValue;
@@ -12,17 +11,18 @@ public class ImmutableModel {
     public final double doubleValue;
     public final boolean booleanValue;
 
+    private final String privateField;
+
     public ImmutableModel(Object objectValue,
-                          String stringValue,
                           int intValue,
                           short shortValue,
                           long longValue,
                           byte byteValue,
                           float floatValue,
                           double doubleValue,
-                          boolean booleanValue) {
+                          boolean booleanValue,
+                          String privateField) {
         this.objectValue = objectValue;
-        this.stringValue = stringValue;
         this.intValue = intValue;
         this.shortValue = shortValue;
         this.longValue = longValue;
@@ -30,5 +30,10 @@ public class ImmutableModel {
         this.floatValue = floatValue;
         this.doubleValue = doubleValue;
         this.booleanValue = booleanValue;
+        this.privateField = privateField;
+    }
+
+    public String getPrivateField() {
+        return privateField;
     }
 }

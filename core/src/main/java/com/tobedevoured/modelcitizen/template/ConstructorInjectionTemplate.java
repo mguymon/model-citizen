@@ -47,9 +47,7 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
     @Override
     public <T> T set(T model, String property, Object value) throws BlueprintTemplateException {
         try {
-            final Field field = model.getClass().getField(property);
-            field.setAccessible(true);
-            field.set(model, value);
+            getAccessibleField(model, property).set(model, value);
             return model;
         } catch (Exception e) {
             throw new BlueprintTemplateException(e);
@@ -59,9 +57,15 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
     @Override
     public Object get(Object model, String property) throws BlueprintTemplateException {
         try {
-            return model.getClass().getField(property).get(model);
+            return getAccessibleField(model, property).get(model);
         } catch (Exception e) {
             throw new BlueprintTemplateException(e);
         }
+    }
+
+    private Field getAccessibleField(Object model, String property) throws NoSuchFieldException {
+        final Field field = model.getClass().getDeclaredField(property);
+        field.setAccessible(true);
+        return field;
     }
 }
