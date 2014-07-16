@@ -1,5 +1,7 @@
 package com.tobedevoured.modelcitizen.template;
 
+import org.apache.commons.lang.reflect.FieldUtils;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -13,6 +15,16 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
         final Constructor<?>[] constructors = modelClass.getConstructors();
         final Constructor<?> constructor = constructors[0];
         final Class<?>[] parameterTypes = constructor.getParameterTypes();
+        final List<?> arguments = getDefaultArguments(parameterTypes);
+
+        try {
+            return (T) constructor.newInstance(arguments.toArray());
+        } catch (Exception e) {
+            throw new BlueprintTemplateException(e);
+        }
+    }
+
+    private List<?> getDefaultArguments(Class<?>[] parameterTypes) {
         final List<Object> arguments = new ArrayList<Object>(parameterTypes.length);
 
         for (Class<?> t : parameterTypes) {
@@ -36,18 +48,15 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
                 arguments.add(null);
             }
         }
-
-        try {
-            return (T) constructor.newInstance(arguments.toArray());
-        } catch (Exception e) {
-            throw new BlueprintTemplateException(e);
-        }
+        return arguments;
     }
 
     @Override
     public <T> T set(T model, String property, Object value) throws BlueprintTemplateException {
         try {
-            getAccessibleField(model, property).set(model, value);
+            final Field field = FieldUtils.getField(model.getClass(), property);
+            field.setAccessible(true);
+            field.set(model, value);
             return model;
         } catch (Exception e) {
             throw new BlueprintTemplateException(e);
@@ -57,15 +66,9 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
     @Override
     public Object get(Object model, String property) throws BlueprintTemplateException {
         try {
-            return getAccessibleField(model, property).get(model);
+            return FieldUtils.readField(model, property, true);
         } catch (Exception e) {
             throw new BlueprintTemplateException(e);
         }
-    }
-
-    private Field getAccessibleField(Object model, String property) throws NoSuchFieldException {
-        final Field field = model.getClass().getDeclaredField(property);
-        field.setAccessible(true);
-        return field;
     }
 }
