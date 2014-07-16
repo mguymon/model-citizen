@@ -5,7 +5,6 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 import com.tobedevoured.modelcitizen.CreateModelException;
-import com.tobedevoured.modelcitizen.Erector;
 import com.tobedevoured.modelcitizen.ModelFactory;
 import com.tobedevoured.modelcitizen.RegisterBlueprintException;
 import com.tobedevoured.modelcitizen.blueprint.ImmutableModelBlueprint;
@@ -16,18 +15,16 @@ import org.junit.Test;
 public class ConstructorInjectionTemplateTest {
 
     private final ModelFactory modelFactory = new ModelFactory();
-    private Erector erector;
 
     @Before
     public void setup() throws RegisterBlueprintException {
         modelFactory.registerBlueprint(ImmutableModelBlueprint.class);
-        erector = modelFactory.getErectors().get(ImmutableModel.class);
-        erector.setTemplate(new ConstructorInjectionTemplate());
+        modelFactory.getErectors().get(ImmutableModel.class).setTemplate(new ConstructorInjectionTemplate());
     }
 
     @Test
     public void shouldCreateModelFromClassConstructor() throws CreateModelException {
-        ImmutableModel model = modelFactory.createModel(erector, null, true);
+        ImmutableModel model = modelFactory.createModel(ImmutableModel.class);
 
         // values set via blueprint
         assertThat(model.getPrivateField(), is("a value"));

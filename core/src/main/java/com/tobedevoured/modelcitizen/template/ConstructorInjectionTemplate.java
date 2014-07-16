@@ -6,42 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConstructorInjectionTemplate implements BlueprintTemplate {
+
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T construct(Class<T> modelClass) throws BlueprintTemplateException {
         final Constructor<?>[] constructors = modelClass.getConstructors();
         final Constructor<?> constructor = constructors[0];
-        final T instance;
-
         final Class<?>[] parameterTypes = constructor.getParameterTypes();
-        final List<Object> parameters = new ArrayList<Object>(parameterTypes.length);
+        final List<Object> arguments = new ArrayList<Object>(parameterTypes.length);
+
         for (Class<?> t : parameterTypes) {
             if (t.isPrimitive()) {
                 if (t == Boolean.TYPE) {
-                    parameters.add(false);
+                    arguments.add(false);
                 } else if (t == Integer.TYPE) {
-                    parameters.add(0);
+                    arguments.add(0);
                 } else if (t == Long.TYPE) {
-                    parameters.add(0L);
+                    arguments.add(0L);
                 } else if (t == Short.TYPE) {
-                    parameters.add((short) 0);
+                    arguments.add((short) 0);
                 } else if (t == Byte.TYPE) {
-                    parameters.add((byte) 0);
+                    arguments.add((byte) 0);
                 } else if (t == Float.TYPE) {
-                    parameters.add(0.0f);
+                    arguments.add(0.0f);
                 } else if (t == Double.TYPE) {
-                    parameters.add(0.0d);
+                    arguments.add(0.0d);
                 }
             } else {
-                parameters.add(null);
+                arguments.add(null);
             }
         }
 
         try {
-            instance = (T) constructor.newInstance(parameters.toArray());
+            return (T) constructor.newInstance(arguments.toArray());
         } catch (Exception e) {
             throw new BlueprintTemplateException(e);
         }
-        return instance;
     }
 
     @Override
