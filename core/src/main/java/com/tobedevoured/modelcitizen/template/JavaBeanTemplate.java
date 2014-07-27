@@ -46,7 +46,7 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 			throw new BlueprintTemplateException( e );
 		}
 	}
-	
+
 	public <T> T set( T model, String property, Object value ) throws BlueprintTemplateException {
 		try {
 			PropertyUtils.setProperty( model, property, value );
@@ -57,10 +57,10 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 		} catch (NoSuchMethodException propertyException) {
 			throw new BlueprintTemplateException( propertyException );
 		}
-		
+
 		return model;
 	}
-	
+
 	public Object get( Object model, String property ) throws BlueprintTemplateException {
         logger.trace( "Getting property [{}] for Model [{}]", property, model );
 		try {
@@ -71,7 +71,7 @@ public class JavaBeanTemplate implements BlueprintTemplate {
 			throw new BlueprintTemplateException( propertyException );
 		} catch (NoSuchMethodException propertyException) {
 			throw new BlueprintTemplateException( propertyException );
-		} 
+		}
 	}
 
 }

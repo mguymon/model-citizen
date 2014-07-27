@@ -25,7 +25,7 @@ import com.tobedevoured.modelcitizen.callback.ConstructorCallback;
 import com.tobedevoured.modelcitizen.model.Wheel;
 import com.tobedevoured.modelcitizen.model.Option;
 
-@Blueprint(Wheel.class)
+@Blueprint(value=Wheel.class, template=CustomTemplate.class)
 public class WheelBlueprint {
 
     ConstructorCallback constructor = new ConstructorCallback() {
