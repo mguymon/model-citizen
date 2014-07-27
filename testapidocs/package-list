@@ -1,3 +1,9 @@
+com.tobedevoured.modelcitizen
+com.tobedevoured.modelcitizen.annotation
 com.tobedevoured.modelcitizen.blueprint
+com.tobedevoured.modelcitizen.callback
+com.tobedevoured.modelcitizen.field
 com.tobedevoured.modelcitizen.model
+com.tobedevoured.modelcitizen.modelfactory
+com.tobedevoured.modelcitizen.policy
 com.tobedevoured.modelcitizen.spring
