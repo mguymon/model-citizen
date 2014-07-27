@@ -105,6 +105,7 @@
                 <version>0.9</version>
                 <configuration>
                     <message>Creating site for ${project.version}</message>
+                    <force>true</force>
                 </configuration>
                 <executions>
                     <execution>
@@ -166,6 +167,23 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>1.5</version>
+              <configuration>
+                <useAgent>true</useAgent>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
             </plugin>
         </plugins>
     </build>
