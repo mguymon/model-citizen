@@ -21,13 +21,18 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>core</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
     </dependency>
 
 ## Blueprint 
 
 A blueprint is a Class annotated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint) are a great example of how they work.
+
+**@Blueprint**: Class annotation
+   * _value_: [Class] The target model class for this blueprint.
+   * _template_: [Class] The [template](https://github.com/mguymon/model-citizen/blob/master/core/src/main/java/com/tobedevoured/modelcitizen/template/BlueprintTemplate.java) use to construct and inject the model. Defaults to [JavaBeanTemplate](https://github.com/mguymon/model-citizen/blob/master/core/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java)
+
 
 ### Field Annotations
 **@Default**: The default value for the field.
@@ -193,7 +198,7 @@ There is an optional jar that provides additional support for Spring:
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>spring</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
     </dependency>
     
 ### Avoiding Spring jar collisions
@@ -203,7 +208,7 @@ ModelFactory should work with Spring 3.x, so you can easily exclude ModelFactory
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>spring</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
       <exclusions>
         <exclusion>
             <groupId>org.springframework</groupId>
