@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.metapossum.utils.scanner.reflect.ClassesInPackageScanner;
+import java.lang.reflect.InvocationTargetException;
+import org.apache.commons.lang.reflect.ConstructorUtils;
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.Mapped;
@@ -40,6 +42,7 @@ import com.tobedevoured.modelcitizen.policy.BlueprintPolicy;
 import com.tobedevoured.modelcitizen.policy.FieldPolicy;
 import com.tobedevoured.modelcitizen.policy.Policy;
 import com.tobedevoured.modelcitizen.policy.PolicyException;
+import com.tobedevoured.modelcitizen.template.BlueprintTemplate;
 import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 import com.tobedevoured.modelcitizen.template.JavaBeanTemplate;
 import com.tobedevoured.modelcitizen.callback.AfterCreateCallback;
@@ -410,9 +413,23 @@ public class ModelFactory {
 
         blueprints.add(blueprint);
 
+        Class templateClass = blueprintAnnotation.template();
+        BlueprintTemplate template = null;
+        try {
+          template = (BlueprintTemplate)ConstructorUtils.invokeConstructor( templateClass, null );
+        } catch (NoSuchMethodException e) {
+          throw new RegisterBlueprintException( e );
+        } catch (IllegalAccessException e) {
+          throw new RegisterBlueprintException( e );
+        } catch (InvocationTargetException e) {
+          throw new RegisterBlueprintException( e );
+        } catch (InstantiationException e) {
+          throw new RegisterBlueprintException( e );
+        }
+
         // Create Erector for this Blueprint
         Erector erector = new Erector();
-        erector.setTemplate(new JavaBeanTemplate());
+        erector.setTemplate(template);
         erector.setBlueprint(blueprint);
         erector.setModelFields(modelFields);
         erector.setTarget(target);
