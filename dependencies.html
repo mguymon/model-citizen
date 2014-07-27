@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>parent - Project Dependencies</title>
+    <title>core - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                parent
+                core
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2014-07-27</span>
                   &nbsp;| <span id="projectVersion">Version: 0.8.1</span>
                       </div>
-            <div class="xright">                    <a href="./" title="parent">parent</a>
+            <div class="xright">                    <a href="./" title="core">core</a>
               
                     
       </div>
@@ -42,18 +42,15 @@
       <div id="navcolumn">
              
                     
-                                          <h5>Modules</h5>
+                                <h5>Parent Project</h5>
                   <ul>
                   <li class="none">
-                          <a href="core/index.html" title="core">core</a>
-            </li>
-                  <li class="none">
-                          <a href="spring/index.html" title="spring">spring</a>
+                          <a href="../index.html" title="parent">parent</a>
             </li>
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
-                                                                                                                                                                                                                                                                                                                                          <li class="expanded">
+                                                                                                                                                                                                                                                                                                                        <li class="expanded">
                           <a href="project-info.html" title="Project Information">Project Information</a>
                     <ul>
                       <li class="none">
@@ -88,9 +85,6 @@
             </li>
                       <li class="none">
                           <a href="license.html" title="Project License">Project License</a>
-            </li>
-                      <li class="none">
-                          <a href="modules.html" title="Project Modules">Project Modules</a>
             </li>
                       <li class="none">
                           <a href="team-list.html" title="Project Team">Project Team</a>
@@ -130,18 +124,24 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>com.metapossum</td>
+<td><a class="externalLink" href="http://bitbucket.org/stevevls/metapossum-scanner">metapossum-scanner</a></td>
+<td>1.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
 <td>commons-beanutils</td>
 <td><a class="externalLink" href="http://commons.apache.org/beanutils/">commons-beanutils</a></td>
 <td>1.8.3</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang</td>
 <td><a class="externalLink" href="http://commons.apache.org/lang/">commons-lang</a></td>
 <td>2.6</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td>
 <td>1.7.5</td>
@@ -189,6 +189,12 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>commons-io</td>
+<td><a class="externalLink" href="http://commons.apache.org/io/">commons-io</a></td>
+<td>1.4</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
 <td>commons-logging</td>
 <td><a class="externalLink" href="http://commons.apache.org/logging">commons-logging</a></td>
 <td>1.1.1</td>
@@ -244,10 +250,10 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>com.tobedevoured.modelcitizen:parent:pom:0.8.1 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>com.tobedevoured.modelcitizen:core:jar:0.8.1 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
-<th>parent</th></tr>
+<th>core</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>Model Citizen is an annotation based model factory for Java.
@@ -259,7 +265,26 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/mguymon/model-citizen">https://github.com/mguymon/model-citizen</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>com.metapossum:metapossum-scanner:jar:1.0 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Metapossum - Scanner</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Java utility library for scanning the classpath for artifacts.</p>
+<p><b>URL: </b><a class="externalLink" href="http://bitbucket.org/stevevls/metapossum-scanner">http://bitbucket.org/stevevls/metapossum-scanner</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>commons-io:commons-io:jar:1.4 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Commons IO</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p>
+<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Lang</th></tr>
@@ -270,7 +295,7 @@
         standard as to justify existence in java.lang.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/lang/">http://commons.apache.org/lang/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>commons-beanutils:commons-beanutils:jar:1.8.3 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<li>commons-beanutils:commons-beanutils:jar:1.8.3 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons BeanUtils</th></tr>
@@ -280,7 +305,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/beanutils/">http://commons.apache.org/beanutils/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>commons-logging:commons-logging:jar:1.1.1 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<li>commons-logging:commons-logging:jar:1.1.1 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Logging</th></tr>
@@ -290,7 +315,7 @@
     well known logging systems.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/logging">http://commons.apache.org/logging</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
-<li>org.slf4j:slf4j-api:jar:1.7.5 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>org.slf4j:slf4j-api:jar:1.7.5 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>SLF4J API Module</th></tr>
@@ -299,7 +324,7 @@
 <p><b>Description: </b>The slf4j API</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.8.2 (test) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>junit:junit:jar:4.8.2 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -308,7 +333,7 @@
 <p><b>Description: </b>JUnit is a regression testing framework. It is used by the developer who implements unit tests in Java.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div></li>
-<li>ch.qos.logback:logback-classic:jar:1.0.13 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>ch.qos.logback:logback-classic:jar:1.0.13 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Classic Module</th></tr>
@@ -318,7 +343,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div>
 <ul>
-<li>ch.qos.logback:logback-core:jar:1.0.13 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>ch.qos.logback:logback-core:jar:1.0.13 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Core Module</th></tr>
@@ -327,7 +352,7 @@
 <p><b>Description: </b>logback-core module</p>
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div></li></ul></li>
-<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -337,7 +362,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hamcrest Core</th></tr>
@@ -345,7 +370,7 @@
 <td>
 <p><b>Description: </b>There is currently no description associated with this project.</p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">BSD style</a></p></td></tr></table></div></li>
-<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
+<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Objenesis</th></tr>
@@ -361,7 +386,7 @@
 <p><b>Common Public License Version 1.0: </b>JUnit</p>
 <p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p>
 <p><b>MIT License: </b>Objenesis, SLF4J API Module</p>
-<p><b>The Apache Software License, Version 2.0: </b>Commons BeanUtils, Commons Lang, Commons Logging, parent</p>
+<p><b>The Apache Software License, Version 2.0: </b>Commons BeanUtils, Commons IO, Commons Lang, Commons Logging, Metapossum - Scanner, core</p>
 <p><b>The MIT License: </b>Mockito</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2>Dependency File Details<a name="Dependency_File_Details"></a></h2>
@@ -391,11 +416,27 @@
 <td>1.5</td>
 <td>debug</td></tr>
 <tr class="b">
+<td>metapossum-scanner-1.0.jar</td>
+<td>17.75 kB</td>
+<td>29</td>
+<td>17</td>
+<td>2</td>
+<td>1.6</td>
+<td>debug</td></tr>
+<tr class="a">
 <td>commons-beanutils-1.8.3.jar</td>
 <td>226.58 kB</td>
 <td>155</td>
 <td>137</td>
 <td>6</td>
+<td>1.3</td>
+<td>debug</td></tr>
+<tr class="b">
+<td>commons-io-1.4.jar</td>
+<td>106.49 kB</td>
+<td>93</td>
+<td>76</td>
+<td>5</td>
 <td>1.3</td>
 <td>debug</td></tr>
 <tr class="a">
@@ -463,21 +504,21 @@
 <th>JDK Rev</th>
 <th>Debug</th></tr>
 <tr class="a">
-<td>10</td>
-<td>2.98 MB</td>
-<td>2,609</td>
-<td>1,768</td>
-<td>182</td>
-<td>1.5</td>
-<td>10</td></tr>
+<td>12</td>
+<td>3.11 MB</td>
+<td>2,731</td>
+<td>1,861</td>
+<td>189</td>
+<td>1.6</td>
+<td>12</td></tr>
 <tr class="b">
-<td>compile: 4</td>
-<td>compile: 588.88 kB</td>
-<td>compile: 386</td>
-<td>compile: 321</td>
-<td>compile: 21</td>
+<td>compile: 6</td>
+<td>compile: 713.11 kB</td>
+<td>compile: 508</td>
+<td>compile: 414</td>
+<td>compile: 28</td>
 <td>-</td>
-<td>compile: 4</td></tr>
+<td>compile: 6</td></tr>
 <tr class="a">
 <td>test: 6</td>
 <td>test: 2.41 MB</td>
@@ -500,6 +541,11 @@
 <td>-</td>
 <td>Yes</td></tr>
 <tr class="a">
+<td>sonatype-nexus-snapshots</td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots">https://oss.sonatype.org/content/repositories/snapshots</a></td>
+<td>-</td>
+<td>Yes</td></tr>
+<tr class="b">
 <td>central</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a></td>
 <td>Yes</td>
@@ -509,55 +555,78 @@
 <tr class="a">
 <th>Artifact</th>
 <th>apache.snapshots</th>
+<th>sonatype-nexus-snapshots</th>
 <th>central</th></tr>
 <tr class="b">
 <td>ch.qos.logback:logback-classic:jar:1.0.13</td>
+<td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
 <td>ch.qos.logback:logback-core:jar:1.0.13</td>
 <td>-</td>
+<td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
+<td>com.metapossum:metapossum-scanner:jar:1.0</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/metapossum/metapossum-scanner/1.0/metapossum-scanner-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
 <td>commons-beanutils:commons-beanutils:jar:1.8.3</td>
 <td>-</td>
+<td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
+<td>commons-io:commons-io:jar:1.4</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
 <td>commons-lang:commons-lang:jar:2.6</td>
+<td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
 <td>commons-logging:commons-logging:jar:1.1.1</td>
 <td>-</td>
+<td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
 <td>junit:junit:jar:4.8.2</td>
+<td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/junit/junit/4.8.2/junit-4.8.2.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
 <td>org.hamcrest:hamcrest-core:jar:1.1</td>
 <td>-</td>
+<td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
 <td>org.mockito:mockito-core:jar:1.9.5</td>
+<td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
 <td>org.objenesis:objenesis:jar:1.0</td>
 <td>-</td>
+<td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/objenesis/objenesis/1.0/objenesis-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
 <td>org.slf4j:slf4j-api:jar:1.7.5</td>
+<td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
 <th>Total</th>
 <th>apache.snapshots</th>
+<th>sonatype-nexus-snapshots</th>
 <th>central</th></tr>
 <tr class="a">
-<td>10 (compile: 4, test: 6)</td>
+<td>12 (compile: 6, test: 6)</td>
 <td>0</td>
-<td>10</td></tr></table></div>
+<td>0</td>
+<td>12</td></tr></table></div>
       </div>
     </div>
     <div class="clear">

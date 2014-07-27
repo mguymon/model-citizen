@@ -5,6 +5,4 @@ com.tobedevoured.modelcitizen.callback.internal
 com.tobedevoured.modelcitizen.erector
 com.tobedevoured.modelcitizen.field
 com.tobedevoured.modelcitizen.policy
-com.tobedevoured.modelcitizen.spring
-com.tobedevoured.modelcitizen.spring.annotation
 com.tobedevoured.modelcitizen.template
