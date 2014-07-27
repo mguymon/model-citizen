@@ -19,7 +19,6 @@ public class ConstructorInjectionTemplateTest {
     @Before
     public void setup() throws RegisterBlueprintException {
         modelFactory.registerBlueprint(ImmutableModelBlueprint.class);
-        modelFactory.getErectors().get(ImmutableModel.class).setTemplate(new ConstructorInjectionTemplate());
     }
 
     @Test
