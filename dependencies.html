@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>core - Project Dependencies</title>
+    <title>spring - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                core
+                spring
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2014-07-27</span>
                   &nbsp;| <span id="projectVersion">Version: 0.8.1</span>
                       </div>
-            <div class="xright">                    <a href="./" title="core">core</a>
+            <div class="xright">                    <a href="./" title="spring">spring</a>
               
                     
       </div>
@@ -124,9 +124,9 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>com.metapossum</td>
-<td><a class="externalLink" href="http://bitbucket.org/stevevls/metapossum-scanner">metapossum-scanner</a></td>
-<td>1.0</td>
+<td>com.tobedevoured.modelcitizen</td>
+<td><a class="externalLink" href="https://github.com/mguymon/model-citizen">core</a></td>
+<td>0.8.1</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="a">
@@ -146,7 +146,13 @@
 <td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td>
 <td>1.7.5</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr>
+<tr class="b">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-context</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
 <div class="section">
 <h3>test<a name="test"></a></h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
@@ -155,26 +161,44 @@
 <th>GroupId</th>
 <th>ArtifactId</th>
 <th>Version</th>
+<th>Classifier</th>
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
 <td>ch.qos.logback</td>
 <td><a class="externalLink" href="http://logback.qos.ch">logback-classic</a></td>
 <td>1.0.13</td>
+<td>-</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a>-<a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></td></tr>
 <tr class="a">
+<td>com.tobedevoured.modelcitizen</td>
+<td><a class="externalLink" href="https://github.com/mguymon/model-citizen">core</a></td>
+<td>0.8.1</td>
+<td>tests</td>
+<td>test-jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
 <td>junit</td>
 <td><a class="externalLink" href="http://junit.org">junit</a></td>
 <td>4.8.2</td>
+<td>-</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.mockito</td>
 <td><a class="externalLink" href="http://www.mockito.org">mockito-core</a></td>
 <td>1.9.5</td>
+<td>-</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
+<td><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></td></tr>
+<tr class="b">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-test</a></td>
+<td>3.2.0.RELEASE</td>
+<td>-</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
 <div class="section">
 <h2>Project Transitive Dependencies<a name="Project_Transitive_Dependencies"></a></h2>
 <p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a>
@@ -189,6 +213,18 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>aopalliance</td>
+<td><a class="externalLink" href="http://aopalliance.sourceforge.net">aopalliance</a></td>
+<td>1.0</td>
+<td>jar</td>
+<td>Public Domain</td></tr>
+<tr class="a">
+<td>com.metapossum</td>
+<td><a class="externalLink" href="http://bitbucket.org/stevevls/metapossum-scanner">metapossum-scanner</a></td>
+<td>1.0</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
 <td>commons-io</td>
 <td><a class="externalLink" href="http://commons.apache.org/io/">commons-io</a></td>
 <td>1.4</td>
@@ -198,6 +234,30 @@
 <td>commons-logging</td>
 <td><a class="externalLink" href="http://commons.apache.org/logging">commons-logging</a></td>
 <td>1.1.1</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-aop</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-beans</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-core</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-expression</a></td>
+<td>3.2.0.RELEASE</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Transitive_Dependencies_test"></a>
 <div class="section">
@@ -227,7 +287,19 @@
 <td><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/index.html">objenesis</a></td>
 <td>1.0</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/license.html">MIT License</a></td></tr></table></div></div><a name="Project_Dependency_Graph"></a>
+<td><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/license.html">MIT License</a></td></tr>
+<tr class="a">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-web</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="b">
+<td>org.springframework</td>
+<td><a class="externalLink" href="https://github.com/SpringSource/spring-framework">spring-webmvc</a></td>
+<td>3.2.0.RELEASE</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div></div><a name="Project_Dependency_Graph"></a>
 <div class="section">
 <h2>Project Dependency Graph<a name="Project_Dependency_Graph"></a></h2><script language="javascript" type="text/javascript">
       function toggleDependencyDetail( divId, imgId )
@@ -250,7 +322,22 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>com.tobedevoured.modelcitizen:core:jar:0.8.1 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>com.tobedevoured.modelcitizen:spring:jar:0.8.1 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>spring</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Model Citizen is an annotation based model factory for Java.
+        A Model is mapped by a Blueprint using annotated fields. Blueprints contain
+        default values and references to other blueprinted models. The ModelFactory can
+        create Models based on registered Blueprints. A Model already created can be
+        passed into the ModelFactory as a Reference Model, which will be used as the basis
+        for the new Model.</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/mguymon/model-citizen">https://github.com/mguymon/model-citizen</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>com.tobedevoured.modelcitizen:core:jar:0.8.1 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>core</th></tr>
@@ -265,7 +352,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/mguymon/model-citizen">https://github.com/mguymon/model-citizen</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>com.metapossum:metapossum-scanner:jar:1.0 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>com.metapossum:metapossum-scanner:jar:1.0 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Metapossum - Scanner</th></tr>
@@ -275,7 +362,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://bitbucket.org/stevevls/metapossum-scanner">http://bitbucket.org/stevevls/metapossum-scanner</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>commons-io:commons-io:jar:1.4 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<li>commons-io:commons-io:jar:1.4 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons IO</th></tr>
@@ -283,8 +370,107 @@
 <td>
 <p><b>Description: </b>Commons-IO contains utility classes, stream implementations, file filters, file comparators and endian classes.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
+<li>org.springframework:spring-context:jar:3.2.0.RELEASE (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Context</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Context</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>org.springframework:spring-core:jar:3.2.0.RELEASE (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Core</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Core</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>org.springframework:spring-aop:jar:3.2.0.RELEASE (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring AOP</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring AOP</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>aopalliance:aopalliance:jar:1.0 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>AOP alliance</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>AOP Alliance</p>
+<p><b>URL: </b><a class="externalLink" href="http://aopalliance.sourceforge.net">http://aopalliance.sourceforge.net</a></p>
+<p><b>Project License: </b>Public Domain</p></td></tr></table></div></li></ul></li>
+<li>org.springframework:spring-expression:jar:3.2.0.RELEASE (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Expression Language (SpEL)</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Expression Language (SpEL)</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>org.springframework:spring-beans:jar:3.2.0.RELEASE (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Beans</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Beans</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
-<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<li>com.tobedevoured.modelcitizen:core:test-jar:tests:0.8.1 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>core</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Model Citizen is an annotation based model factory for Java.
+        A Model is mapped by a Blueprint using annotated fields. Blueprints contain
+        default values and references to other blueprinted models. The ModelFactory can
+        create Models based on registered Blueprints. A Model already created can be
+        passed into the ModelFactory as a Reference Model, which will be used as the basis
+        for the new Model.</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/mguymon/model-citizen">https://github.com/mguymon/model-citizen</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>org.springframework:spring-test:jar:3.2.0.RELEASE (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring TestContext Framework</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring TestContext Framework</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>org.springframework:spring-webmvc:jar:3.2.0.RELEASE (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Web MVC</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Web MVC</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>org.springframework:spring-web:jar:3.2.0.RELEASE (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Spring Web</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Spring Web</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/SpringSource/spring-framework">https://github.com/SpringSource/spring-framework</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
+<li>commons-lang:commons-lang:jar:2.6 (compile) <img id="_img29" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep28', '_img29' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep28" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Lang</th></tr>
@@ -295,7 +481,7 @@
         standard as to justify existence in java.lang.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/lang/">http://commons.apache.org/lang/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>commons-beanutils:commons-beanutils:jar:1.8.3 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>commons-beanutils:commons-beanutils:jar:1.8.3 (compile) <img id="_img31" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep30', '_img31' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep30" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons BeanUtils</th></tr>
@@ -305,7 +491,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/beanutils/">http://commons.apache.org/beanutils/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>commons-logging:commons-logging:jar:1.1.1 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>commons-logging:commons-logging:jar:1.1.1 (compile) <img id="_img33" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep32', '_img33' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep32" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Logging</th></tr>
@@ -315,7 +501,7 @@
     well known logging systems.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/logging">http://commons.apache.org/logging</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
-<li>org.slf4j:slf4j-api:jar:1.7.5 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>org.slf4j:slf4j-api:jar:1.7.5 (compile) <img id="_img35" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep34', '_img35' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep34" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>SLF4J API Module</th></tr>
@@ -324,7 +510,7 @@
 <p><b>Description: </b>The slf4j API</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.8.2 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>junit:junit:jar:4.8.2 (test) <img id="_img37" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep36', '_img37' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep36" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -333,7 +519,7 @@
 <p><b>Description: </b>JUnit is a regression testing framework. It is used by the developer who implements unit tests in Java.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div></li>
-<li>ch.qos.logback:logback-classic:jar:1.0.13 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>ch.qos.logback:logback-classic:jar:1.0.13 (test) <img id="_img39" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep38', '_img39' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep38" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Classic Module</th></tr>
@@ -343,7 +529,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div>
 <ul>
-<li>ch.qos.logback:logback-core:jar:1.0.13 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>ch.qos.logback:logback-core:jar:1.0.13 (test) <img id="_img41" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep40', '_img41' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep40" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Core Module</th></tr>
@@ -352,7 +538,7 @@
 <p><b>Description: </b>logback-core module</p>
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch">http://logback.qos.ch</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div></li></ul></li>
-<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
+<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img43" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep42', '_img43' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep42" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -362,7 +548,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.1 (test) <img id="_img45" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep44', '_img45' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep44" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hamcrest Core</th></tr>
@@ -370,7 +556,7 @@
 <td>
 <p><b>Description: </b>There is currently no description associated with this project.</p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">BSD style</a></p></td></tr></table></div></li>
-<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
+<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img47" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep46', '_img47' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep46" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Objenesis</th></tr>
@@ -382,11 +568,12 @@
 <div class="section">
 <h2>Licenses<a name="Licenses"></a></h2>
 <p><b>BSD style: </b>Hamcrest Core</p>
+<p><b>Public Domain: </b>AOP alliance</p>
 <p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p>
 <p><b>Common Public License Version 1.0: </b>JUnit</p>
 <p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p>
 <p><b>MIT License: </b>Objenesis, SLF4J API Module</p>
-<p><b>The Apache Software License, Version 2.0: </b>Commons BeanUtils, Commons IO, Commons Lang, Commons Logging, Metapossum - Scanner, core</p>
+<p><b>The Apache Software License, Version 2.0: </b>Commons BeanUtils, Commons IO, Commons Lang, Commons Logging, Metapossum - Scanner, Spring AOP, Spring Beans, Spring Context, Spring Core, Spring Expression Language (SpEL), Spring TestContext Framework, Spring Web, Spring Web MVC, core, spring</p>
 <p><b>The MIT License: </b>Mockito</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2>Dependency File Details<a name="Dependency_File_Details"></a></h2>
@@ -400,6 +587,14 @@
 <th>JDK Rev</th>
 <th>Debug</th></tr>
 <tr class="b">
+<td>aopalliance-1.0.jar</td>
+<td>4.36 kB</td>
+<td>15</td>
+<td>9</td>
+<td>2</td>
+<td>1.3</td>
+<td>debug</td></tr>
+<tr class="a">
 <td>logback-classic-1.0.13.jar</td>
 <td>258.40 kB</td>
 <td>208</td>
@@ -407,7 +602,7 @@
 <td>25</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>logback-core-1.0.13.jar</td>
 <td>409.05 kB</td>
 <td>391</td>
@@ -415,7 +610,7 @@
 <td>32</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>metapossum-scanner-1.0.jar</td>
 <td>17.75 kB</td>
 <td>29</td>
@@ -423,7 +618,23 @@
 <td>2</td>
 <td>1.6</td>
 <td>debug</td></tr>
+<tr class="b">
+<td>core/target/classes</td>
+<td>-</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>-</td>
+<td>release</td></tr>
 <tr class="a">
+<td>test-classes</td>
+<td>.13 kB</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
+<tr class="b">
 <td>commons-beanutils-1.8.3.jar</td>
 <td>226.58 kB</td>
 <td>155</td>
@@ -431,7 +642,7 @@
 <td>6</td>
 <td>1.3</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>commons-io-1.4.jar</td>
 <td>106.49 kB</td>
 <td>93</td>
@@ -439,7 +650,7 @@
 <td>5</td>
 <td>1.3</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang-2.6.jar</td>
 <td>277.56 kB</td>
 <td>155</td>
@@ -447,7 +658,7 @@
 <td>10</td>
 <td>1.3</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>commons-logging-1.1.1.jar</td>
 <td>59.26 kB</td>
 <td>42</td>
@@ -455,7 +666,7 @@
 <td>2</td>
 <td>1.1</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>junit-4.8.2.jar</td>
 <td>231.78 kB</td>
 <td>267</td>
@@ -463,7 +674,7 @@
 <td>30</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>hamcrest-core-1.1.jar</td>
 <td>74.85 kB</td>
 <td>54</td>
@@ -471,7 +682,7 @@
 <td>3</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>mockito-core-1.9.5.jar</td>
 <td>1.43 MB</td>
 <td>1,258</td>
@@ -479,7 +690,7 @@
 <td>64</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>objenesis-1.0.jar</td>
 <td>27.90 kB</td>
 <td>45</td>
@@ -487,7 +698,7 @@
 <td>7</td>
 <td>1.3</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>slf4j-api-1.7.5.jar</td>
 <td>25.47 kB</td>
 <td>34</td>
@@ -495,7 +706,71 @@
 <td>3</td>
 <td>1.5</td>
 <td>debug</td></tr>
+<tr class="a">
+<td>spring-aop-3.2.0.RELEASE.jar</td>
+<td>327.05 kB</td>
+<td>282</td>
+<td>252</td>
+<td>15</td>
+<td>1.5</td>
+<td>debug</td></tr>
 <tr class="b">
+<td>spring-beans-3.2.0.RELEASE.jar</td>
+<td>590.57 kB</td>
+<td>399</td>
+<td>356</td>
+<td>14</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
+<td>spring-context-3.2.0.RELEASE.jar</td>
+<td>834.01 kB</td>
+<td>731</td>
+<td>629</td>
+<td>67</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="b">
+<td>spring-core-3.2.0.RELEASE.jar</td>
+<td>842.84 kB</td>
+<td>676</td>
+<td>638</td>
+<td>32</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
+<td>spring-expression-3.2.0.RELEASE.jar</td>
+<td>189.25 kB</td>
+<td>138</td>
+<td>126</td>
+<td>6</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="b">
+<td>spring-test-3.2.0.RELEASE.jar</td>
+<td>440.97 kB</td>
+<td>366</td>
+<td>329</td>
+<td>27</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
+<td>spring-web-3.2.0.RELEASE.jar</td>
+<td>609.69 kB</td>
+<td>491</td>
+<td>443</td>
+<td>35</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="b">
+<td>spring-webmvc-3.2.0.RELEASE.jar</td>
+<td>621.03 kB</td>
+<td>398</td>
+<td>347</td>
+<td>28</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -503,30 +778,30 @@
 <th>Packages</th>
 <th>JDK Rev</th>
 <th>Debug</th></tr>
-<tr class="a">
-<td>12</td>
-<td>3.11 MB</td>
-<td>2,731</td>
-<td>1,861</td>
-<td>189</td>
-<td>1.6</td>
-<td>12</td></tr>
 <tr class="b">
-<td>compile: 6</td>
-<td>compile: 713.11 kB</td>
-<td>compile: 508</td>
-<td>compile: 414</td>
-<td>compile: 28</td>
-<td>-</td>
-<td>compile: 6</td></tr>
+<td>23</td>
+<td>7.46 MB</td>
+<td>6,227</td>
+<td>4,990</td>
+<td>415</td>
+<td>1.6</td>
+<td>21</td></tr>
 <tr class="a">
-<td>test: 6</td>
-<td>test: 2.41 MB</td>
-<td>test: 2,223</td>
-<td>test: 1,447</td>
-<td>test: 161</td>
+<td>compile: 13</td>
+<td>compile: 3.42 MB</td>
+<td>compile: 2,749</td>
+<td>compile: 2,424</td>
+<td>compile: 164</td>
 <td>-</td>
-<td>test: 6</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
+<td>compile: 12</td></tr>
+<tr class="b">
+<td>test: 10</td>
+<td>test: 4.04 MB</td>
+<td>test: 3,478</td>
+<td>test: 2,566</td>
+<td>test: 251</td>
+<td>-</td>
+<td>test: 9</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
 <div class="section">
 <h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2>
 <table border="0" class="bodyTable">
@@ -558,75 +833,130 @@
 <th>sonatype-nexus-snapshots</th>
 <th>central</th></tr>
 <tr class="b">
+<td>aopalliance:aopalliance:jar:1.0</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
 <td>ch.qos.logback:logback-classic:jar:1.0.13</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>ch.qos.logback:logback-core:jar:1.0.13</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>com.metapossum:metapossum-scanner:jar:1.0</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/metapossum/metapossum-scanner/1.0/metapossum-scanner-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
+<td>com.tobedevoured.modelcitizen:core:jar:0.8.1</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/tobedevoured/modelcitizen/core/0.8.1/core-0.8.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
+<td>com.tobedevoured.modelcitizen:core:test-jar:tests:0.8.1</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/tobedevoured/modelcitizen/core/0.8.1/core-0.8.1-tests.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
 <td>commons-beanutils:commons-beanutils:jar:1.8.3</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>commons-io:commons-io:jar:1.4</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-io/commons-io/1.4/commons-io-1.4.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang:commons-lang:jar:2.6</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>commons-logging:commons-logging:jar:1.1.1</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>junit:junit:jar:4.8.2</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/junit/junit/4.8.2/junit-4.8.2.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.hamcrest:hamcrest-core:jar:1.1</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.mockito:mockito-core:jar:1.9.5</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.objenesis:objenesis:jar:1.0</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/objenesis/objenesis/1.0/objenesis-1.0.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.slf4j:slf4j-api:jar:1.7.5</td>
 <td>-</td>
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
+<td>org.springframework:spring-aop:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-aop/3.2.0.RELEASE/spring-aop-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="b">
+<td>org.springframework:spring-beans:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-beans/3.2.0.RELEASE/spring-beans-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
+<td>org.springframework:spring-context:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-context/3.2.0.RELEASE/spring-context-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
+<td>org.springframework:spring-core:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-core/3.2.0.RELEASE/spring-core-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
+<td>org.springframework:spring-expression:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-expression/3.2.0.RELEASE/spring-expression-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
+<td>org.springframework:spring-test:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-test/3.2.0.RELEASE/spring-test-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
+<td>org.springframework:spring-web:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-web/3.2.0.RELEASE/spring-web-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="b">
+<td>org.springframework:spring-webmvc:jar:3.2.0.RELEASE</td>
+<td>-</td>
+<td>-</td>
+<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-webmvc/3.2.0.RELEASE/spring-webmvc-3.2.0.RELEASE.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
 <th>Total</th>
 <th>apache.snapshots</th>
 <th>sonatype-nexus-snapshots</th>
 <th>central</th></tr>
-<tr class="a">
-<td>12 (compile: 6, test: 6)</td>
+<tr class="b">
+<td>23 (compile: 13, test: 10)</td>
 <td>0</td>
 <td>0</td>
-<td>12</td></tr></table></div>
+<td>23</td></tr></table></div>
       </div>
     </div>
     <div class="clear">
