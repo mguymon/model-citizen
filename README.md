@@ -36,24 +36,24 @@ Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/mas
 
 ### Field Annotations
 **@Default**: The default value for the field.
-   * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
+   * _force_:  [boolean] Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
 
 **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
                matching field's Class. Mapped class can be set by the _target_ param. 
 
 **@MappedList**: Creates a List of Models mapped to another blueprint.
-  * _size_: Number of Models to be created by the ModelFactory and added to List, defaults to 1.
-  * _target_: The target Blueprint Class used to create Models
-  * _targetList_: The List created, defaults to ArrayList
-  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
-  * _force_:  Force the value of the MappedList to always be set, even if the target field already has a value. Default is false.
+  * _size_: [int] Number of Models to be created by the ModelFactory and added to List, defaults to 1.
+  * _target_: [Class] The target Blueprint Class used to create Models
+  * _targetList_: [Class] The List created, defaults to ArrayList
+  * _ignoreEmpty_: [boolean] If true, do not create Models for an empty Set. Defaults to true.
+  * _force_: [boolean] Force the value of the MappedList to always be set, even if the target field already has a value. Default is false.
   
 **@MappedSet**: Creates a Set of Models mapped to another blueprint.
-  * _size_: Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
-  * _target_: The target Blueprint Class used to create Models
-  * _targetSet_: The Set created, defaults to HashSet
-  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
-  * _force_:  Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
+  * _size_: [int] Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
+  * _target_: [Class] The target Blueprint Class used to create Models
+  * _targetSet_: [Class] The Set created, defaults to HashSet
+  * _ignoreEmpty_: [boolean] If true, do not create Models for an empty Set. Defaults to true.
+  * _force_:  [boolean] Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
