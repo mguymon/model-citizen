@@ -54,7 +54,7 @@ public class ConstructorInjectionTemplate implements BlueprintTemplate {
     @Override
     public <T> T set(T model, String property, Object value) throws BlueprintTemplateException {
         try {
-            final Field field = FieldUtils.getField(model.getClass(), property);
+            final Field field = FieldUtils.getField(model.getClass(), property, true);
             field.setAccessible(true);
             field.set(model, value);
             return model;
