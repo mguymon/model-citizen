@@ -9,7 +9,7 @@
         <groupId>com.tobedevoured.modelcitizen</groupId>
         <artifactId>parent</artifactId>
         <relativePath>../pom.xml</relativePath>
-        <version>0.8.0</version>
+        <version>0.8.1</version>
     </parent>
 
     <url>https://github.com/mguymon/model-citizen</url>
