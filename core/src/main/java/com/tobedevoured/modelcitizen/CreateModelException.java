@@ -28,7 +28,7 @@ public class CreateModelException extends ModelFactoryException {
 	public CreateModelException( String message ) {
 		super( message );
 	}
-	
+
 	public CreateModelException( Throwable throwable ) {
 		super( throwable );
 	}

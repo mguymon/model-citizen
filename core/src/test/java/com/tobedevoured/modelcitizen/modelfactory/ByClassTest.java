@@ -24,6 +24,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
+import java.util.List;
+
 import com.tobedevoured.modelcitizen.CreateModelException;
 import com.tobedevoured.modelcitizen.Erector;
 import com.tobedevoured.modelcitizen.ModelFactory;
@@ -86,5 +88,13 @@ public class ByClassTest {
 
         // Val is zero because primitive initializes as zero
         assertEquals(0.0, car.getMileage(), 0);
+    }
+
+    @Test
+    public void createMultiples() {
+      List<Car> cars = modelFactory.createModels(Car.class, 3);
+
+      assertEquals(cars.size(), 3);
+
     }
 }

@@ -439,6 +439,16 @@ public class ModelFactory {
         erectors.put(target, erector);
     }
 
+    public <T> List<T> createModels(Class<T> clazz, int count) throws CreateModelException {
+        List<T> models = new ArrayList();
+
+        for( int x = 0; x < count; x++) {
+          models.add( createModel(clazz, true) );
+        }
+
+        return models;
+    }
+
     /**
      * Create a Model for a registered {@link Blueprint}
      *
