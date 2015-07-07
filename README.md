@@ -1,6 +1,9 @@
 # Model Citizen
 
-[![Build Status](https://travis-ci.org/mguymon/model-citizen.png?branch=master)](https://travis-ci.org/mguymon/model-citizen)
+[![Build Status](https://travis-ci.org/mguymon/model-citizen.png?branch=master)](https://travis-ci.org/mguymon/model-citizen) 
+
+<a class="coinbase-button" data-code="f53ed0815094ffa2b63c98ab790376b3" data-button-style="donation_small" href="https://www.coinbase.com/checkouts/f53ed0815094ffa2b63c98ab790376b3">Donate Bitcoins</a>
+<script src="https://www.coinbase.com/assets/button.js" type="text/javascript"></script>
 
 Model Citizen is an annotation based model factory for Java, inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
