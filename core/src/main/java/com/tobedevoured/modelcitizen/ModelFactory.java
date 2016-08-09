@@ -540,7 +540,7 @@ public class ModelFactory {
                         modelFieldCommands = policy.process(this, erector, createdModel);
 
                     } catch (PolicyException e) {
-                        new CreateModelException(e);
+                        throw new CreateModelException(e);
                     }
 
                     for (ModelField modelField : modelFieldCommands.keySet()) {
