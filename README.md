@@ -21,7 +21,7 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>core</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
     </dependency>
 
 ## Blueprint 
@@ -29,26 +29,31 @@ for the new Model.
 A blueprint is a Class annotated with _@Blueprint( Class )_ and contains annotated fields. Everything else is ignored by the _ModelFactory_.
 Model Citizen [own blueprints](https://github.com/mguymon/model-citizen/tree/master/core/src/test/java/com/tobedevoured/modelcitizen/blueprint) are a great example of how they work.
 
+**@Blueprint**: Class annotation
+   * _value_: [Class] The target model class for this blueprint.
+   * _template_: [Class] The [template](https://github.com/mguymon/model-citizen/blob/master/core/src/main/java/com/tobedevoured/modelcitizen/template/BlueprintTemplate.java) use to construct and inject the model. Defaults to [JavaBeanTemplate](https://github.com/mguymon/model-citizen/blob/master/core/src/main/java/com/tobedevoured/modelcitizen/template/JavaBeanTemplate.java)
+
+
 ### Field Annotations
 **@Default**: The default value for the field.
-   * _force_:  Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
+   * _force_:  [boolean] Force the value of the Default to always be set, even if the target field already has a value. Default is false. This is useful for overriding primatives or Collections.
 
 **@Mapped**: The value is mapped to another @Blueprint, default is the blueprint for
                matching field's Class. Mapped class can be set by the _target_ param. 
 
 **@MappedList**: Creates a List of Models mapped to another blueprint.
-  * _size_: Number of Models to be created by the ModelFactory and added to List, defaults to 1.
-  * _target_: The target Blueprint Class used to create Models
-  * _targetList_: The List created, defaults to ArrayList
-  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
-  * _force_:  Force the value of the MappedList to always be set, even if the target field already has a value. Default is false.
+  * _size_: [int] Number of Models to be created by the ModelFactory and added to List, defaults to 1.
+  * _target_: [Class] The target Blueprint Class used to create Models
+  * _targetList_: [Class] The List created, defaults to ArrayList
+  * _ignoreEmpty_: [boolean] If true, do not create Models for an empty Set. Defaults to true.
+  * _force_: [boolean] Force the value of the MappedList to always be set, even if the target field already has a value. Default is false.
   
 **@MappedSet**: Creates a Set of Models mapped to another blueprint.
-  * _size_: Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
-  * _target_: The target Blueprint Class used to create Models
-  * _targetSet_: The Set created, defaults to HashSet
-  * _ignoreEmpty_: If true, do not create Models for an empty Set. Defaults to true.
-  * _force_:  Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
+  * _size_: [int] Number of Models to be created by the ModelFactory and added to Set, defaults to 1.
+  * _target_: [Class] The target Blueprint Class used to create Models
+  * _targetSet_: [Class] The Set created, defaults to HashSet
+  * _ignoreEmpty_: [boolean] If true, do not create Models for an empty Set. Defaults to true.
+  * _force_:  [boolean] Force the value of the MappedSet to always be set, even if the target field already has a value. Default is false.
                     
 **@Nullable**: Specifies this field can be null and not to set a value by the ModelFactory.
 
@@ -193,7 +198,7 @@ There is an optional jar that provides additional support for Spring:
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>spring</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
     </dependency>
     
 ### Avoiding Spring jar collisions
@@ -203,7 +208,7 @@ ModelFactory should work with Spring 3.x, so you can easily exclude ModelFactory
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>spring</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.1</version>
       <exclusions>
         <exclusion>
             <groupId>org.springframework</groupId>

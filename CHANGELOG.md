@@ -1,5 +1,11 @@
 ## Model Citizen Changelog
 
+### 0.8.1 (July 27, 2014)
+* Allow custom templates to be passed in
+
+### 0.8.0 (April 28, 2014)
+* Return model from AfterCreate Callback
+
 ### 0.7.0 (April 12, 2014)
 * Add Spring Support
 
