@@ -21,7 +21,7 @@ for the new Model.
     <dependency>
       <groupId>com.tobedevoured.modelcitizen</groupId>
       <artifactId>core</artifactId>
-      <version>0.8.1</version>
+      <version>0.8.2</version>
     </dependency>
 
 ## Blueprint 
