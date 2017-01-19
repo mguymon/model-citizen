@@ -31,47 +31,46 @@ import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 
 /**
  * Enforce a @Mapped field in a @Blueprint as a Singleton {@link Policy}
- * for creating models. 
- * 
+ * for creating models.
+ *
  * If constructed with a Class, the first attempt to set @Mapped instance of Class
- * will use {@link ModelFactory#createModel(Class, false)} to create singleton to use 
- * for all instances of Class in registered {@link Blueprint}s. Note: 
- * the {@link ModelFactory#createModel(Class,false)} will not run any Policy 
- * for the creation.
- * 
+ * will use ModelFactory to create singleton to use
+ * for all instances of Class in registered Blueprints. Note:
+ * the ModelFactory will not run any Policy for the creation.
+ *
  * If constructed with a Model, the Model will be used for all @Mapped instances of
- * Model's class in registered {@link Blueprint}s.
- * 
+ * Model's class in registered Blueprints.
+ *
  */
 public class MappedSingletonPolicy implements FieldPolicy {
 
 	private Logger logger = LoggerFactory.getLogger( this.getClass() );
-	
+
 	private Class singletonClass;
 	private Object singleton;
 
 	/**
 	 * Create new Singleton with from a registered Class.
- 	 *	 
-	 * @param modelClass Class
+ 	 *
+	 * @param singletonClass Class
 	 */
 	public MappedSingletonPolicy( Class singletonClass ) {
 		super();
 		this.singletonClass = singletonClass;
 	}
-	
+
 	/**
-	 * Create new instance with Model. 
-	 * 
+	 * Create new instance with Model.
+	 *
 	 * @param model Object
 	 */
 	public MappedSingletonPolicy( Object model ) {
 		super();
-		
+
 		this.singleton = model;
 		this.singletonClass = this.singleton.getClass();
 	}
-	
+
 	public Object getSingleton() {
 		return singleton;
 	}
@@ -81,9 +80,9 @@ public class MappedSingletonPolicy implements FieldPolicy {
 	}
 
 	public Command process(ModelFactory modelFactory, Erector erector, ModelField modelField, Object model) throws PolicyException {
-		
+
 		logger.debug( "processing {} for {}", modelField, model );
-		
+
 		// If Model has not be set, create a new one from ModelFactory
 		if ( modelField instanceof MappedField ) {
 			if ( this.getSingleton() == null ) {
@@ -94,7 +93,7 @@ public class MappedSingletonPolicy implements FieldPolicy {
 					throw new PolicyException( e );
 				}
 			}
-			
+
 			// Set Singleton into model
 			try {
 				erector.getTemplate().set( model, modelField.getName(), this.getSingleton() );
@@ -102,7 +101,7 @@ public class MappedSingletonPolicy implements FieldPolicy {
 				throw new PolicyException(e);
 			}
 		}
-		
+
 		return Command.SKIP_INJECTION;
 	}
 

@@ -33,14 +33,13 @@ public interface BlueprintPolicy extends Policy {
 
 	/**
 	 * Process the model with the Policy.
-	 * 
-	 * @param modelFactory {@link ModelFactory modelFactory}
+	 *
+	 * @param modelFactory {@link ModelFactory}
 	 * @param erector {@link Erector}
-	 * @param modelField {@link ModelField}
 	 * @param model Object
-	 * @return Map<ModelField,Set<Command>>
-	 * @throws PolicyException
+	 * @return Map
+	 * @throws PolicyException if policy fails to be applied
 	 */
 	public Map<ModelField,Set<Command>> process(ModelFactory modelFactory, Erector erector, Object model) throws PolicyException;
-	
+
 }

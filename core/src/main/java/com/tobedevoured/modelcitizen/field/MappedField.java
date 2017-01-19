@@ -20,9 +20,9 @@ package com.tobedevoured.modelcitizen.field;
 
 
 /**
- * A {@link Mapped} annotated Field in the {@link Blueprint} that is mapped 
- * to a registered {@Blueprint}
- * 
+ * A Mapped annotated Field in the Blueprint that is mapped 
+ * to a registered Blueprint
+ *
  * @author Michael Guymon
  */
 public class MappedField extends ModelField {
@@ -62,6 +62,6 @@ public class MappedField extends ModelField {
 		}
 		return true;
 	}
-	
-	
+
+
 }

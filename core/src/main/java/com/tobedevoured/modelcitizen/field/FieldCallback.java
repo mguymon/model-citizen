@@ -22,15 +22,15 @@ import com.tobedevoured.modelcitizen.callback.internal.Getable;
 
 /**
  * Callback for a Field when the Model is created
- * @deprecated for {@link com.tobedevoured.modelcitizen.callback.FieldCallback}
+ * @deprecated for FieldCallback
  * @author Michael Guymon
  */
 @Deprecated
 public abstract class FieldCallback implements Getable {
-	
+
 	/**
 	 * Get the Field value
-	 * 
+	 *
 	 * @param referenceModel Object
 	 * @return instance of Field class
 	 */

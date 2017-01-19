@@ -30,14 +30,14 @@ public interface FieldPolicy extends Policy {
 
 	/**
 	 * Process the model with the Policy.
-	 * 
+	 *
 	 * @param modelFactory {@link ModelFactory}
 	 * @param erector {@link Erector}
 	 * @param modelField {@link ModelField}
 	 * @param model Object
 	 * @return Command
-	 * @throws PolicyException
+	 * @throws PolicyException policy failed to apply
 	 */
 	public Command process(ModelFactory modelFactory, Erector erector, ModelField modelField, Object model) throws PolicyException;
-	
+
 }

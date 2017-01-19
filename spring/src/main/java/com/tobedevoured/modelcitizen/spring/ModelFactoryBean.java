@@ -53,11 +53,11 @@ public class ModelFactoryBean extends ModelFactory implements ApplicationContext
 
     /**
      * Create new instance of model before blueprint values are set. Autowire them from Spring Context if they have the
-     * @SpringBlueprint annotation
+     * SpringBlueprint annotation
      *
-     * @param erector {@link Erector}
+     * @param erector Erector
      * @return Object
-     * @throws BlueprintTemplateException
+     * @throws BlueprintTemplateException failed to apply blueprint
      */
     @Override
     protected Object createNewInstance(Erector erector) throws BlueprintTemplateException {
@@ -90,10 +90,10 @@ public class ModelFactoryBean extends ModelFactory implements ApplicationContext
     }
 
     /**
-     * Register Blueprints, autowire them from Spring Context if they have the @SpringBlueprint annotation
+     * Register Blueprints, autowire them from Spring Context if they have the SpringBlueprint annotation
      *
-     * @param blueprint {@link Blueprint}
-     * @throws RegisterBlueprintException
+     * @param blueprint Blueprint
+     * @throws RegisterBlueprintException failed to register blueprint
      */
     @Override
     public void registerBlueprint(Object blueprint) throws RegisterBlueprintException {

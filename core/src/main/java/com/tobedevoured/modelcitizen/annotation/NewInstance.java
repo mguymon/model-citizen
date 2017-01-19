@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * Callback when ModelFactory creates a new instance of the Model. Used in
- * conjunction with (@link ConstructorCallback}
- * @deprecated No longer required, {@link ConstructorCallback} is automatically detected
+ * conjunction with ConstructorCallback
+ * @deprecated No longer required, ConstructorCallback is automatically detected
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

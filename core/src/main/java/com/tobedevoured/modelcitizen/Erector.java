@@ -29,12 +29,12 @@ import com.tobedevoured.modelcitizen.template.BlueprintTemplateException;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * Erector for a Class to create an instance from a {@link com.tobedevoured.modelcitizen.annotation.Blueprint} annotated Class
+ * Erector for a Class to create an instance from a Blueprint annotated Class
  */
 public class Erector {
 
 	private static final Set<Command> EMPTY_SET = new HashSet<Command>();
-	
+
 	private Object blueprint;
 	private Map<String,ModelField> modelFields;
 	private Map<ModelField,Set<Command>> modelFieldCommands = new HashMap<ModelField,Set<Command>>();
@@ -52,9 +52,9 @@ public class Erector {
 	/**
 	 * Create new instance of {@link Erector#getTarget()}. Uses {@link #getNewInstance()}
 	 * if defined, otherwise fails back to {@link BlueprintTemplate#construct}
-	 * 
+	 *
 	 * @return Object new instance
-	 * @throws BlueprintTemplateException 
+	 * @throws BlueprintTemplateException
 	 */
 	public Object createNewInstance() throws BlueprintTemplateException {
 		if ( this.getNewInstance() != null ) {
@@ -64,23 +64,23 @@ public class Erector {
 			return this.getTemplate().construct( this.getTarget() );
 		}
 	}
-	
+
 	public void addCommands(ModelField modelField, Set<Command> commands) {
 		for( Command command : commands ) {
 			addCommand( modelField, command );
 		}
 	}
-	
+
 	public void addCommand( ModelField modelField, Command command ) {
 		Set<Command> commands = modelFieldCommands.get( modelField );
 		if ( commands == null ) {
 			commands = new HashSet<Command>();
 		}
-		
+
 		commands.add( command );
 		modelFieldCommands.put( modelField, commands );
 	}
-	
+
 	public Set<Command> getCommands( ModelField modelField ) {
 		Set<Command> commands = modelFieldCommands.get( modelField );
 		if ( commands != null ) {
@@ -89,19 +89,19 @@ public class Erector {
 			return EMPTY_SET;
 		}
 	}
-	
+
 	public void clearCommands() {
 		modelFieldCommands = new HashMap<ModelField,Set<Command>>();
 	}
-	
+
 	public Object getBlueprint() {
 		return blueprint;
 	}
-	
+
 	public void setBlueprint(Object blueprint) {
 		this.blueprint = blueprint;
 	}
-	
+
 	public Collection<ModelField> getModelFields() {
 		return modelFields.values();
 	}
@@ -109,7 +109,7 @@ public class Erector {
     public ModelField getModelField(String name) {
         return modelFields.get(name);
     }
-	
+
 	public void setModelFields(Collection<ModelField> modelFields) {
         for( ModelField modelField: modelFields ) {
             addModelField(modelField);
@@ -119,7 +119,7 @@ public class Erector {
     public void addModelField(ModelField modelField) {
 		this.modelFields.put(modelField.getName(), modelField);
 	}
-	
+
 	public BlueprintTemplate getTemplate() {
 		return blueprintTemplate;
 	}
@@ -131,7 +131,7 @@ public class Erector {
 	public Class getTarget() {
 		return target;
 	}
-	
+
 	public void setTarget(Class target) {
 		this.target = target;
 	}

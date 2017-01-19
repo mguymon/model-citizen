@@ -19,8 +19,8 @@ package com.tobedevoured.modelcitizen.field;
  */
 
 /**
- * A {@link MappedList} annotated Field in the {@link Blueprint} that is mapped 
- * to a {@link List} comprised of Models with a registered {@Blueprint}. 
+ * A MappedList annotated Field in the Blueprint that is mapped
+ * to a List comprised of Models with a registered Blueprint.
  *
  * @author Michael Guymon
  */
@@ -30,9 +30,9 @@ public class MappedListField extends ModelField {
 	private Class targetList;
     private boolean ignoreEmpty;
 
-    /**
+  /**
 	 * Size of List to create
-	 * 
+	 *
 	 * @return int
 	 */
 	public int getSize() {

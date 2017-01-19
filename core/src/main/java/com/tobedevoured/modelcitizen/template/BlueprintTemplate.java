@@ -24,25 +24,26 @@ package com.tobedevoured.modelcitizen.template;
 public interface BlueprintTemplate {
 
 	public <T> T construct( Class<T> modelClass ) throws BlueprintTemplateException;
-	
+
 	/**
 	 * Set value of Model. Returns Model.
-	 * 
+	 *
+	 * @param <T> type of Model
 	 * @param model T
-	 * @param String property
-	 * @params Object value
+	 * @param property String
+	 * @param value Object
 	 * @return T model
-	 * @throws BlueprintTemplateException
+	 * @throws BlueprintTemplateException fail to set value of Model
 	 */
 	public <T> T set(T model, String property, Object value ) throws BlueprintTemplateException;
-	
+
 	/**
 	 * Get value of Model
-	 * 
+	 *
 	 * @param model Object
-	 * @param String property
-	 * @return Object get value
-	 * @throws BlueprintTemplateException
+	 * @param property String
+	 * @return Object
+	 * @throws BlueprintTemplateException fail to get value of Model
 	 */
 	public Object get(Object model, String property ) throws BlueprintTemplateException;
 }

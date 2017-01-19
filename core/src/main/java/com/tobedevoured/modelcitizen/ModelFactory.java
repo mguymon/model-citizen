@@ -53,7 +53,7 @@ import com.tobedevoured.modelcitizen.callback.internal.Getable;
 import com.tobedevoured.modelcitizen.field.*;
 
 /**
- * ModelFactory for generating Models. A Model's {@link Blueprint} is registered
+ * ModelFactory for generating Models. A Model's Blueprint is registered
  * with the ModelFactory. Then a Model can be generated with {@link #createModel(Class)}
  * or {@link #createModel(Object)}
  */
@@ -77,8 +77,8 @@ public class ModelFactory {
     /**
      * Add Policy to ModelFactory
      *
-     * @param policy {@link FieldPolicy} or {@link BlueprintPolicy}
-     * @throws PolicyException
+     * @param policy FieldPolicy or BlueprintPolicy
+     * @throws PolicyException failed to apply policy
      */
     public void addPolicy(Policy policy) throws PolicyException {
 
@@ -121,11 +121,10 @@ public class ModelFactory {
     }
 
     /**
-     * Register all {@link Blueprint} in package.
+     * Register all Blueprint in package.
      *
      * @param _package String package to scan
-     * @throws RegisterBlueprintException
-     * @throws IOException
+     * @throws RegisterBlueprintException failed to register blueprint
      */
     public void setRegisterBlueprintsByPackage(String _package) throws RegisterBlueprintException {
 
@@ -142,11 +141,11 @@ public class ModelFactory {
     }
 
     /**
-     * Register a List of {@link Blueprint}, Class<Blueprint>, or String
+     * Register a List of Blueprint, Class, or String
      * class names of Blueprint
      *
      * @param blueprints List
-     * @throws RegisterBlueprintException
+     * @throws RegisterBlueprintException failed to register blueprint
      */
     public void setRegisterBlueprints(Collection blueprints) throws RegisterBlueprintException {
         for (Object blueprint : blueprints) {
@@ -163,7 +162,9 @@ public class ModelFactory {
     }
 
     /**
-     * Register a {@link Blueprint} from a String Class name
+     * Register a Blueprint from a String Class name
+     *
+     * @param className String
      */
     public void registerBlueprint(String className) throws RegisterBlueprintException {
         try {
@@ -174,10 +175,10 @@ public class ModelFactory {
     }
 
     /**
-     * Register a {@link Blueprint} from Class
+     * Register a Blueprint from Class
      *
      * @param clazz Blueprint class
-     * @throws RegisterBlueprintException
+     * @throws RegisterBlueprintException failed to register blueprint
      */
     public void registerBlueprint(Class clazz) throws RegisterBlueprintException {
         Object blueprint = null;
@@ -194,10 +195,10 @@ public class ModelFactory {
     }
 
     /**
-     * Register {@link Blueprint} from instance.
+     * Register Blueprint from instance.
      *
-     * @param blueprint {@link Blueprint}
-     * @throws RegisterBlueprintException
+     * @param blueprint Blueprint
+     * @throws RegisterBlueprintException failed to register blueprint
      */
     public void registerBlueprint(Object blueprint) throws RegisterBlueprintException {
 
@@ -440,23 +441,25 @@ public class ModelFactory {
     }
 
     /**
-     * Create a Model for a registered {@link Blueprint}
+     * Create a Model for a registered Blueprint
      *
+     * @param <T> model Class
      * @param clazz Model class
      * @return Model
-     * @throws CreateModelException
+     * @throws CreateModelException model failed to create
      */
     public <T> T createModel(Class<T> clazz) throws CreateModelException {
         return createModel(clazz, true);
     }
 
     /**
-     * Create a Model for a registered {@link Blueprint}
+     * Create a Model for a registered Blueprint
      *
+     * @param <T> model Class
      * @param clazz        Model class
      * @param withPolicies boolean if Policies should be applied to the create
      * @return Model
-     * @throws CreateModelException
+     * @throws CreateModelException model failed to create
      */
     public <T> T createModel(Class<T> clazz, boolean withPolicies) throws CreateModelException {
         Erector erector = erectors.get(clazz);
@@ -469,25 +472,27 @@ public class ModelFactory {
     }
 
     /**
-     * Create a Model for a registered {@link Blueprint}. Values set in the
-     * model will not be overridden by defaults in the {@link Blueprint}.
+     * Create a Model for a registered Blueprint. Values set in the
+     * model will not be overridden by defaults in the Blueprint.
      *
+     * @param <T> model Class
      * @param referenceModel Object
      * @return Model
-     * @throws CreateModelException
+     * @throws CreateModelException model failed to create
      */
     public <T> T createModel(T referenceModel) throws CreateModelException {
         return createModel(referenceModel, true);
     }
 
     /**
-     * Create a Model for a registered {@link Blueprint}. Values set in the
-     * model will not be overridden by defaults in the {@link Blueprint}.
+     * Create a Model for a registered Blueprint. Values set in the
+     * model will not be overridden by defaults in the Blueprint.
      *
+     * @param <T> model Class
      * @param referenceModel Object
      * @param withPolicies   boolean if Policies should be applied to the create
      * @return Model
-     * @throws CreateModelException
+     * @throws CreateModelException model failed to create
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public <T> T createModel(T referenceModel, boolean withPolicies) throws CreateModelException {
@@ -501,15 +506,16 @@ public class ModelFactory {
     }
 
     /**
-     * Create a Model for a registered {@link Blueprint} using {@link Erector}.
+     * Create a Model for a registered Blueprint using Erector.
      * Values set in the model will not be overridden by defaults in the
-     * {@link Blueprint}.
+     * Blueprint.
      *
-     * @param erector        {@link Erector}
+     * @param <T>             model class
+     * @param erector        Erector
      * @param referenceModel T the reference model instance, or null
      * @param withPolicies   boolean if Policies should be applied to the create
      * @return T new Model
-     * @throws CreateModelException
+     * @throws CreateModelException model failed to create
      */
     public <T> T createModel(Erector erector, T referenceModel, boolean withPolicies) throws CreateModelException {
 
@@ -740,16 +746,16 @@ public class ModelFactory {
     /**
      * Registered Blueprints
      *
-     * @return {@link List<Blueprint>}
+     * @return List
      */
     public List<Object> getBlueprints() {
         return blueprints;
     }
 
     /**
-     * Map of Class to their {@link Erector}.
+     * Map of Class to their Erector.
      *
-     * @return {@link Map<Class, Erector>}
+     * @return Map
      */
     public Map<Class, Erector> getErectors() {
         return erectors;
@@ -764,8 +770,8 @@ public class ModelFactory {
     }
 
     /**
-     * Get complete inherited list of {@link Field} for Class, with the exception
-     * that {@link ConstructorCallback} fields are not inherited.
+     * Get complete inherited list of Field for Class, with the exception
+     * that ConstructorCallback fields are not inherited.
      *
      * @param clazz Class
      * @return Map

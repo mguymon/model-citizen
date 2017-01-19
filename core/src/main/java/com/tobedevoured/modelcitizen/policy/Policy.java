@@ -24,10 +24,10 @@ package com.tobedevoured.modelcitizen.policy;
 public interface Policy {
 
 	/**
-	 * Class target of the Policy that has been mapped by a {@link Blueprint}
-	 * 
+	 * Class target of the Policy that has been mapped by a Blueprint.
+	 *
 	 * @return Class
 	 */
 	public Class getTarget();
-	
+
 }

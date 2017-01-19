@@ -19,13 +19,13 @@ package com.tobedevoured.modelcitizen.field;
  */
 
 /**
- * Annotated Field in a {@link Blueprint}
- * 
+ * Annotated Field in a Blueprint
+ *
  * @author Michael Guymon
  */
 public abstract class ModelField {
 
-    private boolean force = false;
+  private boolean force = false;
 	private String name;
 	private Object value;
 	private Class fieldClass;
@@ -42,15 +42,15 @@ public abstract class ModelField {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Object getValue() {
 		return value;
 	}
-	
+
 	public void setValue(Object value) {
 		this.value = value;
 	}
@@ -95,9 +95,9 @@ public abstract class ModelField {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		
+
 		ModelField other = (ModelField) obj;
-		
+
 		if (fieldClass == null) {
 			if (other.fieldClass != null) {
 				return false;
@@ -105,7 +105,7 @@ public abstract class ModelField {
 		} else if (!fieldClass.equals(other.fieldClass)) {
 			return false;
 		}
-		
+
 		if (name == null) {
 			if (other.name != null) {
 				return false;
@@ -113,7 +113,7 @@ public abstract class ModelField {
 		} else if (!name.equals(other.name)) {
 			return false;
 		}
-		
+
 		if (target == null) {
 			if (other.target != null) {
 				return false;
@@ -121,7 +121,7 @@ public abstract class ModelField {
 		} else if (!target.equals(other.target)) {
 			return false;
 		}
-		
+
 		if (value == null) {
 			if (other.value != null) {
 				return false;
