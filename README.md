@@ -102,7 +102,7 @@ Example of creating a new _ModelFactory_ and registering the _CarBlueprint_
     ModelFactory modelFactory = new ModelFactory();
     modelFactory.registerBlueprint( CarBlueprint.class );
     
-A Model with a registered Blueprint can then me created by Class:
+A Model with a registered Blueprint can then be created by Class:
 
     modelFactory.createModel(Car.class);
   
