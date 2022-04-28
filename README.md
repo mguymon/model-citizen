@@ -1,5 +1,7 @@
 # Model Citizen
 
+[![Java CI with Maven](https://github.com/mguymon/model-citizen/actions/workflows/maven.yml/badge.svg)](https://github.com/mguymon/model-citizen/actions/workflows/maven.yml)
+
 Model Citizen is an annotation based model factory for Java, inspired by [FactoryGirl](https://github.com/thoughtbot/factory_girl)
 
 A Model is mapped by a _@Blueprint_ using annotated fields. Blueprints contain
